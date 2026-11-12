@@ -1,0 +1,24 @@
+{
+  "name": "ZenithEdu OS™ · Commercial Institute Management Suite",
+  "short_name": "ZenithEdu OS",
+  "description": "Multi-Tenant Coaching Institute OS - Admissions, Attendance, Fees, AI Test Generator, WhatsApp Broadcast, Timetable & SaaS Hub",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#060913",
+  "theme_color": "#0B1120",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='42' fill='%236366F1'/%3E%3Cpath d='M96 40l60 32-60 32-60-32 60-32zm0 72l44-24v32l-44 24-44-24v-32l44 24z' fill='white'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%236366F1'/%3E%3Cpath d='M256 100l160 85-160 85-160-85 160-85zm0 192l117-64v85l-117 64-117-64v-85l117 64z' fill='white'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
