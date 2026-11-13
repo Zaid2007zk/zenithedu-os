@@ -2030,6 +2030,30 @@
       }
     }
 
+  
+    /* Real Data Upload & Preview Styles */
+    .dropzone-box {
+      border: 2px dashed rgba(99,102,241,0.45);
+      border-radius: 12px;
+      background: rgba(99,102,241,0.04);
+      padding: 30px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .dropzone-box:hover, .dropzone-box.dragover {
+      border-color: #10B981;
+      background: rgba(16,185,129,0.06);
+    }
+    .empty-state-card {
+      text-align: center;
+      padding: 48px 24px;
+      background: rgba(255,255,255,0.02);
+      border: 1px dashed rgba(255,255,255,0.12);
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
   </style>
   <style>
     /* Auth & Settings Enhancements */
@@ -2496,6 +2520,30 @@
       }
     }
 
+  
+    /* Real Data Upload & Preview Styles */
+    .dropzone-box {
+      border: 2px dashed rgba(99,102,241,0.45);
+      border-radius: 12px;
+      background: rgba(99,102,241,0.04);
+      padding: 30px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .dropzone-box:hover, .dropzone-box.dragover {
+      border-color: #10B981;
+      background: rgba(16,185,129,0.06);
+    }
+    .empty-state-card {
+      text-align: center;
+      padding: 48px 24px;
+      background: rgba(255,255,255,0.02);
+      border: 1px dashed rgba(255,255,255,0.12);
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
   </style>
 </head>
 <body>
@@ -2763,6 +2811,7 @@
               <div class="page-desc">Academic session 2026-27 · Real-time attendance, fee velocity & test metrics</div>
             </div>
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <button class="btn btn-pri btn-sm" onclick="openModal('uploadRealDataModal')" style="background:#10B981;white-space:nowrap;flex-shrink:0">📤 Upload Real Data</button>
               <button class="btn btn-pri btn-sm" onclick="openAICopilot('chat')" style="white-space:nowrap;flex-shrink:0;background:linear-gradient(135deg,#6366F1,#8B5CF6)">✨ Ask AI Copilot</button>
               <button class="btn btn-sec btn-sm" onclick="navigateTo('ai-test-gen')" style="white-space:nowrap;flex-shrink:0">📝 AI Test Studio</button>
               <button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub')" style="white-space:nowrap;flex-shrink:0">💬 WhatsApp Alerts</button>
@@ -2931,10 +2980,12 @@
               <div class="page-title">Student Information System (SIS)</div>
               <div class="page-desc">Comprehensive enrollment directory, batch tracking, identity cards & cumulative scorecards</div>
             </div>
-            <div style="display:flex;gap:10px">
-              <button class="btn btn-sec btn-sm" onclick="navigateTo('id-cards')">📇 ID Cards Studio</button>
-              <button class="btn btn-sec btn-sm" onclick="exportStudentsCSV()">Download CSV</button>
-              <button class="btn btn-pri btn-sm" onclick="openModal('studentModal')">+ Admit Student</button>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <button class="btn btn-pri btn-sm" onclick="openModal('uploadRealDataModal')" style="background:#10B981;white-space:nowrap;flex-shrink:0">📤 Upload Real Data (CSV)</button>
+              <button class="btn btn-sec btn-sm" onclick="downloadSampleStudentCSV()" style="white-space:nowrap;flex-shrink:0">📄 Sample Template</button>
+              <button class="btn btn-sec btn-sm" onclick="navigateTo('id-cards')" style="white-space:nowrap;flex-shrink:0">📇 ID Cards</button>
+              <button class="btn btn-sec btn-sm" onclick="exportStudentsCSV()" style="white-space:nowrap;flex-shrink:0">Download CSV</button>
+              <button class="btn btn-pri btn-sm" onclick="openModal('studentModal')" style="white-space:nowrap;flex-shrink:0">+ Admit Student</button>
             </div>
           </div>
 
@@ -4447,6 +4498,89 @@
             <input type="password" class="form-control" id="regPassword" placeholder="Minimum 8 characters">
           </div>
           <button class="btn btn-pri" style="width:100%;padding:10px" onclick="submitRegisterInstitute()">Create Workspace & Sign In</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- MODAL: BULK UPLOAD REAL DATA (CSV / EXCEL) -->
+  <div class="modal-backdrop" id="uploadRealDataModal">
+    <div class="modal-box" style="max-width:740px">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#10B981,#059669);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px">📤</div>
+          <div>
+            <div class="modal-title">Upload Real Institute Data (CSV / Excel)</div>
+            <div style="font-size:11.5px;color:var(--text-muted)">Import real students, roll numbers, batches, fees & parent WhatsApp contacts</div>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeModal('uploadRealDataModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Template Download Banner -->
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:8px;padding:12px 16px;margin-bottom:16px">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#fff">Need a ready-made Excel / CSV template?</div>
+            <div style="font-size:11px;color:var(--text-muted)">Download our formatted template, paste your students and upload back.</div>
+          </div>
+          <button class="btn btn-sec btn-sm" onclick="downloadSampleStudentCSV()" style="white-space:nowrap">
+            📄 Download Sample Template (.CSV)
+          </button>
+        </div>
+
+        <!-- Import Mode Selection -->
+        <div class="form-group" style="margin-bottom:16px">
+          <label class="form-label">Select Import Action:</label>
+          <div style="display:flex;gap:18px;flex-wrap:wrap">
+            <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#fff;cursor:pointer">
+              <input type="radio" name="uploadImportMode" value="append" checked style="accent-color:var(--brand-500)">
+              <span><strong>Append Mode:</strong> Add to current records</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#F59E0B;cursor:pointer">
+              <input type="radio" name="uploadImportMode" value="replace" style="accent-color:#F59E0B">
+              <span><strong>Fresh Real Mode:</strong> Replace demo records with ONLY my real data</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- File Dropzone -->
+        <div class="dropzone-box" id="csvDropzone" onclick="document.getElementById('realDataFileInput').click()">
+          <input type="file" id="realDataFileInput" accept=".csv, .txt, .tsv" style="display:none" onchange="handleRealDataFile(event)">
+          <div style="font-size:32px;margin-bottom:8px">📁</div>
+          <div style="font-weight:700;font-size:14px;color:#fff">Click to choose or drag & drop CSV file here</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Supports CSV, TSV or TXT exports from Excel, Google Sheets or ERPs</div>
+        </div>
+
+        <!-- Live Preview Container -->
+        <div id="csvPreviewSection" style="display:none;margin-top:18px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <span style="font-size:12.5px;font-weight:700;color:#10B981" id="csvPreviewCount">0 Real Records Parsed</span>
+            <span style="font-size:11px;color:var(--text-muted)">Verify rows before saving</span>
+          </div>
+          <div style="max-height:220px;overflow-y:auto;border:1px solid var(--border-subtle);border-radius:8px">
+            <table style="width:100%;font-size:11.5px;border-collapse:collapse" id="csvPreviewTable">
+              <thead style="position:sticky;top:0;background:#172033">
+                <tr style="border-bottom:1px solid var(--border-medium);color:var(--text-muted)">
+                  <th style="padding:8px 12px;text-align:left">Name</th>
+                  <th style="padding:8px 12px;text-align:left">Roll</th>
+                  <th style="padding:8px 12px;text-align:left">Batch</th>
+                  <th style="padding:8px 12px;text-align:left">Parent WhatsApp</th>
+                  <th style="padding:8px 12px;text-align:center">Fee</th>
+                  <th style="padding:8px 12px;text-align:center">Attendance</th>
+                </tr>
+              </thead>
+              <tbody id="csvPreviewTbody">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot" style="display:flex;justify-content:space-between;align-items:center">
+        <button class="btn btn-sec btn-sm" style="color:#EF4444;border-color:rgba(239,68,68,0.3)" onclick="clearAllDemoStudentsPrompt()">🧹 Wipe Demo Records (Clean Slate)</button>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-sec" onclick="closeModal('uploadRealDataModal')">Cancel</button>
+          <button class="btn btn-pri" id="btnCommitRealData" style="background:#10B981" onclick="commitRealDataImport()" disabled>✅ Confirm & Save Real Data</button>
         </div>
       </div>
     </div>
@@ -6755,6 +6889,232 @@
       appendBotMessage(resp);
     }
 
+    
+    // ==========================================
+    // REAL INSTITUTE DATA IMPORT & MANAGEMENT
+    // ==========================================
+    let parsedRealStudents = [];
+
+    function downloadSampleStudentCSV() {
+      const headers = "Full Name,Roll Number,Batch,Student Mobile,Parent Name,Parent WhatsApp,Email,Course Total Fee,Paid Fee,Attendance Percentage";
+      const sampleRows = [
+        "Aarav Sharma,1041,Class 12 JEE Elite,9823011221,Rajesh Sharma,9823011223,aarav.sharma@gmail.com,45000,45000,96%",
+        "Diya Patel,1042,Class 11 NEET Super 30,9823022332,Suresh Patel,9823022334,diya.patel@gmail.com,50000,25000,94%",
+        "Rohan Verma,1043,Class 12 JEE Elite,9823033443,Amit Verma,9823033445,rohan.v@gmail.com,45000,15000,82%",
+        "Ishita Gupta,1044,CBSE 12 Board,9823044554,Vikas Gupta,9823044556,ishita.g@gmail.com,30000,30000,92%",
+        "Kabir Singh,1045,Foundation 10,9823055665,Harish Singh,9823055667,kabir.s@gmail.com,25000,25000,90%"
+      ];
+
+      const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(headers + "\n" + sampleRows.join("\n"));
+      const link = document.createElement("a");
+      link.setAttribute("href", csvContent);
+      link.setAttribute("download", "zenithedu_real_students_template.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      toast('Template Downloaded|Open in Excel or Google Sheets, add your real students, and upload!', 'ok');
+    }
+
+    function handleRealDataFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const content = e.target.result;
+          parseRealDataCSV(content);
+        } catch(err) {
+          toast('Failed to Read File|' + err.message, 'err');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function parseRealDataCSV(csvText) {
+      const lines = csvText.split(/\r?\n/).filter(line => line.trim().length > 0);
+      if (lines.length < 2) {
+        toast('Empty or Invalid File|File must contain headers and at least 1 student row', 'err');
+        return;
+      }
+
+      parsedRealStudents = [];
+      // Skip header row
+      for (let i = 1; i < lines.length; i++) {
+        const row = lines[i];
+        // Split by comma or tab, respecting quotes
+        const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
+        if (cols.length >= 2 && cols[0]) {
+          const name = cols[0];
+          const roll = cols[1] || ('#' + (1050 + i));
+          const batch = cols[2] || 'Class 12 JEE Elite';
+          const studentPhone = cols[3] || '+91 98220 00000';
+          const parentName = cols[4] || 'Parent';
+          const parentPhone = cols[5] || studentPhone;
+          const email = cols[6] || '';
+          const totalFee = parseInt(cols[7]) || 35000;
+          const paidFee = parseInt(cols[8]) || totalFee;
+          const att = cols[9] ? (cols[9].includes('%') ? cols[9] : cols[9] + '%') : '95%';
+          const feeStatus = paidFee >= totalFee ? 'Paid' : (paidFee > 0 ? 'Partial' : 'Overdue');
+
+          parsedRealStudents.push({
+            name: name,
+            roll: roll.startsWith('#') ? roll : '#' + roll,
+            batch: batch,
+            parent: `${parentName} (${parentPhone})`,
+            att: att,
+            fee: feeStatus,
+            status: 'P',
+            tuition: totalFee,
+            paid: paidFee,
+            email: email,
+            phone: studentPhone
+          });
+        }
+      }
+
+      if (parsedRealStudents.length === 0) {
+        toast('No Students Found|Could not parse rows from CSV', 'err');
+        return;
+      }
+
+      // Render Preview
+      const previewSec = document.getElementById('csvPreviewSection');
+      const countEl = document.getElementById('csvPreviewCount');
+      const tbody = document.getElementById('csvPreviewTbody');
+      const btnCommit = document.getElementById('btnCommitRealData');
+
+      if (previewSec) previewSec.style.display = 'block';
+      if (countEl) countEl.textContent = `${parsedRealStudents.length} Real Student Records Parsed`;
+      if (btnCommit) {
+        btnCommit.disabled = false;
+        btnCommit.textContent = `✅ Confirm & Save ${parsedRealStudents.length} Real Students`;
+      }
+
+      if (tbody) {
+        tbody.innerHTML = parsedRealStudents.slice(0, 50).map(s => `
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+            <td style="padding:7px 12px;font-weight:700;color:#fff">${s.name}</td>
+            <td style="padding:7px 12px;color:#A5B4FC">${s.roll}</td>
+            <td style="padding:7px 12px">${s.batch}</td>
+            <td style="padding:7px 12px;color:var(--text-muted)">${s.parent}</td>
+            <td style="padding:7px 12px;text-align:center"><span class="badge ${s.fee === 'Paid' ? 'badge-paid' : 'badge-unpaid'}">${s.fee}</span></td>
+            <td style="padding:7px 12px;text-align:center"><span class="badge badge-paid">${s.att}</span></td>
+          </tr>
+        `).join('');
+      }
+
+      toast('CSV Parsed Successfully|' + parsedRealStudents.length + ' students ready to import', 'ok');
+    }
+
+    function commitRealDataImport() {
+      if (parsedRealStudents.length === 0) return;
+
+      const importMode = document.querySelector('input[name="uploadImportMode"]:checked')?.value || 'append';
+
+      if (importMode === 'replace') {
+        state.students = [...parsedRealStudents];
+        state.studentsCount = parsedRealStudents.length;
+      } else {
+        // Prepend new real students
+        state.students = [...parsedRealStudents, ...state.students];
+        state.studentsCount += parsedRealStudents.length;
+      }
+
+      // Also create real fee transactions for any student with paid fees
+      parsedRealStudents.forEach((s, idx) => {
+        if (s.paid > 0) {
+          state.feeTransactions.unshift({
+            rec: 'REC-REAL-' + (500 + idx),
+            name: s.name,
+            batch: s.batch,
+            amount: s.paid,
+            mode: 'Bank / Cash Deposit',
+            date: 'Today',
+            status: 'Paid'
+          });
+        }
+      });
+
+      // Persist to unified localStorage keys
+      localStorage.setItem('zenithedu_students', JSON.stringify(state.students));
+      localStorage.setItem('zenithedu_students_count', state.studentsCount);
+      localStorage.setItem('zenithedu_fees', JSON.stringify(state.feeTransactions));
+
+      // Update UI
+      renderStudentsTable();
+      renderAttendanceTable();
+      renderFeeLedger();
+
+      const elDash = document.getElementById('dashTotalStudents');
+      const elSb = document.getElementById('sbStudentCount');
+      const elQuota = document.getElementById('sbQuotaNum');
+      if (elDash) elDash.textContent = state.studentsCount.toLocaleString('en-IN');
+      if (elSb) elSb.textContent = state.studentsCount.toLocaleString('en-IN');
+      if (elQuota) elQuota.textContent = state.studentsCount.toLocaleString('en-IN');
+
+      closeModal('uploadRealDataModal');
+      toast('Real Data Landed!|' + parsedRealStudents.length + ' real students active in your OS database', 'ok');
+    }
+
+    function clearAllDemoStudentsPrompt() {
+      if (confirm('Are you sure you want to wipe demo records? This gives you an empty, clean slate for only your real students.')) {
+        state.students = [];
+        state.studentsCount = 0;
+        state.feeTransactions = [];
+        localStorage.setItem('zenithedu_students', JSON.stringify([]));
+        localStorage.setItem('zenithedu_students_count', 0);
+        localStorage.setItem('zenithedu_fees', JSON.stringify([]));
+
+        renderStudentsTable();
+        renderAttendanceTable();
+        renderFeeLedger();
+
+        const elDash = document.getElementById('dashTotalStudents');
+        const elSb = document.getElementById('sbStudentCount');
+        const elQuota = document.getElementById('sbQuotaNum');
+        if (elDash) elDash.textContent = '0';
+        if (elSb) elSb.textContent = '0';
+        if (elQuota) elQuota.textContent = '0';
+
+        closeModal('uploadRealDataModal');
+        toast('Clean Slate Ready!|Demo records cleared. Click "Upload Real Data" or "+ Admit Student" to begin.', 'info');
+      }
+    }
+
+    // Enhance renderStudentsTable to show clean empty state if 0 records
+    const _origRenderStudentsTable = renderStudentsTable;
+    renderStudentsTable = function(list = state.students) {
+      const tbody = document.getElementById('studentsTableBody');
+      if (!tbody) return;
+      if (!list || list.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7">
+              <div class="empty-state-card">
+                <div style="font-size:36px;margin-bottom:8px">👥</div>
+                <div style="font-size:16px;font-weight:700;color:#fff;margin-bottom:4px">No Students Enrolled Yet</div>
+                <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px">Upload your real coaching student list or admit students individually.</div>
+                <div style="display:flex;gap:10px;justify-content:center">
+                  <button class="btn btn-pri btn-sm" onclick="openModal('uploadRealDataModal')" style="background:#10B981">📤 Upload Real Data (CSV)</button>
+                  <button class="btn btn-sec btn-sm" onclick="openModal('studentModal')">+ Admit Single Student</button>
+                  <button class="btn btn-sec btn-sm" onclick="restoreDemoStudents()">Restore Demo Data</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+      _origRenderStudentsTable(list);
+    };
+
+    function restoreDemoStudents() {
+      localStorage.removeItem('zenithedu_students');
+      localStorage.removeItem('zenithedu_fees');
+      location.reload();
+    }
+
     // App Initialization
     window.addEventListener('DOMContentLoaded', () => {
       // Load persistent database from localStorage
@@ -6818,7 +7178,7 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) { r.update(); }
         });
-        navigator.serviceWorker.register('./sw.js?v=6').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=7').catch(() => {});
       }
       updateCommercialCalc();
       initAuthSession();
