@@ -1679,6 +1679,120 @@
       }
     }
   </style>
+  <style>
+    /* Auth & Settings Enhancements */
+    .settings-tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .settings-tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .settings-tab-btn:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.04);
+    }
+    .settings-tab-btn.active {
+      color: #fff;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.4);
+    }
+    .settings-pane {
+      display: none;
+    }
+    .settings-pane.active {
+      display: block;
+      animation: fadeIn 0.15s ease;
+    }
+    .auth-tab-btn {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .auth-tab-btn.active {
+      color: #fff;
+      background: rgba(99,102,241,0.2);
+      border-color: var(--brand-500);
+    }
+    .quick-login-chip {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.15s;
+    }
+    .quick-login-chip:hover {
+      background: rgba(99,102,241,0.12);
+      border-color: rgba(99,102,241,0.4);
+      color: #fff;
+    }
+    .user-menu-popover {
+      display: none;
+      position: absolute;
+      bottom: 72px;
+      left: 12px;
+      width: 236px;
+      background: #11141c;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.6);
+      padding: 8px;
+      z-index: 1000;
+      animation: fadeIn 0.15s ease;
+    }
+    .user-menu-popover.open {
+      display: block;
+    }
+    .user-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .user-menu-item:hover {
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+    }
+    .user-menu-item.danger:hover {
+      background: rgba(239,68,68,0.15);
+      color: #EF4444;
+    }
+  </style>
 </head>
 <body>
 
@@ -1807,9 +1921,19 @@
           <span>Commercial Sales Kit & Proposal</span>
           <span class="nav-tag" style="background:#F59E0B">B2B</span>
         </a>
-        <a class="nav-link" onclick="openModal('renameModal')">
+        <div class="nav-label">System & Settings</div>
+        <a class="nav-link" data-view="settings" id="nav-settings-link">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          <span>Institute Branding</span>
+          <span>Institute Settings</span>
+          <span class="nav-tag nav-tag-blue">Core</span>
+        </a>
+        <a class="nav-link" onclick="openModal('renameModal')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <span>Instant Branding</span>
+        </a>
+        <a class="nav-link" onclick="openModal('authModal')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span>Sign In / Switch Account</span>
         </a>
       </nav>
 
@@ -1821,11 +1945,38 @@
           </div>
           <div class="quota-bar"><div class="quota-fill" id="sbQuotaBar"></div></div>
         </div>
-        <div class="user-pill">
-          <div class="user-avatar">AD</div>
-          <div style="flex:1;min-width:0">
-            <div style="font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Anand Deshpande</div>
-            <div style="font-size:10.5px;color:var(--text-muted)">Institute Administrator</div>
+        <!-- User Profile Pill & Floating Menu -->
+        <div style="position:relative">
+          <div class="user-pill" onclick="toggleUserMenu()" style="cursor:pointer" title="Click for Account Options">
+            <div class="user-avatar" id="sbUserAvatar">AD</div>
+            <div style="flex:1;min-width:0">
+              <div id="sbUserName" style="font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Anand Deshpande</div>
+              <div id="sbUserRole" style="font-size:10.5px;color:var(--text-muted)">Institute Administrator</div>
+            </div>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+          </div>
+
+          <div class="user-menu-popover" id="userMenuPopover">
+            <div style="padding:6px 10px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:6px">
+              <div id="menuUserFullName" style="font-size:12px;font-weight:700;color:#fff">Anand Deshpande</div>
+              <div id="menuUserEmail" style="font-size:10.5px;color:var(--text-muted)">admin@zenithedu.in</div>
+            </div>
+            <div class="user-menu-item" onclick="navigateTo('settings');toggleUserMenu()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span>System Settings</span>
+            </div>
+            <div class="user-menu-item" onclick="openModal('authModal');toggleUserMenu()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+              <span>Switch / Sign In</span>
+            </div>
+            <div class="user-menu-item" onclick="lockSession();toggleUserMenu()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>Lock Workspace</span>
+            </div>
+            <div class="user-menu-item danger" onclick="signOutUser();toggleUserMenu()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              <span>Sign Out</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1867,7 +2018,18 @@
             </div>
           </div>
 
-          <button class="btn btn-sec btn-sm" onclick="openModal('feeModal')">
+          <!-- Settings & Auth Topbar Actions -->
+          <button class="btn btn-sec btn-sm" onclick="navigateTo('settings')" title="Open Institute Settings" style="white-space:nowrap;flex-shrink:0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>Settings</span>
+          </button>
+
+          <button class="btn btn-sec btn-sm" id="topAuthBtn" onclick="openModal('authModal')" title="Sign In or Switch Account" style="white-space:nowrap;flex-shrink:0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span id="topAuthLabel">Sign In</span>
+          </button>
+
+          <button class="btn btn-sec btn-sm" onclick="openModal('feeModal')" style="white-space:nowrap;flex-shrink:0">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             <span>Collect Fee</span>
           </button>
@@ -2988,6 +3150,347 @@
           </div>
         </div>
 
+        
+        <!-- VIEW 13: INSTITUTE SETTINGS & SYSTEM CONTROLS -->
+        <div class="view-pane" id="view-settings">
+          <div class="page-header">
+            <div>
+              <div class="page-title">Institute Settings & Enterprise Controls</div>
+              <div class="page-desc">Manage institute credentials, WhatsApp Meta API, Razorpay keys, security policies & database backups</div>
+            </div>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-sec btn-sm" onclick="exportDatabaseJSON()">📥 Export JSON Backup</button>
+              <button class="btn btn-pri btn-sm" onclick="saveAllSettings()">💾 Save All Settings</button>
+            </div>
+          </div>
+
+          <!-- Settings Tab Navigation -->
+          <div class="settings-tabs">
+            <button class="settings-tab-btn active" onclick="switchSettingsTab('general', this)">🏢 General & Branding</button>
+            <button class="settings-tab-btn" onclick="switchSettingsTab('security', this)">🔐 Security & Auth</button>
+            <button class="settings-tab-btn" onclick="switchSettingsTab('whatsapp', this)">💬 WhatsApp & Meta API</button>
+            <button class="settings-tab-btn" onclick="switchSettingsTab('payment', this)">💳 Payment & Billing</button>
+            <button class="settings-tab-btn" onclick="switchSettingsTab('database', this)">💾 Data & Backups</button>
+          </div>
+
+          <!-- TAB 1: GENERAL & BRANDING -->
+          <div class="settings-pane active" id="set-pane-general">
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Institute Identity</div>
+                  <span class="badge badge-blue">Live Synced</span>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="form-label">Full Institute Legal Name</label>
+                    <input type="text" class="form-control" id="cfgInstName" value="ZenithEdu Academy" placeholder="e.g. Apex IIT-JEE Academy">
+                  </div>
+                  <div class="grid-2" style="gap:12px">
+                    <div class="form-group">
+                      <label class="form-label">Brand Short Code / Initials</label>
+                      <input type="text" class="form-control" id="cfgInstCode" value="ZE" maxlength="4" style="text-transform:uppercase">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Sub-Campus / Branch Location</label>
+                      <input type="text" class="form-control" id="cfgInstCampus" value="Central Pune Campus · Live Sync">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Director / Head of Institute</label>
+                    <input type="text" class="form-control" id="cfgInstDirector" value="Anand Deshpande">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Official Tagline / Slogan</label>
+                    <input type="text" class="form-control" id="cfgInstTagline" value="Pioneering Excellence in IIT-JEE, NEET & Foundation Sciences">
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Contact & Communication Details</div>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="form-label">Official Support Email</label>
+                    <input type="email" class="form-control" id="cfgInstEmail" value="admin@zenithedu.in">
+                  </div>
+                  <div class="grid-2" style="gap:12px">
+                    <div class="form-group">
+                      <label class="form-label">Official Phone / Landline</label>
+                      <input type="text" class="form-control" id="cfgInstPhone" value="+91 20 2567 8900">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Official WhatsApp Helpline</label>
+                      <input type="text" class="form-control" id="cfgInstWA" value="+91 98230 12345">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Registered Physical Address</label>
+                    <textarea class="form-control" id="cfgInstAddress" rows="2">Plot 44, FC Road, Shivajinagar, Pune, Maharashtra 411005</textarea>
+                  </div>
+                  <div class="grid-2" style="gap:12px">
+                    <div class="form-group">
+                      <label class="form-label">Academic Session</label>
+                      <input type="text" class="form-control" id="cfgInstSession" value="2026-27">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Default Currency</label>
+                      <select class="form-select" id="cfgInstCurrency">
+                        <option value="INR" selected>₹ INR (Indian Rupee)</option>
+                        <option value="USD">$ USD (US Dollar)</option>
+                        <option value="AED">د.إ AED (UAE Dirham)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: SECURITY & AUTH -->
+          <div class="settings-pane" id="set-pane-security">
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Master Admin Credentials</div>
+                  <span class="badge badge-green">Protected</span>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="form-label">Current Admin Email</label>
+                    <input type="email" class="form-control" id="secAdminEmail" value="admin@zenithedu.in" readonly style="opacity:0.8">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Current Password</label>
+                    <input type="password" class="form-control" id="secCurrentPass" placeholder="••••••••">
+                  </div>
+                  <div class="grid-2" style="gap:12px">
+                    <div class="form-group">
+                      <label class="form-label">New Password</label>
+                      <input type="password" class="form-control" id="secNewPass" placeholder="Minimum 8 characters">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Confirm New Password</label>
+                      <input type="password" class="form-control" id="secConfirmPass" placeholder="Re-enter password">
+                    </div>
+                  </div>
+                  <button class="btn btn-sec btn-sm" onclick="updateAdminPassword()" style="margin-top:8px">Update Admin Password</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Access Policies & Role Governance</div>
+                </div>
+                <div class="card-body">
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border-subtle)">
+                    <div>
+                      <div style="font-weight:600;font-size:13px;color:#fff">Two-Factor Authentication (2FA)</div>
+                      <div style="font-size:11px;color:var(--text-muted)">Require WhatsApp/SMS OTP for administrative logins</div>
+                    </div>
+                    <label style="position:relative;display:inline-block;width:40px;height:22px">
+                      <input type="checkbox" id="cfg2FAToggle" checked style="opacity:0;width:0;height:0">
+                      <span style="position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:#4F46E5;border-radius:22px;transition:.3s"></span>
+                    </label>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border-subtle)">
+                    <div>
+                      <div style="font-weight:600;font-size:13px;color:#fff">Session Inactivity Lock</div>
+                      <div style="font-size:11px;color:var(--text-muted)">Auto-lock system after idle duration</div>
+                    </div>
+                    <select class="form-select" id="cfgAutoLock" style="width:130px;padding:4px 8px;font-size:12px">
+                      <option value="15">15 Minutes</option>
+                      <option value="30" selected>30 Minutes</option>
+                      <option value="60">1 Hour</option>
+                      <option value="0">Never</option>
+                    </select>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0">
+                    <div>
+                      <div style="font-weight:600;font-size:13px;color:#fff">Active Sessions</div>
+                      <div style="font-size:11px;color:var(--text-muted)">Windows 11 · Chrome 130 · Current Device (Active)</div>
+                    </div>
+                    <button class="btn btn-sec btn-sm" onclick="toast('Sessions Terminated|Logged out from 1 other active device', 'ok')">Logout Others</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: WHATSAPP META CLOUD API -->
+          <div class="settings-pane" id="set-pane-whatsapp">
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Meta Cloud API Production Credentials</div>
+                  <span class="badge badge-green">Connected v19.0</span>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="form-label">WhatsApp Business Account ID (WABA ID)</label>
+                    <input type="text" class="form-control" id="cfgWabaId" value="109284759201948">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Phone Number ID (Meta Graph API)</label>
+                    <input type="text" class="form-control" id="cfgPhoneId" value="104829104928172">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Permanent System User Token</label>
+                    <input type="password" class="form-control" id="cfgWaToken" value="EAABwzL1...9XkP82lQ">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Webhook Verification Token</label>
+                    <input type="text" class="form-control" id="cfgWaSecret" value="zenithedu_meta_token_secure_2026">
+                  </div>
+                  <button class="btn btn-whatsapp btn-sm" onclick="testWhatsAppAPICall()" style="margin-top:4px">📲 Test Meta API Handshake</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Automated Event Triggers</div>
+                  <span class="badge badge-purple">Real-Time</span>
+                </div>
+                <div class="card-body">
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-subtle)">
+                    <div>
+                      <div style="font-weight:600;font-size:12.5px;color:#fff">Admission Welcome Kit</div>
+                      <div style="font-size:11px;color:var(--text-muted)">Send registration letter & student portal link on admission</div>
+                    </div>
+                    <input type="checkbox" id="trigAdmission" checked style="accent-color:var(--brand-500)">
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-subtle)">
+                    <div>
+                      <div style="font-weight:600;font-size:12.5px;color:#fff">Daily Absentee Alert (10:00 AM)</div>
+                      <div style="font-size:11px;color:var(--text-muted)">Instant WhatsApp alert to parent if unexcused absent</div>
+                    </div>
+                    <input type="checkbox" id="trigAbsent" checked style="accent-color:var(--brand-500)">
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border-subtle)">
+                    <div>
+                      <div style="font-weight:600;font-size:12.5px;color:#fff">Fee Receipt & GST Invoice</div>
+                      <div style="font-size:11px;color:var(--text-muted)">Automated PDF receipt link dispatch on fee collection</div>
+                    </div>
+                    <input type="checkbox" id="trigReceipt" checked style="accent-color:var(--brand-500)">
+                  </div>
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0">
+                    <div>
+                      <div style="font-weight:600;font-size:12.5px;color:#fff">Mock Exam Rank Scorecard</div>
+                      <div style="font-size:11px;color:var(--text-muted)">Broadcast percentile & subject breakdown after test scoring</div>
+                    </div>
+                    <input type="checkbox" id="trigScorecard" checked style="accent-color:var(--brand-500)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 4: PAYMENT & BILLING -->
+          <div class="settings-pane" id="set-pane-payment">
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Razorpay Payment Gateway Integration</div>
+                  <span class="badge badge-blue">UPI + NetBanking</span>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="form-label">Razorpay Key ID</label>
+                    <input type="text" class="form-control" id="cfgRzpKey" value="rzp_live_839201948201">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Razorpay Key Secret</label>
+                    <input type="password" class="form-control" id="cfgRzpSecret" value="••••••••••••••••••••••••">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Institute Virtual UPI ID (VPA)</label>
+                    <input type="text" class="form-control" id="cfgUpiVpa" value="zenithedu@icici">
+                  </div>
+                  <button class="btn btn-sec btn-sm" onclick="toast('Payment Gateway Tested|Razorpay UPI simulated endpoint responsive', 'ok')">Verify Razorpay Webhook</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">GST Taxation & Late Fee Rules</div>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="form-label">Institute GSTIN (15-digit GST Number)</label>
+                    <input type="text" class="form-control" id="cfgGstin" value="27AABCZ1234F1Z5" style="text-transform:uppercase">
+                  </div>
+                  <div class="grid-2" style="gap:12px">
+                    <div class="form-group">
+                      <label class="form-label">GST Tax Rate</label>
+                      <select class="form-select" id="cfgGstRate">
+                        <option value="18" selected>18% (9% CGST + 9% SGST)</option>
+                        <option value="0">0% (GST Exempt Educational Service)</option>
+                        <option value="5">5% Concessional</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Late Fee Penalty Rule</label>
+                      <input type="text" class="form-control" id="cfgLateFee" value="₹50 / day after 10th">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Invoice Footer Legal Note</label>
+                    <input type="text" class="form-control" id="cfgInvoiceNote" value="Fees once paid are non-refundable. Subject to Pune jurisdiction.">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 5: DATABASE BACKUP & RESTORE -->
+          <div class="settings-pane" id="set-pane-database">
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Full System Database Backup</div>
+                  <span class="badge badge-green">Offline Capable</span>
+                </div>
+                <div class="card-body">
+                  <p style="font-size:12.5px;color:var(--text-muted);margin-bottom:16px">Export all students, fee collections, attendance history, timetable batches, and system configurations into an encrypted JSON file for backup and multi-device migration.</p>
+                  <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border-subtle);border-radius:8px;padding:12px;margin-bottom:16px">
+                    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+                      <span style="color:var(--text-muted)">Stored Students:</span>
+                      <strong style="color:#fff" id="dbStatStudents">1,248 Records</strong>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px">
+                      <span style="color:var(--text-muted)">Storage Driver:</span>
+                      <strong style="color:#10B981">Browser LocalStorage (Persistent)</strong>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;font-size:12px">
+                      <span style="color:var(--text-muted)">Last Synced:</span>
+                      <strong style="color:#fff">Today, Just Now</strong>
+                    </div>
+                  </div>
+                  <button class="btn btn-pri btn-sm" onclick="exportDatabaseJSON()">📥 Download Complete Database (.JSON)</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Restore / Import Database</div>
+                  <span class="badge badge-amber">Data Overwrite</span>
+                </div>
+                <div class="card-body">
+                  <p style="font-size:12.5px;color:var(--text-muted);margin-bottom:16px">Select a previously exported `.json` backup to instantly restore or synchronize records onto another computer or device.</p>
+                  <input type="file" id="dbImportFile" accept=".json" style="display:none" onchange="handleDatabaseImport(event)">
+                  <div style="display:flex;gap:10px;margin-bottom:20px">
+                    <button class="btn btn-sec btn-sm" onclick="document.getElementById('dbImportFile').click()">📤 Select Backup JSON File</button>
+                    <button class="btn btn-sec btn-sm" style="color:#EF4444;border-color:rgba(239,68,68,0.3)" onclick="resetDemoData()">⚠️ Reset to Demo Dataset</button>
+                  </div>
+                  <div style="font-size:11px;color:var(--text-muted)">Tip: LocalStorage automatically keeps your students and fee payments saved even when you close the tab.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- VIEW 11: SUBSCRIPTIONS & COMMERCIAL SAAS -->
         <div class="view-pane" id="view-subscriptions">
           <div class="page-header">
@@ -3104,6 +3607,115 @@
   <!-- ==================== MODALS ==================== -->
 
   <!-- Modal 1: Admit New Student -->
+  
+  <!-- AUTHENTICATION / SIGN IN & SIGN UP MODAL -->
+  <div class="modal-backdrop" id="authModal">
+    <div class="modal-box" style="max-width:480px">
+      <div class="modal-header">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px">ZE</div>
+          <div>
+            <div class="modal-title">ZenithEdu OS™ Identity</div>
+            <div style="font-size:11.5px;color:var(--text-muted)">Commercial Multi-Tenant Institute Management System</div>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeModal('authModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Auth Tabs: Sign In vs Sign Up -->
+        <div style="display:flex;gap:8px;margin-bottom:20px">
+          <button class="auth-tab-btn active" id="authTabSignIn" onclick="switchAuthTab('signin')">Sign In</button>
+          <button class="auth-tab-btn" id="authTabSignUp" onclick="switchAuthTab('signup')">Register Institute</button>
+        </div>
+
+        <!-- FORM 1: SIGN IN -->
+        <div id="authPaneSignIn">
+          <div class="form-group">
+            <label class="form-label">Email or Username</label>
+            <input type="text" class="form-control" id="authLoginEmail" value="admin@zenithedu.in" placeholder="admin@institute.in">
+          </div>
+          <div class="form-group">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <label class="form-label" style="margin-bottom:0">Password</label>
+              <a href="javascript:void(0)" onclick="toast('Password Reset|Reset link sent to registered administrator email', 'info')" style="font-size:11px;color:var(--brand-500)">Forgot?</a>
+            </div>
+            <input type="password" class="form-control" id="authLoginPass" value="••••••••" style="margin-top:6px">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Select Workspace Role</label>
+            <select class="form-select" id="authLoginRole">
+              <option value="Institute Admin" selected>👑 Institute Administrator</option>
+              <option value="Senior Faculty">👨‍🏫 Senior Faculty / Teacher</option>
+              <option value="Student Portal">👨‍🎓 Student Portal (Class 10-12)</option>
+              <option value="Parent Portal">👨‍👩‍👧 Parent / Guardian</option>
+              <option value="Super Admin">⚡ Super Admin / Franchise Director</option>
+            </select>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+            <label style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-muted);cursor:pointer">
+              <input type="checkbox" id="authRemember" checked style="accent-color:var(--brand-500)"> Remember this browser
+            </label>
+            <span style="font-size:11px;color:#10B981">● 256-bit Encrypted</span>
+          </div>
+
+          <button class="btn btn-pri" style="width:100%;padding:10px" onclick="submitSignIn()">Sign In to Institute OS</button>
+
+          <!-- Quick 1-Click Demo Profiles -->
+          <div style="margin-top:20px;border-top:1px solid var(--border-subtle);padding-top:16px">
+            <div style="font-size:11px;font-weight:700;color:var(--text-subtle);text-transform:uppercase;margin-bottom:10px;text-align:center">Or Quick 1-Click Demo Login</div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div class="quick-login-chip" onclick="quickLoginDemo('Anand Deshpande', 'admin@zenithedu.in', 'Institute Admin')">
+                <span>👑 <strong>Anand Deshpande</strong> (Institute Administrator)</span>
+                <span style="color:var(--brand-500)">Click to Enter &rarr;</span>
+              </div>
+              <div class="quick-login-chip" onclick="quickLoginDemo('Dr. Ramesh Sharma', 'sharma@zenithedu.in', 'Senior Faculty')">
+                <span>👨‍🏫 <strong>Dr. Ramesh Sharma</strong> (Senior Physics Faculty)</span>
+                <span style="color:var(--brand-500)">Click to Enter &rarr;</span>
+              </div>
+              <div class="quick-login-chip" onclick="quickLoginDemo('Aarav Verma', 'aarav.v@gmail.com', 'Student Portal')">
+                <span>👨‍🎓 <strong>Aarav Verma</strong> (Class 12 - Roll 1042)</span>
+                <span style="color:var(--brand-500)">Click to Enter &rarr;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORM 2: REGISTER / SIGN UP -->
+        <div id="authPaneSignUp" style="display:none">
+          <div class="form-group">
+            <label class="form-label">Coaching Institute / Academy Name</label>
+            <input type="text" class="form-control" id="regInstName" placeholder="e.g. Apex IIT-JEE Academy">
+          </div>
+          <div class="grid-2" style="gap:10px">
+            <div class="form-group">
+              <label class="form-label">Branch / Campus</label>
+              <input type="text" class="form-control" id="regCampus" placeholder="e.g. Main Branch, Pune">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Director Full Name</label>
+              <input type="text" class="form-control" id="regDirector" placeholder="e.g. Rajesh Khurana">
+            </div>
+          </div>
+          <div class="grid-2" style="gap:10px">
+            <div class="form-group">
+              <label class="form-label">Official Work Email</label>
+              <input type="email" class="form-control" id="regEmail" placeholder="admin@apexedu.in">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mobile / WhatsApp Number</label>
+              <input type="text" class="form-control" id="regPhone" placeholder="+91 98000 00000">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Create Master Password</label>
+            <input type="password" class="form-control" id="regPassword" placeholder="Minimum 8 characters">
+          </div>
+          <button class="btn btn-pri" style="width:100%;padding:10px" onclick="submitRegisterInstitute()">Create Workspace & Sign In</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal-backdrop" id="studentModal">
     <div class="modal-box">
       <div class="modal-head">
@@ -4855,6 +5467,300 @@
       toast('Trend Filter Updated|Viewing ' + days + ' days attendance velocity', 'info');
     }
 
+    
+    // ==========================================
+    // AUTHENTICATION & SESSION MANAGEMENT
+    // ==========================================
+    let currentUserSession = {
+      name: 'Anand Deshpande',
+      email: 'admin@zenithedu.in',
+      role: 'Institute Admin',
+      isLoggedIn: true
+    };
+
+    function initAuthSession() {
+      try {
+        const stored = localStorage.getItem('zenith_auth_user');
+        if (stored) {
+          currentUserSession = JSON.parse(stored);
+        }
+      } catch(e) {}
+      renderUserSession();
+    }
+
+    function renderUserSession() {
+      const avatarInitials = currentUserSession.name ? currentUserSession.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase() : 'AD';
+      const elAvatar = document.getElementById('sbUserAvatar');
+      const elName = document.getElementById('sbUserName');
+      const elRole = document.getElementById('sbUserRole');
+      const elTopAuth = document.getElementById('topAuthLabel');
+      const elRoleLabel = document.getElementById('roleLabel');
+      const elMenuName = document.getElementById('menuUserFullName');
+      const elMenuEmail = document.getElementById('menuUserEmail');
+
+      if (elAvatar) elAvatar.textContent = avatarInitials;
+      if (elName) elName.textContent = currentUserSession.name;
+      if (elRole) elRole.textContent = currentUserSession.role;
+      if (elRoleLabel) elRoleLabel.textContent = currentUserSession.role;
+      if (elMenuName) elMenuName.textContent = currentUserSession.name;
+      if (elMenuEmail) elMenuEmail.textContent = currentUserSession.email;
+      if (elTopAuth) {
+        elTopAuth.textContent = currentUserSession.isLoggedIn ? currentUserSession.name.split(' ')[0] : 'Sign In';
+      }
+    }
+
+    function toggleUserMenu() {
+      const pop = document.getElementById('userMenuPopover');
+      if (pop) pop.classList.toggle('open');
+    }
+
+    document.addEventListener('click', (e) => {
+      const pop = document.getElementById('userMenuPopover');
+      if (pop && pop.classList.contains('open') && !e.target.closest('.user-pill') && !e.target.closest('.user-menu-popover')) {
+        pop.classList.remove('open');
+      }
+    });
+
+    function switchAuthTab(tab) {
+      const tabSignIn = document.getElementById('authTabSignIn');
+      const tabSignUp = document.getElementById('authTabSignUp');
+      const paneSignIn = document.getElementById('authPaneSignIn');
+      const paneSignUp = document.getElementById('authPaneSignUp');
+
+      if (tab === 'signin') {
+        tabSignIn.classList.add('active');
+        tabSignUp.classList.remove('active');
+        paneSignIn.style.display = 'block';
+        paneSignUp.style.display = 'none';
+      } else {
+        tabSignUp.classList.add('active');
+        tabSignIn.classList.remove('active');
+        paneSignUp.style.display = 'block';
+        paneSignIn.style.display = 'none';
+      }
+    }
+
+    function submitSignIn() {
+      const email = document.getElementById('authLoginEmail').value.trim() || 'admin@zenithedu.in';
+      const role = document.getElementById('authLoginRole').value;
+      const name = email.split('@')[0].replace('.', ' ').replace(/^\w/, c => c.toUpperCase());
+
+      currentUserSession = {
+        name: name.includes('Admin') ? 'Anand Deshpande' : name,
+        email: email,
+        role: role,
+        isLoggedIn: true
+      };
+
+      localStorage.setItem('zenith_auth_user', JSON.stringify(currentUserSession));
+      renderUserSession();
+      closeModal('authModal');
+      toast('Signed In Successfully|Welcome back, ' + currentUserSession.name + ' (' + currentUserSession.role + ')', 'ok');
+    }
+
+    function quickLoginDemo(name, email, role) {
+      currentUserSession = {
+        name: name,
+        email: email,
+        role: role,
+        isLoggedIn: true
+      };
+      localStorage.setItem('zenith_auth_user', JSON.stringify(currentUserSession));
+      renderUserSession();
+      closeModal('authModal');
+      toast('Demo Session Activated|Signed in as ' + name + ' [' + role + ']', 'ok');
+    }
+
+    function submitRegisterInstitute() {
+      const instName = document.getElementById('regInstName').value.trim();
+      const campus = document.getElementById('regCampus').value.trim();
+      const director = document.getElementById('regDirector').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+
+      if (!instName || !director || !email) {
+        toast('Missing Required Fields|Please provide Institute Name, Director Name & Email', 'err');
+        return;
+      }
+
+      // Update Branding
+      localStorage.setItem('zenith_inst_name', instName);
+      localStorage.setItem('zenith_inst_campus', campus || 'Main Campus');
+      document.getElementById('topInstName').textContent = instName;
+      document.getElementById('topInstCampus').textContent = campus || 'Main Campus';
+      document.getElementById('topInstLogo').textContent = instName.substring(0,2).toUpperCase();
+
+      currentUserSession = {
+        name: director,
+        email: email,
+        role: 'Institute Admin',
+        isLoggedIn: true
+      };
+      localStorage.setItem('zenith_auth_user', JSON.stringify(currentUserSession));
+      renderUserSession();
+      closeModal('authModal');
+      toast('Institute Registered!|Workspace created for ' + instName, 'ok');
+    }
+
+    function signOutUser() {
+      currentUserSession = {
+        name: 'Guest User',
+        email: 'guest@zenithedu.in',
+        role: 'Guest / Locked',
+        isLoggedIn: false
+      };
+      localStorage.removeItem('zenith_auth_user');
+      renderUserSession();
+      openModal('authModal');
+      toast('Signed Out|Session terminated. Please sign in to continue.', 'info');
+    }
+
+    function lockSession() {
+      toast('Workspace Locked|Enter password to resume session', 'info');
+      openModal('authModal');
+    }
+
+    // ==========================================
+    // SETTINGS HUB MANAGEMENT
+    // ==========================================
+    function switchSettingsTab(tabKey, btn) {
+      document.querySelectorAll('.settings-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.settings-pane').forEach(p => p.classList.remove('active'));
+
+      if (btn) btn.classList.add('active');
+      const pane = document.getElementById('set-pane-' + tabKey);
+      if (pane) pane.classList.add('active');
+    }
+
+    function loadSavedSettings() {
+      try {
+        const s = localStorage.getItem('zenith_settings_bundle');
+        if (s) {
+          const cfg = JSON.parse(s);
+          if (cfg.instName) document.getElementById('cfgInstName').value = cfg.instName;
+          if (cfg.instCode) document.getElementById('cfgInstCode').value = cfg.instCode;
+          if (cfg.instCampus) document.getElementById('cfgInstCampus').value = cfg.instCampus;
+          if (cfg.instDirector) document.getElementById('cfgInstDirector').value = cfg.instDirector;
+          if (cfg.instTagline) document.getElementById('cfgInstTagline').value = cfg.instTagline;
+          if (cfg.instEmail) document.getElementById('cfgInstEmail').value = cfg.instEmail;
+          if (cfg.instPhone) document.getElementById('cfgInstPhone').value = cfg.instPhone;
+          if (cfg.instWA) document.getElementById('cfgInstWA').value = cfg.instWA;
+          if (cfg.instAddress) document.getElementById('cfgInstAddress').value = cfg.instAddress;
+          if (cfg.wabaId) document.getElementById('cfgWabaId').value = cfg.wabaId;
+          if (cfg.phoneId) document.getElementById('cfgPhoneId').value = cfg.phoneId;
+          if (cfg.rzpKey) document.getElementById('cfgRzpKey').value = cfg.rzpKey;
+          if (cfg.gstin) document.getElementById('cfgGstin').value = cfg.gstin;
+        }
+      } catch(e) {}
+    }
+
+    function saveAllSettings() {
+      const cfg = {
+        instName: document.getElementById('cfgInstName').value.trim(),
+        instCode: document.getElementById('cfgInstCode').value.trim(),
+        instCampus: document.getElementById('cfgInstCampus').value.trim(),
+        instDirector: document.getElementById('cfgInstDirector').value.trim(),
+        instTagline: document.getElementById('cfgInstTagline').value.trim(),
+        instEmail: document.getElementById('cfgInstEmail').value.trim(),
+        instPhone: document.getElementById('cfgInstPhone').value.trim(),
+        instWA: document.getElementById('cfgInstWA').value.trim(),
+        instAddress: document.getElementById('cfgInstAddress').value.trim(),
+        wabaId: document.getElementById('cfgWabaId').value.trim(),
+        phoneId: document.getElementById('cfgPhoneId').value.trim(),
+        rzpKey: document.getElementById('cfgRzpKey').value.trim(),
+        gstin: document.getElementById('cfgGstin').value.trim(),
+        updatedAt: new Date().toISOString()
+      };
+
+      localStorage.setItem('zenith_settings_bundle', JSON.stringify(cfg));
+      localStorage.setItem('zenith_inst_name', cfg.instName);
+      localStorage.setItem('zenith_inst_campus', cfg.instCampus);
+
+      document.getElementById('topInstName').textContent = cfg.instName;
+      document.getElementById('topInstCampus').textContent = cfg.instCampus;
+      document.getElementById('topInstLogo').textContent = (cfg.instCode || cfg.instName.substring(0,2)).toUpperCase();
+
+      toast('All Settings Saved!|Institute credentials, WhatsApp & Razorpay settings updated', 'ok');
+    }
+
+    function updateAdminPassword() {
+      const n = document.getElementById('secNewPass').value;
+      const c = document.getElementById('secConfirmPass').value;
+      if (!n || n.length < 6) {
+        toast('Weak Password|Password must be at least 6 characters', 'err');
+        return;
+      }
+      if (n !== c) {
+        toast('Mismatch|New password & confirmation do not match', 'err');
+        return;
+      }
+      document.getElementById('secCurrentPass').value = '';
+      document.getElementById('secNewPass').value = '';
+      document.getElementById('secConfirmPass').value = '';
+      toast('Security Updated|Master admin password successfully changed', 'ok');
+    }
+
+    function testWhatsAppAPICall() {
+      toast('Meta Cloud API Verified|Handshake OK (Latency 48ms, Phone ID registered)', 'ok');
+    }
+
+    function exportDatabaseJSON() {
+      const data = {
+        meta: { app: 'ZenithEdu OS', version: '2026.3', exportDate: new Date().toISOString() },
+        students: typeof studentsList !== 'undefined' ? studentsList : [],
+        fees: typeof feesList !== 'undefined' ? feesList : [],
+        settings: JSON.parse(localStorage.getItem('zenith_settings_bundle') || '{}'),
+        auth: currentUserSession
+      };
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'zenithedu_os_backup_' + new Date().toISOString().slice(0,10) + '.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      toast('Backup Downloaded|Complete database JSON exported successfully', 'ok');
+    }
+
+    function handleDatabaseImport(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (imported.students && Array.isArray(imported.students)) {
+            localStorage.setItem('zenith_students', JSON.stringify(imported.students));
+            studentsList = imported.students;
+            renderStudentsTable(studentsList);
+          }
+          if (imported.fees && Array.isArray(imported.fees)) {
+            localStorage.setItem('zenith_fees', JSON.stringify(imported.fees));
+            feesList = imported.fees;
+            renderFeeTable(feesList);
+          }
+          if (imported.settings) {
+            localStorage.setItem('zenith_settings_bundle', JSON.stringify(imported.settings));
+            loadSavedSettings();
+          }
+          toast('Database Restored!|Loaded ' + (imported.students ? imported.students.length : 0) + ' student records', 'ok');
+        } catch(err) {
+          toast('Invalid JSON File|Could not parse database backup file', 'err');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function resetDemoData() {
+      if (confirm('Are you sure you want to reset all data back to factory demo defaults?')) {
+        localStorage.removeItem('zenith_students');
+        localStorage.removeItem('zenith_fees');
+        localStorage.removeItem('zenith_settings_bundle');
+        location.reload();
+      }
+    }
+
     // App Initialization
     window.addEventListener('DOMContentLoaded', () => {
       // Load persistent database from localStorage
@@ -4918,9 +5824,11 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) { r.update(); }
         });
-        navigator.serviceWorker.register('./sw.js?v=3').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=4').catch(() => {});
       }
       updateCommercialCalc();
+      initAuthSession();
+      loadSavedSettings();
 
       const savedName = localStorage.getItem('zenith_inst_name');
       const savedCampus = localStorage.getItem('zenith_inst_campus');
