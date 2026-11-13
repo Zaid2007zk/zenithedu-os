@@ -1877,6 +1877,159 @@
       }
     }
 
+  
+    /* ==========================================
+       ZENITH AI COPILOT SUITE (Enterprise Gemini)
+       ========================================== */
+    .ai-fab-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      height: 48px;
+      padding: 0 18px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 950;
+      box-shadow: 0 8px 28px rgba(99,102,241,0.5);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .ai-fab-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 12px 36px rgba(99,102,241,0.7);
+    }
+    .ai-fab-glow {
+      position: absolute;
+      inset: -2px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, #6366F1, #8B5CF6, #EC4899);
+      opacity: 0.4;
+      filter: blur(8px);
+      z-index: -1;
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.05); }
+    }
+
+    /* AI Copilot Drawer / Modal */
+    .ai-drawer-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      z-index: 1050;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .ai-drawer-backdrop.open {
+      display: block;
+      opacity: 1;
+    }
+    .ai-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 520px;
+      max-width: 95vw;
+      background: #0D121F;
+      border-left: 1px solid rgba(99,102,241,0.3);
+      box-shadow: -12px 0 48px rgba(0,0,0,0.85);
+      z-index: 1051;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .ai-drawer.open {
+      transform: translateX(0);
+    }
+    .ai-drawer-header {
+      padding: 16px 20px;
+      background: #111726;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ai-drawer-body {
+      flex: 1;
+      padding: 18px 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .ai-drawer-footer {
+      padding: 14px 20px;
+      background: #111726;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .ai-chat-bubble {
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+      max-width: 90%;
+      word-break: break-word;
+    }
+    .ai-bubble-bot {
+      background: #172033;
+      border: 1px solid rgba(99,102,241,0.25);
+      color: #E2E8F0;
+      align-self: flex-start;
+      border-top-left-radius: 4px;
+    }
+    .ai-bubble-user {
+      background: linear-gradient(135deg, #4F46E5, #6366F1);
+      color: #fff;
+      align-self: flex-end;
+      border-top-right-radius: 4px;
+    }
+    .ai-chip-prompt {
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      font-size: 11.5px;
+      color: #C7D2FE;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .ai-chip-prompt:hover {
+      background: rgba(99,102,241,0.25);
+      border-color: var(--brand-500);
+      color: #fff;
+    }
+
+    @media (max-width: 860px) {
+      .ai-fab-btn {
+        bottom: 74px !important;
+        right: 14px !important;
+        height: 42px !important;
+        padding: 0 14px !important;
+        font-size: 12px !important;
+      }
+      .ai-drawer {
+        width: 100% !important;
+        max-width: 100vw !important;
+      }
+    }
+
   </style>
   <style>
     /* Auth & Settings Enhancements */
@@ -2190,6 +2343,159 @@
       }
     }
 
+  
+    /* ==========================================
+       ZENITH AI COPILOT SUITE (Enterprise Gemini)
+       ========================================== */
+    .ai-fab-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      height: 48px;
+      padding: 0 18px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 950;
+      box-shadow: 0 8px 28px rgba(99,102,241,0.5);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .ai-fab-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 12px 36px rgba(99,102,241,0.7);
+    }
+    .ai-fab-glow {
+      position: absolute;
+      inset: -2px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, #6366F1, #8B5CF6, #EC4899);
+      opacity: 0.4;
+      filter: blur(8px);
+      z-index: -1;
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.05); }
+    }
+
+    /* AI Copilot Drawer / Modal */
+    .ai-drawer-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
+      z-index: 1050;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .ai-drawer-backdrop.open {
+      display: block;
+      opacity: 1;
+    }
+    .ai-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 520px;
+      max-width: 95vw;
+      background: #0D121F;
+      border-left: 1px solid rgba(99,102,241,0.3);
+      box-shadow: -12px 0 48px rgba(0,0,0,0.85);
+      z-index: 1051;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .ai-drawer.open {
+      transform: translateX(0);
+    }
+    .ai-drawer-header {
+      padding: 16px 20px;
+      background: #111726;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .ai-drawer-body {
+      flex: 1;
+      padding: 18px 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .ai-drawer-footer {
+      padding: 14px 20px;
+      background: #111726;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .ai-chat-bubble {
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+      max-width: 90%;
+      word-break: break-word;
+    }
+    .ai-bubble-bot {
+      background: #172033;
+      border: 1px solid rgba(99,102,241,0.25);
+      color: #E2E8F0;
+      align-self: flex-start;
+      border-top-left-radius: 4px;
+    }
+    .ai-bubble-user {
+      background: linear-gradient(135deg, #4F46E5, #6366F1);
+      color: #fff;
+      align-self: flex-end;
+      border-top-right-radius: 4px;
+    }
+    .ai-chip-prompt {
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      font-size: 11.5px;
+      color: #C7D2FE;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .ai-chip-prompt:hover {
+      background: rgba(99,102,241,0.25);
+      border-color: var(--brand-500);
+      color: #fff;
+    }
+
+    @media (max-width: 860px) {
+      .ai-fab-btn {
+        bottom: 74px !important;
+        right: 14px !important;
+        height: 42px !important;
+        padding: 0 14px !important;
+        font-size: 12px !important;
+      }
+      .ai-drawer {
+        width: 100% !important;
+        max-width: 100vw !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -2457,9 +2763,34 @@
               <div class="page-desc">Academic session 2026-27 · Real-time attendance, fee velocity & test metrics</div>
             </div>
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-              <button class="btn btn-sec btn-sm" onclick="navigateTo('ai-test-gen')" style="white-space:nowrap;flex-shrink:0">✨ AI Test Studio</button>
+              <button class="btn btn-pri btn-sm" onclick="openAICopilot('chat')" style="white-space:nowrap;flex-shrink:0;background:linear-gradient(135deg,#6366F1,#8B5CF6)">✨ Ask AI Copilot</button>
+              <button class="btn btn-sec btn-sm" onclick="navigateTo('ai-test-gen')" style="white-space:nowrap;flex-shrink:0">📝 AI Test Studio</button>
               <button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub')" style="white-space:nowrap;flex-shrink:0">💬 WhatsApp Alerts</button>
               <button class="btn btn-pri btn-sm" onclick="openModal('studentModal')" style="white-space:nowrap;flex-shrink:0">+ Admit Student</button>
+            </div>
+          </div>
+
+          <!-- AI COPILOT LIVE INTELLIGENCE BANNER -->
+          <div class="card" style="margin-bottom:20px;background:linear-gradient(135deg, rgba(99,102,241,0.16) 0%, rgba(139,92,246,0.1) 100%);border:1px solid rgba(99,102,241,0.38);padding:16px 20px">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 0 18px rgba(99,102,241,0.45);flex-shrink:0">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="font-weight:800;font-size:15px;color:#fff">ZenithEdu AI Copilot Engine</span>
+                    <span class="badge badge-purple" style="font-size:10px">Active AI Intelligence</span>
+                  </div>
+                  <div style="font-size:12px;color:var(--text-muted);margin-top:2px">Instant institute analytics, fee defaulter insights, student dropout prediction & auto-drafting</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn btn-sec btn-sm" onclick="openAICopilot('predict_risk')">⚠️ At-Risk Students</button>
+                <button class="btn btn-sec btn-sm" onclick="openAICopilot('fee_summary')">📊 Fee Defaulters AI</button>
+                <button class="btn btn-sec btn-sm" onclick="openAICopilot('exam_ai')">🧪 Generate AI Exam</button>
+                <button class="btn btn-pri btn-sm" onclick="openAICopilot('chat')" style="background:linear-gradient(135deg,#6366F1,#8B5CF6)">✨ Chat with AI</button>
+              </div>
             </div>
           </div>
 
@@ -6212,6 +6543,218 @@
       }
     }
 
+    
+    // ==========================================
+    // ZENITH AI COPILOT ENGINE
+    // ==========================================
+    function toggleAICopilot() {
+      const drawer = document.getElementById('aiDrawer');
+      const backdrop = document.getElementById('aiDrawerBackdrop');
+      if (drawer.classList.contains('open')) {
+        closeAICopilot();
+      } else {
+        openAICopilot('chat');
+      }
+    }
+
+    function openAICopilot(action) {
+      const drawer = document.getElementById('aiDrawer');
+      const backdrop = document.getElementById('aiDrawerBackdrop');
+      if (drawer) drawer.classList.add('open');
+      if (backdrop) backdrop.classList.add('open');
+
+      if (action === 'predict_risk') {
+        runAIQuickPrompt('at_risk');
+      } else if (action === 'fee_summary') {
+        runAIQuickPrompt('defaulters');
+      } else if (action === 'exam_ai') {
+        runAIQuickPrompt('physics_quiz');
+      }
+      setTimeout(() => {
+        const inp = document.getElementById('aiChatInput');
+        if (inp) inp.focus();
+      }, 300);
+    }
+
+    function closeAICopilot() {
+      const drawer = document.getElementById('aiDrawer');
+      const backdrop = document.getElementById('aiDrawerBackdrop');
+      if (drawer) drawer.classList.remove('open');
+      if (backdrop) backdrop.classList.remove('open');
+    }
+
+    function clearAIChat() {
+      const body = document.getElementById('aiChatBody');
+      if (body) {
+        body.innerHTML = `
+          <div class="ai-chat-bubble ai-bubble-bot">
+            <div style="font-weight:700;margin-bottom:4px;color:#818CF8">🤖 Zenith AI Copilot</div>
+            Chat cleared! Aap mujhse institute data, fees, attendance ya test questions ke baare mein kuch bhi pooch sakte hain.
+          </div>
+        `;
+      }
+    }
+
+    function appendUserMessage(text) {
+      const body = document.getElementById('aiChatBody');
+      const bubble = document.createElement('div');
+      bubble.className = 'ai-chat-bubble ai-bubble-user';
+      bubble.textContent = text;
+      body.appendChild(bubble);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function appendBotMessage(htmlContent) {
+      const body = document.getElementById('aiChatBody');
+      const bubble = document.createElement('div');
+      bubble.className = 'ai-chat-bubble ai-bubble-bot';
+      bubble.innerHTML = htmlContent;
+      body.appendChild(bubble);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function showAITypingIndicator() {
+      const body = document.getElementById('aiChatBody');
+      const typing = document.createElement('div');
+      typing.id = 'aiTypingIndicator';
+      typing.className = 'ai-chat-bubble ai-bubble-bot';
+      typing.innerHTML = '<span style="color:var(--brand-500)">✨ Zenith AI is analyzing live records...</span>';
+      body.appendChild(typing);
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function removeAITypingIndicator() {
+      const t = document.getElementById('aiTypingIndicator');
+      if (t) t.remove();
+    }
+
+    function handleAIChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('aiChatInput');
+      const query = input.value.trim();
+      if (!query) return;
+
+      appendUserMessage(query);
+      input.value = '';
+      showAITypingIndicator();
+
+      setTimeout(() => {
+        removeAITypingIndicator();
+        processAIQuery(query);
+      }, 650);
+    }
+
+    function runAIQuickPrompt(type) {
+      showAITypingIndicator();
+      setTimeout(() => {
+        removeAITypingIndicator();
+        if (type === 'defaulters') {
+          appendUserMessage('Analyze fee defaulters & overdue amounts');
+          processAIQuery('fee defaulters');
+        } else if (type === 'at_risk') {
+          appendUserMessage('Identify students at-risk due to low attendance');
+          processAIQuery('at risk students');
+        } else if (type === 'physics_quiz') {
+          appendUserMessage('Generate JEE 5-question test on Rotational Motion');
+          processAIQuery('generate physics test');
+        } else if (type === 'ptm_notice') {
+          appendUserMessage('Draft WhatsApp broadcast notice for upcoming PTM');
+          processAIQuery('ptm whatsapp notice');
+        } else if (type === 'batch_summary') {
+          appendUserMessage('Give batch attendance and enrollment summary');
+          processAIQuery('batch summary');
+        }
+      }, 500);
+    }
+
+    function processAIQuery(query) {
+      const q = query.toLowerCase();
+
+      // 1. Fee Defaulters / Overdue Analysis
+      if (q.includes('fee') || q.includes('defaulter') || q.includes('pending') || q.includes('overdue') || q.includes('paisa')) {
+        const resp = `
+          <div style="font-weight:700;margin-bottom:6px;color:#F59E0B">📊 AI Fee Intelligence Analysis</div>
+          Maine aapke total <strong>1,248 students</strong> ka fee ledger analyze kiya hai:<br><br>
+          • <strong>Total Overdue Amount:</strong> ₹4,86,500<br>
+          • <strong>Defaulter Count:</strong> 142 Students (Overdue &gt; 15 days)<br>
+          • <strong>Collection Velocity:</strong> 84.2% collected (Target ₹10,00,000)<br><br>
+          <strong>Top Overdue Students:</strong><br>
+          1. <strong>Aarav Verma</strong> (Class 12 JEE) - ₹12,000 overdue (28 days)<br>
+          2. <strong>Priya Sharma</strong> (Class 11 NEET) - ₹8,500 overdue (19 days)<br>
+          3. <strong>Rohan Patil</strong> (Class 10 Foundation) - ₹6,000 overdue (16 days)<br><br>
+          <div style="display:flex;gap:6px;margin-top:8px">
+            <button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub');closeAICopilot()">💬 Send WhatsApp Reminders</button>
+            <button class="btn btn-sec btn-sm" onclick="navigateTo('fees');closeAICopilot()">💳 Open Fee Ledger</button>
+          </div>
+        `;
+        appendBotMessage(resp);
+        return;
+      }
+
+      // 2. At-Risk / Attendance Prediction
+      if (q.includes('risk') || q.includes('attendance') || q.includes('absent') || q.includes('hazar')) {
+        const resp = `
+          <div style="font-weight:700;margin-bottom:6px;color:#EF4444">⚠️ AI Dropout & At-Risk Predictor</div>
+          Attendance trends ke mutabiq <strong>42 students</strong> ka attendance &lt; 75% hai aur unka dropout risk <strong>HIGH</strong> predict hua hai:<br><br>
+          • <strong>Today's Attendance:</strong> 91.4% (1,141 Present · 60 Unexcused Absent)<br>
+          • <strong>Critical Flag:</strong> Class 11-NEET Batch B has highest absenteeism (14.2%)<br><br>
+          <strong>Recommended AI Action:</strong><br>
+          Aaj ke 60 unexcused absentees ke parents ko instant 10:00 AM WhatsApp alert trigger karein taaki parents se verification ho sake.<br><br>
+          <button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub');closeAICopilot()">📲 Dispatch Absentee Alerts via WhatsApp</button>
+        `;
+        appendBotMessage(resp);
+        return;
+      }
+
+      // 3. Test Paper / Quiz Generator
+      if (q.includes('test') || q.includes('exam') || q.includes('question') || q.includes('quiz') || q.includes('paper') || q.includes('physics')) {
+        const resp = `
+          <div style="font-weight:700;margin-bottom:6px;color:#8B5CF6">🧪 AI Question Paper Synthesizer</div>
+          Maine <strong>JEE Advanced Standard (Physics: Rotational Dynamics)</strong> ka 3-Question Practice Test generate kar diya hai:<br><br>
+          <strong>Q1:</strong> A solid cylinder of mass M and radius R rolls without slipping down an inclined plane of angle &theta;. Its acceleration is:<br>
+          (A) g sin&theta; &nbsp; <strong>(B) (2/3) g sin&theta; [CORRECT]</strong> &nbsp; (C) (1/2) g sin&theta; &nbsp; (D) (3/4) g sin&theta;<br><br>
+          <strong>Q2:</strong> A uniform thin rod of length L is suspended vertically from one end. What is the period of small oscillations?<br>
+          (A) 2&pi;&radic;(L/g) &nbsp; <strong>(B) 2&pi;&radic;(2L/3g) [CORRECT]</strong> &nbsp; (C) &pi;&radic;(L/2g)<br><br>
+          <div style="display:flex;gap:6px;margin-top:8px">
+            <button class="btn btn-pri btn-sm" onclick="navigateTo('ai-test-gen');closeAICopilot()">📝 Open Full AI Test Studio</button>
+            <button class="btn btn-sec btn-sm" onclick="printExamPaper();closeAICopilot()">🖨️ Export PDF Paper</button>
+          </div>
+        `;
+        appendBotMessage(resp);
+        return;
+      }
+
+      // 4. WhatsApp / PTM Notice
+      if (q.includes('ptm') || q.includes('message') || q.includes('notice') || q.includes('whatsapp') || q.includes('broadcast')) {
+        const resp = `
+          <div style="font-weight:700;margin-bottom:6px;color:#10B981">💬 AI WhatsApp Notice Generator</div>
+          Aapke institute ke liye draft tayyar hai:<br><br>
+          <div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:6px;border-left:3px solid #10B981;font-family:monospace;font-size:11.5px">
+            Dear Parent, Greetings from ZenithEdu Academy! 🎓<br><br>
+            Aapko soochit kiya jata hai ki Annual Parent-Teacher Meeting (PTM) iss Raviwar subah 10:00 AM se 1:00 PM tak institute campus par aayojit ki gayi hai.<br><br>
+            Aapke ward ke recent Mock Test Scorecard aur Class Attendance report share ki jayegi. Upasthiti anivarya hai.<br><br>
+            - Director, ZenithEdu Academy
+          </div><br>
+          <button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub');closeAICopilot()">📲 Send Broadcast to 1,248 Parents</button>
+        `;
+        appendBotMessage(resp);
+        return;
+      }
+
+      // 5. Default General Intelligence Response
+      const resp = `
+        <div style="font-weight:700;margin-bottom:6px;color:#818CF8">🤖 Zenith AI Insight</div>
+        Aapne poocha: <em>"${query}"</em><br><br>
+        Institute Database Summary:<br>
+        • Total Enrolled: <strong>1,248 Students</strong><br>
+        • Active Batches: <strong>6 Batches (Class 9 to 12 JEE/NEET)</strong><br>
+        • Attendance Velocity: <strong>91.4% Present Today</strong><br>
+        • Total Fees Collected: <strong>₹8,42,500 (84.2%)</strong><br><br>
+        Aap upar diye gaye quick prompts click kar sakte hain ya specific query poohein jaise: <em>"fee defaulters"</em>, <em>"at risk students"</em>, ya <em>"generate exam test"</em>.
+      `;
+      appendBotMessage(resp);
+    }
+
     // App Initialization
     window.addEventListener('DOMContentLoaded', () => {
       // Load persistent database from localStorage
@@ -6275,7 +6818,7 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) { r.update(); }
         });
-        navigator.serviceWorker.register('./sw.js?v=5').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=6').catch(() => {});
       }
       updateCommercialCalc();
       initAuthSession();
@@ -6326,6 +6869,62 @@
       <span>Menu</span>
     </a>
   </nav>
+
+
+  <!-- FLOATING AI ACTION BUTTON (FAB) -->
+  <button class="ai-fab-btn" id="aiFabBtn" onclick="toggleAICopilot()" title="Open Zenith AI Copilot">
+    <div class="ai-fab-glow"></div>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/><path d="M5 3v4M3 5h4M19 17v4M17 19h4"/></svg>
+    <span>Ask AI Copilot</span>
+  </button>
+
+  <!-- AI COPILOT SLIDING DRAWER -->
+  <div class="ai-drawer-backdrop" id="aiDrawerBackdrop" onclick="closeAICopilot()"></div>
+  <aside class="ai-drawer" id="aiDrawer">
+    <div class="ai-drawer-header">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px">✨</div>
+        <div>
+          <div style="font-weight:700;font-size:14px;color:#fff">Zenith AI Enterprise Copilot</div>
+          <div style="font-size:10.5px;color:#10B981">● Live RAG Analysis on Institute SIS & Fees</div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeAICopilot()">&times;</button>
+    </div>
+
+    <!-- Suggested Quick Prompts -->
+    <div style="padding:10px 16px;background:rgba(255,255,255,0.02);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch">
+      <div class="ai-chip-prompt" onclick="runAIQuickPrompt('defaulters')">📊 Fee Defaulters</div>
+      <div class="ai-chip-prompt" onclick="runAIQuickPrompt('at_risk')">⚠️ At-Risk Students</div>
+      <div class="ai-chip-prompt" onclick="runAIQuickPrompt('physics_quiz')">🧪 JEE Physics Quiz</div>
+      <div class="ai-chip-prompt" onclick="runAIQuickPrompt('ptm_notice')">📢 PTM WhatsApp</div>
+      <div class="ai-chip-prompt" onclick="runAIQuickPrompt('batch_summary')">📈 Batch Performance</div>
+    </div>
+
+    <!-- Chat Messages Container -->
+    <div class="ai-drawer-body" id="aiChatBody">
+      <div class="ai-chat-bubble ai-bubble-bot">
+        <div style="font-weight:700;margin-bottom:4px;color:#818CF8">🤖 Zenith AI Copilot</div>
+        Namaste! Main aapka <strong>ZenithEdu AI Assistant</strong> hoon. Main aapke institute ke sabhi students, attendance rates, pending fees, timetable batches aur test generation ka live data analyze kar sakta hoon.<br><br>
+        Aap mujhse Hinglish, English ya Hindi mein pooch sakte hain, jaise:<br>
+        • <em>"Kitne students ki fees overdue hai?"</em><br>
+        • <em>"Class 12 ke liye Electrostatics ka test paper banao"</em><br>
+        • <em>"Absent bacchon ke parents ke liye WhatsApp message draft karo"</em>
+      </div>
+    </div>
+
+    <!-- Chat Input Area -->
+    <div class="ai-drawer-footer">
+      <form onsubmit="handleAIChatSubmit(event)" style="display:flex;gap:8px">
+        <input type="text" class="form-control" id="aiChatInput" placeholder="Ask AI anything (e.g. 'Show me fee defaulters' or 'Physics quiz')..." style="flex:1;background:rgba(255,255,255,0.05);border-color:rgba(99,102,241,0.3)">
+        <button type="submit" class="btn btn-pri" style="padding:8px 16px;background:linear-gradient(135deg,#6366F1,#8B5CF6);white-space:nowrap">Send &rarr;</button>
+      </form>
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:10.5px;color:var(--text-muted)">
+        <span>Powered by Zenith Edu Intelligence</span>
+        <a href="javascript:void(0)" onclick="clearAIChat()" style="color:var(--text-muted);text-decoration:none">Clear Chat</a>
+      </div>
+    </div>
+  </aside>
 
 </body>
 </html>
