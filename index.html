@@ -6,6 +6,10 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <title>ZenithEdu OS™ · Commercial Institute & Academy Management Suite</title>
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#0B1120">
@@ -2171,6 +2175,358 @@
       }
     }
 
+  
+    /* ==========================================
+       NEXT-LEVEL PREMIUM OBSIDIAN UI SYSTEM
+       ========================================== */
+    :root {
+      --bg-base: #070913;
+      --bg-surface: rgba(11, 16, 28, 0.82);
+      --bg-elevated: rgba(18, 25, 44, 0.75);
+      --bg-hover: rgba(30, 41, 69, 0.7);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.14);
+      --border-focus: #6366F1;
+
+      --brand-500: #6366F1;
+      --brand-600: #4F46E5;
+      --brand-gradient: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
+      --glass-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-subtle: #64748B;
+
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-display: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 22px;
+
+      --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.2);
+    }
+
+    /* Ambient Mesh Glow on Body */
+    body {
+      background-color: #060911 !important;
+      background-image: 
+        radial-gradient(circle at 18% 10%, rgba(99, 102, 241, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 15%, rgba(139, 92, 246, 0.09) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%) !important;
+      background-attachment: fixed !important;
+      font-family: var(--font-sans) !important;
+      letter-spacing: -0.01em;
+    }
+
+    /* Glassmorphism Sidebar */
+    .sidebar {
+      background: rgba(8, 12, 22, 0.88) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+    }
+
+    .sb-brand {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+
+    .brand-icon {
+      border-radius: 10px !important;
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.45) !important;
+    }
+
+    .brand-title {
+      font-family: var(--font-display) !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.02em !important;
+    }
+
+    /* Glassmorphism Topbar */
+    .topbar {
+      background: rgba(8, 12, 22, 0.8) !important;
+      backdrop-filter: blur(18px) !important;
+      -webkit-backdrop-filter: blur(18px) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+    }
+
+    .inst-badge {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: 8px !important;
+      transition: all 0.2s ease !important;
+    }
+    .inst-badge:hover {
+      background: rgba(255, 255, 255, 0.06) !important;
+      border-color: rgba(99, 102, 241, 0.4) !important;
+      transform: translateY(-1px);
+    }
+
+    .search-box {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: 8px !important;
+    }
+    .search-box:hover {
+      border-color: rgba(99, 102, 241, 0.4) !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    /* Ultra-Polished Cards */
+    .card {
+      background: linear-gradient(180deg, rgba(16, 23, 38, 0.7) 0%, rgba(10, 15, 28, 0.8) 100%) !important;
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: var(--radius-md) !important;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .card:hover {
+      border-color: rgba(99, 102, 241, 0.35) !important;
+      box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.6), 0 0 20px rgba(99, 102, 241, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    }
+
+    /* Stat Cards Ambient Glow */
+    .stat-card {
+      position: relative !important;
+      overflow: hidden !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: var(--radius-md) !important;
+      background: linear-gradient(180deg, rgba(17, 24, 40, 0.75) 0%, rgba(10, 16, 29, 0.85) 100%) !important;
+      box-shadow: var(--shadow-subtle) !important;
+      transition: all 0.22s ease !important;
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px) !important;
+      border-color: rgba(99, 102, 241, 0.4) !important;
+      box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.6), 0 0 25px rgba(99, 102, 241, 0.15) !important;
+    }
+
+    .stat-num {
+      font-family: var(--font-display) !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.03em !important;
+      color: #fff !important;
+    }
+
+    .stat-icon {
+      border-radius: 8px !important;
+      box-shadow: 0 0 14px rgba(99, 102, 241, 0.3) !important;
+    }
+
+    /* Buttons Modern Elevation & Press FX */
+    .btn {
+      font-family: var(--font-sans) !important;
+      font-weight: 600 !important;
+      letter-spacing: -0.01em !important;
+      border-radius: var(--radius-sm) !important;
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .btn:active {
+      transform: scale(0.97) translateY(1px) !important;
+    }
+
+    .btn-pri {
+      background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%) !important;
+      box-shadow: 0 2px 12px rgba(99, 102, 241, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    .btn-pri:hover {
+      background: linear-gradient(135deg, #7174F8 0%, #5B52ED 100%) !important;
+      box-shadow: 0 4px 18px rgba(99, 102, 241, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+      transform: translateY(-1px) !important;
+    }
+
+    .btn-sec {
+      background: rgba(255, 255, 255, 0.04) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+    }
+    .btn-sec:hover {
+      background: rgba(255, 255, 255, 0.08) !important;
+      border-color: rgba(255, 255, 255, 0.2) !important;
+      color: #fff !important;
+      transform: translateY(-1px) !important;
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+      box-shadow: 0 2px 12px rgba(16, 185, 129, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+    .btn-whatsapp:hover {
+      background: linear-gradient(135deg, #1ECA90 0%, #0AA474 100%) !important;
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.55) !important;
+      transform: translateY(-1px) !important;
+    }
+
+    /* Active Nav Link Glow Effect */
+    .nav-link.active {
+      background: linear-gradient(90deg, rgba(99, 102, 241, 0.22) 0%, rgba(99, 102, 241, 0.06) 100%) !important;
+      border-left: 3px solid #6366F1 !important;
+      border-radius: 0 8px 8px 0 !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .nav-link.active::before {
+      display: none !important;
+    }
+
+    /* Badges with Glowing Indicators */
+    .badge-paid {
+      background: rgba(16, 185, 129, 0.14) !important;
+      color: #34D399 !important;
+      border: 1px solid rgba(16, 185, 129, 0.35) !important;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.18) !important;
+      font-weight: 700 !important;
+    }
+
+    .badge-unpaid {
+      background: rgba(239, 68, 68, 0.14) !important;
+      color: #F87171 !important;
+      border: 1px solid rgba(239, 68, 68, 0.35) !important;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.18) !important;
+      font-weight: 700 !important;
+    }
+
+    /* Page Titles & Headers */
+    .page-title {
+      font-family: var(--font-display) !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.025em !important;
+    }
+
+    /* Modals Glass Polish */
+    .modal-box {
+      background: rgba(13, 18, 31, 0.95) !important;
+      backdrop-filter: blur(24px) !important;
+      -webkit-backdrop-filter: blur(24px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(99, 102, 241, 0.15) !important;
+      border-radius: var(--radius-lg) !important;
+    }
+
+    /* Form Controls */
+    .form-control, .form-input, .form-select {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      color: #fff !important;
+      border-radius: 8px !important;
+      font-family: var(--font-sans) !important;
+      transition: all 0.18s ease !important;
+    }
+
+    .form-control:focus, .form-input:focus, .form-select:focus {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border-color: var(--brand-500) !important;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
+      outline: none !important;
+    }
+
+    /* Table Rows Hover Glass FX */
+    table tbody tr {
+      transition: background 0.15s ease !important;
+    }
+    table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03) !important;
+    }
+
+  
+    /* Global Button Perfect Alignment & No-Wrap */
+    .btn {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 7px !important;
+      white-space: nowrap !important;
+      word-break: keep-all !important;
+      line-height: 1.25 !important;
+    }
+
+    /* WhatsApp Button Sleek Premium Styling (no garish neon green) */
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(52, 211, 153, 0.3) !important;
+      box-shadow: 0 2px 10px rgba(5, 150, 105, 0.25) !important;
+    }
+    .btn-whatsapp:hover {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4) !important;
+      border-color: rgba(52, 211, 153, 0.5) !important;
+    }
+
+    /* Primary Button Sleek Violet-Indigo Glow */
+    .btn-pri {
+      background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(129, 140, 248, 0.35) !important;
+      box-shadow: 0 2px 12px rgba(79, 70, 229, 0.3) !important;
+    }
+    .btn-pri:hover {
+      background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%) !important;
+      box-shadow: 0 4px 18px rgba(99, 102, 241, 0.5) !important;
+      border-color: rgba(165, 180, 252, 0.6) !important;
+    }
+
+    /* Secondary Button Sleek Obsidian Glass */
+    .btn-sec {
+      background: rgba(255, 255, 255, 0.05) !important;
+      color: #E2E8F0 !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      backdrop-filter: blur(12px) !important;
+    }
+    .btn-sec:hover {
+      background: rgba(255, 255, 255, 0.1) !important;
+      color: #ffffff !important;
+      border-color: rgba(255, 255, 255, 0.25) !important;
+    }
+
+    /* Table styling polish */
+    .table th {
+      text-transform: uppercase !important;
+      font-size: 11px !important;
+      letter-spacing: 0.06em !important;
+      color: var(--text-muted) !important;
+      font-weight: 700 !important;
+      background: rgba(15, 23, 42, 0.6) !important;
+    }
+
+    /* Scrollbar ultra sleek */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(8, 12, 22, 0.5);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(99, 102, 241, 0.5);
+    }
+
   </style>
   <style>
     /* Auth & Settings Enhancements */
@@ -2776,6 +3132,358 @@
       .kanban-board {
         grid-template-columns: repeat(2, 260px) !important;
       }
+    }
+
+  
+    /* ==========================================
+       NEXT-LEVEL PREMIUM OBSIDIAN UI SYSTEM
+       ========================================== */
+    :root {
+      --bg-base: #070913;
+      --bg-surface: rgba(11, 16, 28, 0.82);
+      --bg-elevated: rgba(18, 25, 44, 0.75);
+      --bg-hover: rgba(30, 41, 69, 0.7);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-medium: rgba(255, 255, 255, 0.14);
+      --border-focus: #6366F1;
+
+      --brand-500: #6366F1;
+      --brand-600: #4F46E5;
+      --brand-gradient: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%);
+      --glass-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-subtle: #64748B;
+
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-display: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 22px;
+
+      --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      --shadow-glow: 0 0 25px rgba(99, 102, 241, 0.2);
+    }
+
+    /* Ambient Mesh Glow on Body */
+    body {
+      background-color: #060911 !important;
+      background-image: 
+        radial-gradient(circle at 18% 10%, rgba(99, 102, 241, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 15%, rgba(139, 92, 246, 0.09) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%) !important;
+      background-attachment: fixed !important;
+      font-family: var(--font-sans) !important;
+      letter-spacing: -0.01em;
+    }
+
+    /* Glassmorphism Sidebar */
+    .sidebar {
+      background: rgba(8, 12, 22, 0.88) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+    }
+
+    .sb-brand {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    }
+
+    .brand-icon {
+      border-radius: 10px !important;
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.45) !important;
+    }
+
+    .brand-title {
+      font-family: var(--font-display) !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.02em !important;
+    }
+
+    /* Glassmorphism Topbar */
+    .topbar {
+      background: rgba(8, 12, 22, 0.8) !important;
+      backdrop-filter: blur(18px) !important;
+      -webkit-backdrop-filter: blur(18px) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+    }
+
+    .inst-badge {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: 8px !important;
+      transition: all 0.2s ease !important;
+    }
+    .inst-badge:hover {
+      background: rgba(255, 255, 255, 0.06) !important;
+      border-color: rgba(99, 102, 241, 0.4) !important;
+      transform: translateY(-1px);
+    }
+
+    .search-box {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: 8px !important;
+    }
+    .search-box:hover {
+      border-color: rgba(99, 102, 241, 0.4) !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    /* Ultra-Polished Cards */
+    .card {
+      background: linear-gradient(180deg, rgba(16, 23, 38, 0.7) 0%, rgba(10, 15, 28, 0.8) 100%) !important;
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.07) !important;
+      border-radius: var(--radius-md) !important;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .card:hover {
+      border-color: rgba(99, 102, 241, 0.35) !important;
+      box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.6), 0 0 20px rgba(99, 102, 241, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    }
+
+    /* Stat Cards Ambient Glow */
+    .stat-card {
+      position: relative !important;
+      overflow: hidden !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: var(--radius-md) !important;
+      background: linear-gradient(180deg, rgba(17, 24, 40, 0.75) 0%, rgba(10, 16, 29, 0.85) 100%) !important;
+      box-shadow: var(--shadow-subtle) !important;
+      transition: all 0.22s ease !important;
+    }
+
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px) !important;
+      border-color: rgba(99, 102, 241, 0.4) !important;
+      box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.6), 0 0 25px rgba(99, 102, 241, 0.15) !important;
+    }
+
+    .stat-num {
+      font-family: var(--font-display) !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.03em !important;
+      color: #fff !important;
+    }
+
+    .stat-icon {
+      border-radius: 8px !important;
+      box-shadow: 0 0 14px rgba(99, 102, 241, 0.3) !important;
+    }
+
+    /* Buttons Modern Elevation & Press FX */
+    .btn {
+      font-family: var(--font-sans) !important;
+      font-weight: 600 !important;
+      letter-spacing: -0.01em !important;
+      border-radius: var(--radius-sm) !important;
+      transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .btn:active {
+      transform: scale(0.97) translateY(1px) !important;
+    }
+
+    .btn-pri {
+      background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%) !important;
+      box-shadow: 0 2px 12px rgba(99, 102, 241, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    .btn-pri:hover {
+      background: linear-gradient(135deg, #7174F8 0%, #5B52ED 100%) !important;
+      box-shadow: 0 4px 18px rgba(99, 102, 241, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+      transform: translateY(-1px) !important;
+    }
+
+    .btn-sec {
+      background: rgba(255, 255, 255, 0.04) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+    }
+    .btn-sec:hover {
+      background: rgba(255, 255, 255, 0.08) !important;
+      border-color: rgba(255, 255, 255, 0.2) !important;
+      color: #fff !important;
+      transform: translateY(-1px) !important;
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+      box-shadow: 0 2px 12px rgba(16, 185, 129, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+    .btn-whatsapp:hover {
+      background: linear-gradient(135deg, #1ECA90 0%, #0AA474 100%) !important;
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.55) !important;
+      transform: translateY(-1px) !important;
+    }
+
+    /* Active Nav Link Glow Effect */
+    .nav-link.active {
+      background: linear-gradient(90deg, rgba(99, 102, 241, 0.22) 0%, rgba(99, 102, 241, 0.06) 100%) !important;
+      border-left: 3px solid #6366F1 !important;
+      border-radius: 0 8px 8px 0 !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .nav-link.active::before {
+      display: none !important;
+    }
+
+    /* Badges with Glowing Indicators */
+    .badge-paid {
+      background: rgba(16, 185, 129, 0.14) !important;
+      color: #34D399 !important;
+      border: 1px solid rgba(16, 185, 129, 0.35) !important;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.18) !important;
+      font-weight: 700 !important;
+    }
+
+    .badge-unpaid {
+      background: rgba(239, 68, 68, 0.14) !important;
+      color: #F87171 !important;
+      border: 1px solid rgba(239, 68, 68, 0.35) !important;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.18) !important;
+      font-weight: 700 !important;
+    }
+
+    /* Page Titles & Headers */
+    .page-title {
+      font-family: var(--font-display) !important;
+      font-weight: 800 !important;
+      letter-spacing: -0.025em !important;
+    }
+
+    /* Modals Glass Polish */
+    .modal-box {
+      background: rgba(13, 18, 31, 0.95) !important;
+      backdrop-filter: blur(24px) !important;
+      -webkit-backdrop-filter: blur(24px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(99, 102, 241, 0.15) !important;
+      border-radius: var(--radius-lg) !important;
+    }
+
+    /* Form Controls */
+    .form-control, .form-input, .form-select {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      color: #fff !important;
+      border-radius: 8px !important;
+      font-family: var(--font-sans) !important;
+      transition: all 0.18s ease !important;
+    }
+
+    .form-control:focus, .form-input:focus, .form-select:focus {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border-color: var(--brand-500) !important;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25) !important;
+      outline: none !important;
+    }
+
+    /* Table Rows Hover Glass FX */
+    table tbody tr {
+      transition: background 0.15s ease !important;
+    }
+    table tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03) !important;
+    }
+
+  
+    /* Global Button Perfect Alignment & No-Wrap */
+    .btn {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 7px !important;
+      white-space: nowrap !important;
+      word-break: keep-all !important;
+      line-height: 1.25 !important;
+    }
+
+    /* WhatsApp Button Sleek Premium Styling (no garish neon green) */
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(52, 211, 153, 0.3) !important;
+      box-shadow: 0 2px 10px rgba(5, 150, 105, 0.25) !important;
+    }
+    .btn-whatsapp:hover {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%) !important;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4) !important;
+      border-color: rgba(52, 211, 153, 0.5) !important;
+    }
+
+    /* Primary Button Sleek Violet-Indigo Glow */
+    .btn-pri {
+      background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(129, 140, 248, 0.35) !important;
+      box-shadow: 0 2px 12px rgba(79, 70, 229, 0.3) !important;
+    }
+    .btn-pri:hover {
+      background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%) !important;
+      box-shadow: 0 4px 18px rgba(99, 102, 241, 0.5) !important;
+      border-color: rgba(165, 180, 252, 0.6) !important;
+    }
+
+    /* Secondary Button Sleek Obsidian Glass */
+    .btn-sec {
+      background: rgba(255, 255, 255, 0.05) !important;
+      color: #E2E8F0 !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      backdrop-filter: blur(12px) !important;
+    }
+    .btn-sec:hover {
+      background: rgba(255, 255, 255, 0.1) !important;
+      color: #ffffff !important;
+      border-color: rgba(255, 255, 255, 0.25) !important;
+    }
+
+    /* Table styling polish */
+    .table th {
+      text-transform: uppercase !important;
+      font-size: 11px !important;
+      letter-spacing: 0.06em !important;
+      color: var(--text-muted) !important;
+      font-weight: 700 !important;
+      background: rgba(15, 23, 42, 0.6) !important;
+    }
+
+    /* Scrollbar ultra sleek */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(8, 12, 22, 0.5);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(99, 102, 241, 0.5);
     }
 
   </style>
@@ -8283,7 +8991,7 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) { r.update(); }
         });
-        navigator.serviceWorker.register('./sw.js?v=8').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=10').catch(() => {});
       }
       updateCommercialCalc();
       initAuthSession();
