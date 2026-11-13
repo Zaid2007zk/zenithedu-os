@@ -1,4 +1,4 @@
-const CACHE_NAME = 'zenithedu-os-v1';
+const CACHE_NAME = 'zenithedu-os-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -6,8 +6,9 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', (e) => {
+  self.skipWaiting();
   e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
 });
 
@@ -21,8 +22,21 @@ self.addEventListener('activate', (e) => {
   );
 });
 
+// Network-First strategy: always fetch latest from server first
 self.addEventListener('fetch', (e) => {
+  if (e.request.mode === 'navigate' || e.request.destination === 'document') {
+    e.respondWith(
+      fetch(e.request)
+        .then((response) => {
+          const resClone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(e.request, resClone));
+          return response;
+        })
+        .catch(() => caches.match(e.request))
+    );
+    return;
+  }
   e.respondWith(
-    caches.match(e.request).then((res) => res || fetch(e.request))
+    fetch(e.request).catch(() => caches.match(e.request))
   );
 });

@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ZenithEdu OS™ · Commercial Institute & Academy Management Suite</title>
   <link rel="manifest" href="manifest.json">
@@ -498,6 +501,8 @@
       align-items: center;
       justify-content: center;
       gap: 7px;
+      white-space: nowrap !important;
+      flex-shrink: 0;
       white-space: nowrap;
       padding: 8px 16px;
       border-radius: var(--radius-sm);
@@ -1884,10 +1889,10 @@
               <div class="page-title">Operational Overview</div>
               <div class="page-desc">Academic session 2026-27 · Real-time attendance, fee velocity & test metrics</div>
             </div>
-            <div style="display:flex;gap:10px">
-              <button class="btn btn-sec btn-sm" onclick="navigateTo('ai-test-gen')">✨ Generate AI Test</button>
-              <button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub')">💬 WhatsApp Alerts</button>
-              <button class="btn btn-pri btn-sm" onclick="openModal('studentModal')">+ New Admission</button>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <button class="btn btn-sec btn-sm" onclick="navigateTo('ai-test-gen')" style="white-space:nowrap;flex-shrink:0">✨ AI Test Studio</button>
+              <button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub')" style="white-space:nowrap;flex-shrink:0">💬 WhatsApp Alerts</button>
+              <button class="btn btn-pri btn-sm" onclick="openModal('studentModal')" style="white-space:nowrap;flex-shrink:0">+ Admit Student</button>
             </div>
           </div>
 
@@ -4903,8 +4908,17 @@
       }
 
       
+      // Auto-purge stale service workers and old caches (v3)
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
+        if (!localStorage.getItem('zenith_sw_purged_v3')) {
+          caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k)))).then(() => {
+            localStorage.setItem('zenith_sw_purged_v3', '1');
+          });
+        }
+        navigator.serviceWorker.getRegistrations().then(regs => {
+          for (let r of regs) { r.update(); }
+        });
+        navigator.serviceWorker.register('./sw.js?v=3').catch(() => {});
       }
       updateCommercialCalc();
 
