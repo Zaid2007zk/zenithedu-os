@@ -2054,6 +2054,123 @@
       margin: 20px 0;
     }
 
+  
+    /* Enterprise Institute Modules CSS */
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .kanban-col {
+      background: #111726;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      min-width: 250px;
+    }
+    .kanban-head {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 12.5px;
+    }
+    .kanban-body {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      min-height: 280px;
+    }
+    .lead-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      transition: all 0.15s ease;
+      cursor: grab;
+    }
+    .lead-card:hover {
+      border-color: rgba(99,102,241,0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    }
+    .scanner-viewport {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      height: 320px;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 0 auto;
+      border: 2px solid rgba(99,102,241,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scanner-laser {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #EF4444;
+      box-shadow: 0 0 15px #EF4444;
+      animation: scanLaser 2s infinite ease-in-out;
+      z-index: 10;
+    }
+    @keyframes scanLaser {
+      0% { top: 10%; opacity: 0.8; }
+      50% { top: 90%; opacity: 1; }
+      100% { top: 10%; opacity: 0.8; }
+    }
+    .cbt-container {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 18px;
+    }
+    .cbt-palette {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    .cbt-q-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 1px solid var(--border-subtle);
+      background: #172033;
+      color: #fff;
+      transition: all 0.15s;
+    }
+    .cbt-q-btn.ans { background: #10B981; border-color: #059669; }
+    .cbt-q-btn.not-ans { background: #EF4444; border-color: #DC2626; }
+    .cbt-q-btn.review { background: #8B5CF6; border-color: #7C3AED; }
+    .cbt-q-btn.active { outline: 2px solid #fff; outline-offset: 1px; }
+
+    @media (max-width: 860px) {
+      .cbt-container {
+        grid-template-columns: 1fr !important;
+      }
+      .kanban-board {
+        grid-template-columns: repeat(2, 260px) !important;
+      }
+    }
+
   </style>
   <style>
     /* Auth & Settings Enhancements */
@@ -2544,6 +2661,123 @@
       margin: 20px 0;
     }
 
+  
+    /* Enterprise Institute Modules CSS */
+    .kanban-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .kanban-col {
+      background: #111726;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+      min-width: 250px;
+    }
+    .kanban-head {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 12.5px;
+    }
+    .kanban-body {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      min-height: 280px;
+    }
+    .lead-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      transition: all 0.15s ease;
+      cursor: grab;
+    }
+    .lead-card:hover {
+      border-color: rgba(99,102,241,0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    }
+    .scanner-viewport {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      height: 320px;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 0 auto;
+      border: 2px solid rgba(99,102,241,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scanner-laser {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #EF4444;
+      box-shadow: 0 0 15px #EF4444;
+      animation: scanLaser 2s infinite ease-in-out;
+      z-index: 10;
+    }
+    @keyframes scanLaser {
+      0% { top: 10%; opacity: 0.8; }
+      50% { top: 90%; opacity: 1; }
+      100% { top: 10%; opacity: 0.8; }
+    }
+    .cbt-container {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 18px;
+    }
+    .cbt-palette {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    .cbt-q-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 1px solid var(--border-subtle);
+      background: #172033;
+      color: #fff;
+      transition: all 0.15s;
+    }
+    .cbt-q-btn.ans { background: #10B981; border-color: #059669; }
+    .cbt-q-btn.not-ans { background: #EF4444; border-color: #DC2626; }
+    .cbt-q-btn.review { background: #8B5CF6; border-color: #7C3AED; }
+    .cbt-q-btn.active { outline: 2px solid #fff; outline-offset: 1px; }
+
+    @media (max-width: 860px) {
+      .cbt-container {
+        grid-template-columns: 1fr !important;
+      }
+      .kanban-board {
+        grid-template-columns: repeat(2, 260px) !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -2623,6 +2857,16 @@
           <span>Students SIS</span>
           <span class="nav-count" id="sbStudentCount">1,248</span>
         </a>
+        <a class="nav-link" data-view="inquiries">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+          <span>Admission Leads CRM</span>
+          <span class="nav-tag nav-tag-green">Leads</span>
+        </a>
+        <a class="nav-link" data-view="scanner">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span>Gate QR Scanner</span>
+          <span class="nav-tag nav-tag-purple">Live</span>
+        </a>
         <a class="nav-link" data-view="attendance">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           <span>Attendance</span>
@@ -2656,6 +2900,23 @@
         <a class="nav-link" data-view="id-cards">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><line x1="15" y1="8" x2="17" y2="8"/><line x1="15" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="17" y2="16"/></svg>
           <span>Digital ID Cards</span>
+        </a>
+        <a class="nav-link" data-view="faculty">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>Faculty & Payroll</span>
+        </a>
+        <a class="nav-link" data-view="lms">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>Study Material & DPPs</span>
+        </a>
+        <a class="nav-link" data-view="cbt">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span>Online CBT Exam</span>
+          <span class="nav-tag nav-tag-green">NTA</span>
+        </a>
+        <a class="nav-link" data-view="inventory">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span>Inventory & Store</span>
         </a>
         <a class="nav-link" data-view="announcements">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
@@ -3938,6 +4199,475 @@
         </div>
 
         
+        
+        <!-- VIEW 14: ADMISSION LEADS CRM PIPELINE -->
+        <div class="view-pane" id="view-inquiries">
+          <div class="page-header">
+            <div>
+              <div class="page-title">Admission Leads & Inquiry CRM Pipeline</div>
+              <div class="page-desc">Track prospective walk-in inquiries, demo class bookings, follow-ups & conversion to enrolled students</div>
+            </div>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-sec btn-sm" onclick="exportLeadsCSV()">Download Leads CSV</button>
+              <button class="btn btn-pri btn-sm" onclick="openModal('inquiryModal')">+ New Walk-in Inquiry</button>
+            </div>
+          </div>
+
+          <!-- Kanban Pipeline -->
+          <div class="kanban-board">
+            <!-- Stage 1 -->
+            <div class="kanban-col">
+              <div class="kanban-head" style="border-top:3px solid #6366F1">
+                <span>1. New Inquiries</span>
+                <span class="badge badge-purple" id="kCountNew">3</span>
+              </div>
+              <div class="kanban-body" id="kColNew">
+                <!-- Lead Card 1 -->
+                <div class="lead-card">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                    <strong style="color:#fff;font-size:13px">Manish Gupta</strong>
+                    <span class="badge badge-blue">Class 11 JEE</span>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:8px">Father: Ashok Gupta · +91 98230 44112</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px">Source: Instagram Ad · Wants Weekend Demo</div>
+                  <div style="display:flex;gap:6px">
+                    <button class="btn btn-whatsapp btn-sm" style="flex:1;padding:4px" onclick="openLeadWhatsApp('+91 98230 44112', 'Manish Gupta')">💬 Send Brochure</button>
+                    <button class="btn btn-sec btn-sm" style="padding:4px 8px" onclick="convertLeadToStudent('Manish Gupta', 'Class 11 JEE Elite', '+91 98230 44112')">Admit</button>
+                  </div>
+                </div>
+
+                <!-- Lead Card 2 -->
+                <div class="lead-card">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                    <strong style="color:#fff;font-size:13px">Shruti Iyer</strong>
+                    <span class="badge badge-green">Class 12 NEET</span>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:8px">Mother: Dr. Vidya Iyer · +91 98230 88221</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px">Walk-in inquiry · Physics dropper course</div>
+                  <div style="display:flex;gap:6px">
+                    <button class="btn btn-whatsapp btn-sm" style="flex:1;padding:4px" onclick="openLeadWhatsApp('+91 98230 88221', 'Shruti Iyer')">💬 Send Brochure</button>
+                    <button class="btn btn-sec btn-sm" style="padding:4px 8px" onclick="convertLeadToStudent('Shruti Iyer', 'Class 11 NEET Super 30', '+91 98230 88221')">Admit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage 2 -->
+            <div class="kanban-col">
+              <div class="kanban-head" style="border-top:3px solid #3B82F6">
+                <span>2. Demo Scheduled</span>
+                <span class="badge badge-blue">2</span>
+              </div>
+              <div class="kanban-body" id="kColDemo">
+                <div class="lead-card">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                    <strong style="color:#fff;font-size:13px">Kunal Deshmukh</strong>
+                    <span class="badge badge-purple">Foundation 10</span>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:8px">Parent: Sanjay (+91 98230 77334)</div>
+                  <div style="font-size:11px;color:#FBBF24;margin-bottom:10px">📅 Demo: Tomorrow 04:30 PM (Maths)</div>
+                  <button class="btn btn-whatsapp btn-sm" style="width:100%;padding:4px" onclick="openLeadWhatsApp('+91 98230 77334', 'Kunal Deshmukh', 'demo')">💬 Confirm Demo Time</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage 3 -->
+            <div class="kanban-col">
+              <div class="kanban-head" style="border-top:3px solid #F59E0B">
+                <span>3. Follow-Up Call</span>
+                <span class="badge badge-amber">2</span>
+              </div>
+              <div class="kanban-body" id="kColFollow">
+                <div class="lead-card">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                    <strong style="color:#fff;font-size:13px">Aryan Naik</strong>
+                    <span class="badge badge-blue">Class 12 JEE</span>
+                  </div>
+                  <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:8px">Parent: Prakash (+91 98230 55443)</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px">Attended demo yesterday · Liked faculty</div>
+                  <button class="btn btn-pri btn-sm" style="width:100%;padding:4px" onclick="convertLeadToStudent('Aryan Naik', 'Class 12 JEE Elite', '+91 98230 55443')">Convert & Admit Now</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage 4 -->
+            <div class="kanban-col">
+              <div class="kanban-head" style="border-top:3px solid #10B981">
+                <span>4. Admitted This Week</span>
+                <span class="badge badge-green">4</span>
+              </div>
+              <div class="kanban-body" id="kColEnrolled">
+                <div class="lead-card" style="border-left:3px solid #10B981">
+                  <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+                    <strong style="color:#fff;font-size:13px">Tanvi Joshi</strong>
+                    <span class="badge badge-paid">Paid ₹25,000</span>
+                  </div>
+                  <div style="font-size:11px;color:var(--text-muted)">Class 11 NEET · Roll #1048</div>
+                  <div style="font-size:10.5px;color:#10B981;margin-top:4px">✔ Onboarded & PVC ID issued</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 15: LIVE QR & BARCODE GATE ATTENDANCE SCANNER -->
+        <div class="view-pane" id="view-scanner">
+          <div class="page-header">
+            <div>
+              <div class="page-title">Reception & Turnstile Gate Attendance Scanner</div>
+              <div class="page-desc">Camera barcode / QR scanner for instant student arrival verification & real-time WhatsApp parent dispatch</div>
+            </div>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-sec btn-sm" onclick="testGateBeepSound()">🔊 Test Audio Chime</button>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <!-- Camera Viewport Card -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Live ID Scanner Viewport</div>
+                <span class="badge badge-green">Camera Active</span>
+              </div>
+              <div class="card-body" style="text-align:center">
+                <div class="scanner-viewport">
+                  <div class="scanner-laser"></div>
+                  <!-- Camera Simulation Stream -->
+                  <div style="color:var(--text-muted);font-size:13px;display:flex;flex-direction:column;align-items:center;gap:10px">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><line x1="15" y1="8" x2="17" y2="8"/><line x1="15" y1="12" x2="17" y2="12"/></svg>
+                    <span>Hold student PVC ID card or mobile QR code in front of lens</span>
+                  </div>
+                </div>
+
+                <!-- Manual / Barcode Gun Input -->
+                <div style="margin-top:18px;display:flex;gap:8px">
+                  <input type="text" class="form-control" id="manualScanRoll" placeholder="Or type Roll No / Scan with USB barcode gun (e.g. 1024)..." onkeypress="if(event.key==='Enter') executeManualGateScan()">
+                  <button class="btn btn-pri" onclick="executeManualGateScan()">Verify & Check-In</button>
+                </div>
+
+                <!-- Last Scanned Student Flash Card -->
+                <div id="scanResultBox" style="display:none;margin-top:16px;background:rgba(16,185,129,0.1);border:1px solid #10B981;border-radius:8px;padding:12px;text-align:left">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <div style="width:40px;height:40px;border-radius:50%;background:#10B981;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px" id="scanAvatar">AS</div>
+                    <div style="flex:1">
+                      <div style="font-weight:700;color:#fff;font-size:14px" id="scanName">Aaditya Sharma</div>
+                      <div style="font-size:11.5px;color:var(--text-muted)" id="scanDetails">Roll #1024 · Class 12 JEE Elite</div>
+                    </div>
+                    <span class="badge badge-paid">Marked Present</span>
+                  </div>
+                  <div style="font-size:11px;color:#10B981;margin-top:6px">📲 Real-time arrival WhatsApp notification dispatched to parent mobile!</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Today's Gate Entry Feed -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Live Check-In Activity Feed</div>
+                <span class="badge badge-purple" id="gateTodayCount">1,141 Present Today</span>
+              </div>
+              <div class="card-body" style="padding:0">
+                <div style="max-height:380px;overflow-y:auto" id="gateScanFeed">
+                  <!-- Feed Item 1 -->
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.05)">
+                    <div>
+                      <strong style="color:#fff;font-size:12.5px">Aarav Sharma (#1024)</strong>
+                      <div style="font-size:11px;color:var(--text-muted)">Class 12 JEE Elite · Gate 1 Turnstile</div>
+                    </div>
+                    <span style="font-size:11px;color:#10B981;font-weight:700">08:24:10 AM</span>
+                  </div>
+                  <!-- Feed Item 2 -->
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.05)">
+                    <div>
+                      <strong style="color:#fff;font-size:12.5px">Diya Patel (#1025)</strong>
+                      <div style="font-size:11px;color:var(--text-muted)">Class 11 NEET Super 30 · Gate 1 Turnstile</div>
+                    </div>
+                    <span style="font-size:11px;color:#10B981;font-weight:700">08:26:45 AM</span>
+                  </div>
+                  <!-- Feed Item 3 -->
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px">
+                    <div>
+                      <strong style="color:#fff;font-size:12.5px">Ananya Deshmukh (#1029)</strong>
+                      <div style="font-size:11px;color:var(--text-muted)">Class 12 JEE Elite · Gate 2 Main</div>
+                    </div>
+                    <span style="font-size:11px;color:#10B981;font-weight:700">08:31:02 AM</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 16: FACULTY ROSTER & PAYROLL MANAGEMENT -->
+        <div class="view-pane" id="view-faculty">
+          <div class="page-header">
+            <div>
+              <div class="page-title">Faculty Roster & Monthly Lecture Payroll</div>
+              <div class="page-desc">Track senior educators, lectures taught per batch, hourly compensation & automated salary slips</div>
+            </div>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-sec btn-sm" onclick="generateFacultyPayslip('Dr. H. C. Verma')">🖨️ Print Sample Payslip PDF</button>
+              <button class="btn btn-pri btn-sm" onclick="openModal('facultyModal')">+ Add Faculty Member</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body" style="padding:0">
+              <table style="width:100%;border-collapse:collapse;font-size:12.5px" id="facultyTable">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--border-medium);color:var(--text-muted);background:rgba(255,255,255,0.02)">
+                    <th style="padding:12px 16px;text-align:left">Faculty Name</th>
+                    <th style="padding:12px 16px;text-align:left">Subject</th>
+                    <th style="padding:12px 16px;text-align:left">Batches Assigned</th>
+                    <th style="padding:12px 16px;text-align:center">Lectures (This Month)</th>
+                    <th style="padding:12px 16px;text-align:right">Rate / Lecture</th>
+                    <th style="padding:12px 16px;text-align:right">Total Payable</th>
+                    <th style="padding:12px 16px;text-align:center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="facultyTbody">
+                  <tr style="border-bottom:1px solid var(--border-subtle)">
+                    <td style="padding:12px 16px"><strong>Dr. H. C. Verma</strong><br><span style="font-size:11px;color:var(--text-muted)">Ph.D. IIT Kanpur · 18 yrs exp</span></td>
+                    <td style="padding:12px 16px"><span class="badge badge-purple">Physics</span></td>
+                    <td style="padding:12px 16px">Class 12 JEE Elite, Class 11 JEE</td>
+                    <td style="padding:12px 16px;text-align:center"><b style="color:#fff">42 Lectures</b></td>
+                    <td style="padding:12px 16px;text-align:right">₹2,000</td>
+                    <td style="padding:12px 16px;text-align:right"><strong style="color:#10B981">₹84,000</strong></td>
+                    <td style="padding:12px 16px;text-align:center">
+                      <button class="btn btn-sec btn-sm" onclick="generateFacultyPayslip('Dr. H. C. Verma')">📄 Payslip</button>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border-subtle)">
+                    <td style="padding:12px 16px"><strong>Dr. V. Joshi</strong><br><span style="font-size:11px;color:var(--text-muted)">M.D. AIIMS Delhi · 12 yrs exp</span></td>
+                    <td style="padding:12px 16px"><span class="badge badge-green">Biology / Botany</span></td>
+                    <td style="padding:12px 16px">Class 11 NEET Super 30, Class 12 NEET</td>
+                    <td style="padding:12px 16px;text-align:center"><b style="color:#fff">38 Lectures</b></td>
+                    <td style="padding:12px 16px;text-align:right">₹1,800</td>
+                    <td style="padding:12px 16px;text-align:right"><strong style="color:#10B981">₹68,400</strong></td>
+                    <td style="padding:12px 16px;text-align:center">
+                      <button class="btn btn-sec btn-sm" onclick="generateFacultyPayslip('Dr. V. Joshi')">📄 Payslip</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:12px 16px"><strong>Prof. S. L. Loney</strong><br><span style="font-size:11px;color:var(--text-muted)">M.Sc. Mathematics · 15 yrs exp</span></td>
+                    <td style="padding:12px 16px"><span class="badge badge-blue">Advanced Maths</span></td>
+                    <td style="padding:12px 16px">Class 12 JEE Elite, CBSE 12</td>
+                    <td style="padding:12px 16px;text-align:center"><b style="color:#fff">40 Lectures</b></td>
+                    <td style="padding:12px 16px;text-align:right">₹1,750</td>
+                    <td style="padding:12px 16px;text-align:right"><strong style="color:#10B981">₹70,000</strong></td>
+                    <td style="padding:12px 16px;text-align:center">
+                      <button class="btn btn-sec btn-sm" onclick="generateFacultyPayslip('Prof. S. L. Loney')">📄 Payslip</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 17: STUDY MATERIAL & DIGITAL LMS -->
+        <div class="view-pane" id="view-lms">
+          <div class="page-header">
+            <div>
+              <div class="page-title">Digital Study Material, DPPs & Video Lectures</div>
+              <div class="page-desc">Centralized knowledge repository for formula sheets, chapter modules, daily practice problems & PYQs</div>
+            </div>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-pri btn-sm" onclick="openModal('materialModal')">+ Upload Study Material</button>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <!-- Module Card 1 -->
+            <div class="card">
+              <div class="card-header">
+                <span class="badge badge-purple">Physics · Class 12</span>
+                <span style="font-size:11px;color:var(--text-muted)">PDF · 4.8 MB</span>
+              </div>
+              <div class="card-body">
+                <h4 style="color:#fff;margin-bottom:6px">Rotational Dynamics & Rigid Body Mechanics</h4>
+                <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">Complete theory, 140 solved problems, JEE Advanced archive (2014-2025) & mind map.</p>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-sec btn-sm" style="flex:1" onclick="toast('PDF Downloaded|Rotational_Dynamics_Module.pdf saved', 'ok')">📥 Download</button>
+                  <button class="btn btn-whatsapp btn-sm" onclick="toast('Shared on WhatsApp|Dispatched to Class 12 JEE Elite group', 'ok')">📲 Share</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Module Card 2 -->
+            <div class="card">
+              <div class="card-header">
+                <span class="badge badge-green">Biology · Class 11</span>
+                <span style="font-size:11px;color:var(--text-muted)">PDF · 3.2 MB</span>
+              </div>
+              <div class="card-body">
+                <h4 style="color:#fff;margin-bottom:6px">Human Physiology & Endocrine Coordination</h4>
+                <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">NCERT line-by-line breakdown, colored diagrams, 200 NEET assertion-reason questions.</p>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-sec btn-sm" style="flex:1" onclick="toast('PDF Downloaded|Endocrine_Coordination.pdf saved', 'ok')">📥 Download</button>
+                  <button class="btn btn-whatsapp btn-sm" onclick="toast('Shared on WhatsApp|Dispatched to Class 11 NEET group', 'ok')">📲 Share</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Module Card 3 -->
+            <div class="card">
+              <div class="card-header">
+                <span class="badge badge-blue">Maths · Class 12</span>
+                <span style="font-size:11px;color:var(--text-muted)">DPP Sheet #44</span>
+              </div>
+              <div class="card-body">
+                <h4 style="color:#fff;margin-bottom:6px">Definite Integrals & Differential Equations</h4>
+                <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px">Daily Practice Problem set with step-by-step QR video solutions and answer key.</p>
+                <div style="display:flex;gap:8px">
+                  <button class="btn btn-sec btn-sm" style="flex:1" onclick="toast('DPP Downloaded|Definite_Integrals_DPP44.pdf saved', 'ok')">📥 Download</button>
+                  <button class="btn btn-whatsapp btn-sm" onclick="toast('Shared on WhatsApp|Dispatched to Class 12 Board group', 'ok')">📲 Share</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 18: ONLINE CBT EXAM ENGINE -->
+        <div class="view-pane" id="view-cbt">
+          <div class="page-header">
+            <div>
+              <div class="page-title">National Standard Online Computer-Based Test (CBT)</div>
+              <div class="page-desc">Simulated NTA / JEE / NEET examination console with countdown timer, question palette & auto-grading</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div style="background:#EF4444;color:#fff;padding:6px 14px;border-radius:6px;font-weight:800;font-size:14px;font-family:monospace" id="cbtTimerDisplay">02:59:40</div>
+              <button class="btn btn-pri btn-sm" style="background:#10B981" onclick="submitCBTExam()">Finish & Submit Test</button>
+            </div>
+          </div>
+
+          <div class="cbt-container">
+            <!-- Question Box -->
+            <div class="card">
+              <div class="card-header" style="justify-content:space-between">
+                <div>
+                  <span class="badge badge-purple" id="cbtSubjectBadge">Physics</span>
+                  <span style="font-size:12px;color:var(--text-muted);margin-left:8px" id="cbtQNum">Question 1 of 5</span>
+                </div>
+                <span style="font-size:11px;color:#10B981">+4.0 for correct · -1.0 for wrong</span>
+              </div>
+              <div class="card-body">
+                <div style="font-size:14px;color:#fff;line-height:1.6;margin-bottom:20px" id="cbtQuestionText">
+                  A wheel of radius R = 0.5 m rolls without slipping on a horizontal surface with a constant linear velocity v = 10 m/s. The acceleration of the highest point of the wheel is:
+                </div>
+                <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:24px" id="cbtOptionsGroup">
+                  <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:8px;cursor:pointer">
+                    <input type="radio" name="cbtOption" value="A" style="accent-color:var(--brand-500)">
+                    <span>(A) Zero</span>
+                  </label>
+                  <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:8px;cursor:pointer">
+                    <input type="radio" name="cbtOption" value="B" style="accent-color:var(--brand-500)">
+                    <span>(B) 100 m/s² downwards</span>
+                  </label>
+                  <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:8px;cursor:pointer">
+                    <input type="radio" name="cbtOption" value="C" style="accent-color:var(--brand-500)">
+                    <span>(C) 200 m/s² towards the center</span>
+                  </label>
+                  <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:8px;cursor:pointer">
+                    <input type="radio" name="cbtOption" value="D" style="accent-color:var(--brand-500)">
+                    <span>(D) 400 m/s² upwards</span>
+                  </label>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <div style="display:flex;gap:8px">
+                    <button class="btn btn-sec btn-sm" onclick="markCBTReview()">Mark for Review</button>
+                    <button class="btn btn-sec btn-sm" onclick="clearCBTOption()">Clear Response</button>
+                  </div>
+                  <button class="btn btn-pri btn-sm" onclick="saveAndNextCBT()">Save & Next &rarr;</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Question Palette -->
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title" style="font-size:13px">Question Palette</div>
+              </div>
+              <div class="card-body">
+                <div class="cbt-palette" id="cbtPaletteGrid">
+                  <button class="cbt-q-btn active ans" onclick="jumpCBTQ(1)">1</button>
+                  <button class="cbt-q-btn" onclick="jumpCBTQ(2)">2</button>
+                  <button class="cbt-q-btn" onclick="jumpCBTQ(3)">3</button>
+                  <button class="cbt-q-btn" onclick="jumpCBTQ(4)">4</button>
+                  <button class="cbt-q-btn" onclick="jumpCBTQ(5)">5</button>
+                </div>
+                <div style="margin-top:20px;font-size:11px;display:flex;flex-direction:column;gap:6px;color:var(--text-muted)">
+                  <div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:#10B981;border-radius:2px"></span> Answered (1)</div>
+                  <div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:#172033;border:1px solid #4B5563;border-radius:2px"></span> Not Visited (4)</div>
+                  <div style="display:flex;align-items:center;gap:6px"><span style="width:12px;height:12px;background:#8B5CF6;border-radius:2px"></span> Marked for Review (0)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 19: INVENTORY & UNIFORM/BOOK STORE -->
+        <div class="view-pane" id="view-inventory">
+          <div class="page-header">
+            <div>
+              <div class="page-title">Kit Inventory & Academic Resource Store</div>
+              <div class="page-desc">Track study modules stock, backpacks, lab uniforms, student kit distribution & reorder thresholds</div>
+            </div>
+            <div style="display:flex;gap:10px">
+              <button class="btn btn-pri btn-sm" onclick="openModal('inventoryModal')">+ Add Stock Item</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body" style="padding:0">
+              <table style="width:100%;border-collapse:collapse;font-size:12.5px" id="inventoryTable">
+                <thead>
+                  <tr style="border-bottom:2px solid var(--border-medium);color:var(--text-muted);background:rgba(255,255,255,0.02)">
+                    <th style="padding:12px 16px;text-align:left">Item Description</th>
+                    <th style="padding:12px 16px;text-align:left">Target Program</th>
+                    <th style="padding:12px 16px;text-align:center">Current Stock</th>
+                    <th style="padding:12px 16px;text-align:center">Minimum Threshold</th>
+                    <th style="padding:12px 16px;text-align:center">Status</th>
+                    <th style="padding:12px 16px;text-align:center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="inventoryTbody">
+                  <tr style="border-bottom:1px solid var(--border-subtle)">
+                    <td style="padding:12px 16px"><strong>JEE Advanced 6-Volume Study Kit</strong><br><span style="font-size:11px;color:var(--text-muted)">Physics, Chem, Maths theory + test modules</span></td>
+                    <td style="padding:12px 16px">Class 12 JEE Elite</td>
+                    <td style="padding:12px 16px;text-align:center"><b style="color:#fff;font-size:14px">342 Sets</b></td>
+                    <td style="padding:12px 16px;text-align:center">50 Sets</td>
+                    <td style="padding:12px 16px;text-align:center"><span class="badge badge-paid">In Stock</span></td>
+                    <td style="padding:12px 16px;text-align:center">
+                      <button class="btn btn-sec btn-sm" onclick="toast('Issued to Student|1 Kit assigned to Aarav Sharma (#1024)', 'ok')">Issue Kit</button>
+                    </td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--border-subtle)">
+                    <td style="padding:12px 16px"><strong>Institute Signature Backpack (Ergonomic)</strong><br><span style="font-size:11px;color:var(--text-muted)">Waterproof laptop/book bag with reflective badge</span></td>
+                    <td style="padding:12px 16px">All Batches</td>
+                    <td style="padding:12px 16px;text-align:center"><b style="color:#EF4444;font-size:14px">18 Bags</b></td>
+                    <td style="padding:12px 16px;text-align:center">30 Bags</td>
+                    <td style="padding:12px 16px;text-align:center"><span class="badge badge-unpaid">Low Stock</span></td>
+                    <td style="padding:12px 16px;text-align:center">
+                      <button class="btn btn-sec btn-sm" onclick="toast('Reorder Dispatched|Purchase order sent to vendor for 100 bags', 'info')">Reorder (100)</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding:12px 16px"><strong>OMR Evaluation Answer Sheets (200 Questions)</strong><br><span style="font-size:11px;color:var(--text-muted)">High-speed scanner compatible bubble sheets</span></td>
+                    <td style="padding:12px 16px">Weekly Mock Series</td>
+                    <td style="padding:12px 16px;text-align:center"><b style="color:#fff;font-size:14px">5,400 Sheets</b></td>
+                    <td style="padding:12px 16px;text-align:center">1,000 Sheets</td>
+                    <td style="padding:12px 16px;text-align:center"><span class="badge badge-paid">In Stock</span></td>
+                    <td style="padding:12px 16px;text-align:center">
+                      <button class="btn btn-sec btn-sm" onclick="toast('Dispatched to Exam Hall|200 OMR sheets issued', 'ok')">Dispatch</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
         <!-- VIEW 13: INSTITUTE SETTINGS & SYSTEM CONTROLS -->
         <div class="view-pane" id="view-settings">
           <div class="page-header">
@@ -4505,6 +5235,95 @@
 
   
   <!-- MODAL: BULK UPLOAD REAL DATA (CSV / EXCEL) -->
+  
+  <!-- MODAL: ADD WALK-IN INQUIRY -->
+  <div class="modal-backdrop" id="inquiryModal">
+    <div class="modal-box" style="max-width:520px">
+      <div class="modal-header">
+        <div class="modal-title">Record Admission Walk-in Inquiry</div>
+        <button class="modal-close" onclick="closeModal('inquiryModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Student Full Name *</label>
+          <input type="text" class="form-control" id="inqStudentName" placeholder="e.g. Manish Gupta">
+        </div>
+        <div class="grid-2" style="gap:10px">
+          <div class="form-group">
+            <label class="form-label">Target Batch / Goal</label>
+            <select class="form-select" id="inqBatch">
+              <option value="Class 12 JEE Elite">Class 12 JEE Elite</option>
+              <option value="Class 11 NEET Super 30">Class 11 NEET Super 30</option>
+              <option value="CBSE 12 Board">CBSE 12 Board</option>
+              <option value="Foundation 10">Foundation 10</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Lead Source</label>
+            <select class="form-select" id="inqSource">
+              <option value="Walk-in Direct">Walk-in Direct</option>
+              <option value="Friend / Student Referral">Student Referral</option>
+              <option value="Social Media (Instagram/FB)">Instagram / Facebook</option>
+              <option value="Hoarding / Paper Leaflet">Hoarding / Paper</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid-2" style="gap:10px">
+          <div class="form-group">
+            <label class="form-label">Parent / Guardian Name</label>
+            <input type="text" class="form-control" id="inqParentName" placeholder="e.g. Ashok Gupta">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Parent WhatsApp Phone *</label>
+            <input type="text" class="form-control" id="inqPhone" placeholder="+91 98230 00000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Counselor Notes</label>
+          <input type="text" class="form-control" id="inqNotes" placeholder="e.g. Interested in morning batch, needs weekend demo">
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-sec" onclick="closeModal('inquiryModal')">Cancel</button>
+        <button class="btn btn-pri" onclick="submitNewInquiry()">Save Lead to Pipeline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD FACULTY -->
+  <div class="modal-backdrop" id="facultyModal">
+    <div class="modal-box" style="max-width:520px">
+      <div class="modal-header">
+        <div class="modal-title">Register Senior Faculty Member</div>
+        <button class="modal-close" onclick="closeModal('facultyModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Faculty Full Name & Title</label>
+          <input type="text" class="form-control" id="facName" placeholder="e.g. Dr. H. C. Verma">
+        </div>
+        <div class="grid-2" style="gap:10px">
+          <div class="form-group">
+            <label class="form-label">Subject Department</label>
+            <input type="text" class="form-control" id="facSubject" placeholder="e.g. Physics / Mechanics">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hourly / Lecture Rate (₹)</label>
+            <input type="number" class="form-control" id="facRate" value="2000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Assigned Batches</label>
+          <input type="text" class="form-control" id="facBatches" placeholder="e.g. Class 12 JEE Elite, Class 11 JEE">
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-sec" onclick="closeModal('facultyModal')">Cancel</button>
+        <button class="btn btn-pri" onclick="submitNewFaculty()">Register Faculty</button>
+      </div>
+    </div>
+  </div>
+
   <div class="modal-backdrop" id="uploadRealDataModal">
     <div class="modal-box" style="max-width:740px">
       <div class="modal-header">
@@ -7115,6 +7934,292 @@
       location.reload();
     }
 
+    
+    // ==========================================
+    // ENTERPRISE INSTITUTE MODULE LOGIC
+    // ==========================================
+
+    // 1. INQUIRY & LEADS CRM
+    function submitNewInquiry() {
+      const name = document.getElementById('inqStudentName').value.trim();
+      const batch = document.getElementById('inqBatch').value;
+      const phone = document.getElementById('inqPhone').value.trim();
+      const parent = document.getElementById('inqParentName').value.trim() || 'Parent';
+      const notes = document.getElementById('inqNotes').value.trim() || 'Walk-in inquiry';
+
+      if (!name || !phone) {
+        toast('Missing Required Fields|Please provide Student Name and Parent Phone', 'err');
+        return;
+      }
+
+      const col = document.getElementById('kColNew');
+      if (col) {
+        const card = document.createElement('div');
+        card.className = 'lead-card';
+        card.innerHTML = `
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+            <strong style="color:#fff;font-size:13px">${name}</strong>
+            <span class="badge badge-purple">${batch}</span>
+          </div>
+          <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:8px">Parent: ${parent} · ${phone}</div>
+          <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px">${notes}</div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-whatsapp btn-sm" style="flex:1;padding:4px" onclick="openLeadWhatsApp('${phone}', '${name}')">💬 WhatsApp</button>
+            <button class="btn btn-sec btn-sm" style="padding:4px 8px" onclick="convertLeadToStudent('${name}', '${batch}', '${phone}')">Admit</button>
+          </div>
+        `;
+        col.prepend(card);
+      }
+
+      closeModal('inquiryModal');
+      toast('Inquiry Added to CRM|' + name + ' added to new leads pipeline', 'ok');
+    }
+
+    function openLeadWhatsApp(phone, name, type) {
+      const cleanPhone = phone.replace(/[^0-9]/g, '');
+      const instName = document.getElementById('topInstName').textContent;
+      let text = `Hello! Greetings from ${instName}. Thank you for your inquiry for ${name}. Here is our official academic brochure, fee structure and batch timings: https://zenithedu.in/brochure. Let us know if you wish to attend a free trial class!`;
+      if (type === 'demo') {
+        text = `Hello! Greetings from ${instName}. This is confirmation for ${name}'s demo lecture scheduled for tomorrow. We look forward to meeting you at our campus!`;
+      }
+      window.open(`https://wa.me/${cleanPhone.length === 10 ? '91'+cleanPhone : cleanPhone}?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    function convertLeadToStudent(name, batch, phone) {
+      document.getElementById('stuFirstName').value = name.split(' ')[0] || name;
+      document.getElementById('stuLastName').value = name.split(' ').slice(1).join(' ') || '';
+      document.getElementById('stuBatch').value = batch;
+      document.getElementById('stuPhone').value = phone;
+      openModal('studentModal');
+      toast('Converting Lead|Pre-filled admission form with inquiry details', 'info');
+    }
+
+    function exportLeadsCSV() {
+      const headers = "Student Name,Target Program,Parent Contact,Status";
+      const rows = [
+        "Manish Gupta,Class 11 JEE Elite,+91 98230 44112,New Inquiry",
+        "Shruti Iyer,Class 12 NEET Super 30,+91 98230 88221,New Inquiry",
+        "Kunal Deshmukh,Foundation 10,+91 98230 77334,Demo Scheduled",
+        "Aryan Naik,Class 12 JEE Elite,+91 98230 55443,Follow-up Call"
+      ];
+      const blob = new Blob([headers + "\n" + rows.join("\n")], { type: 'text/csv' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'zenithedu_admission_leads.csv';
+      a.click();
+      toast('Leads Exported|Downloaded admission inquiries CSV', 'ok');
+    }
+
+    // 2. GATE QR SCANNER & AUDIO CHIME
+    function testGateBeepSound() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, ctx.currentTime); // 880 Hz beep
+        gain.gain.setValueAtTime(0.15, ctx.currentTime);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.12);
+      } catch(e) {}
+    }
+
+    function executeManualGateScan() {
+      const input = document.getElementById('manualScanRoll');
+      const val = input.value.trim().replace('#', '');
+      if (!val) {
+        toast('Enter Roll Number|Please enter student roll number or scan barcode', 'err');
+        return;
+      }
+
+      // Find student in database
+      const found = state.students.find(s => s.roll.includes(val) || s.name.toLowerCase().includes(val.toLowerCase())) || {
+        name: 'Aaditya Sharma',
+        roll: '#' + val,
+        batch: 'Class 12 JEE Elite',
+        parent: 'Rajesh Sharma (+91 98220 11223)'
+      };
+
+      testGateBeepSound();
+
+      // Show result card
+      const resBox = document.getElementById('scanResultBox');
+      const nameEl = document.getElementById('scanName');
+      const detailsEl = document.getElementById('scanDetails');
+      const avatarEl = document.getElementById('scanAvatar');
+
+      if (resBox) resBox.style.display = 'block';
+      if (nameEl) nameEl.textContent = found.name;
+      if (detailsEl) detailsEl.textContent = `${found.roll} · ${found.batch}`;
+      if (avatarEl) avatarEl.textContent = found.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+
+      // Append to live feed
+      const feed = document.getElementById('gateScanFeed');
+      if (feed) {
+        const item = document.createElement('div');
+        item.style = "display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.05);animation:fadeIn 0.2s ease";
+        item.innerHTML = `
+          <div>
+            <strong style="color:#fff;font-size:12.5px">${found.name} (${found.roll})</strong>
+            <div style="font-size:11px;color:var(--text-muted)">${found.batch} · Gate Turnstile Verified</div>
+          </div>
+          <span style="font-size:11px;color:#10B981;font-weight:700">Just Now</span>
+        `;
+        feed.prepend(item);
+      }
+
+      input.value = '';
+      toast('Student Arrival Verified!|' + found.name + ' checked in. WhatsApp dispatched to parent.', 'ok');
+    }
+
+    // 3. FACULTY PAYROLL
+    function submitNewFaculty() {
+      const name = document.getElementById('facName').value.trim();
+      const subject = document.getElementById('facSubject').value.trim();
+      const rate = document.getElementById('facRate').value.trim() || '2000';
+      const batches = document.getElementById('facBatches').value.trim() || 'Class 12 JEE';
+
+      if (!name || !subject) {
+        toast('Missing Name/Subject|Please enter faculty name & subject department', 'err');
+        return;
+      }
+
+      const tbody = document.getElementById('facultyTbody');
+      if (tbody) {
+        const tr = document.createElement('tr');
+        tr.style = "border-bottom:1px solid var(--border-subtle)";
+        tr.innerHTML = `
+          <td style="padding:12px 16px"><strong>${name}</strong><br><span style="font-size:11px;color:var(--text-muted)">Senior Faculty</span></td>
+          <td style="padding:12px 16px"><span class="badge badge-purple">${subject}</span></td>
+          <td style="padding:12px 16px">${batches}</td>
+          <td style="padding:12px 16px;text-align:center"><b style="color:#fff">28 Lectures</b></td>
+          <td style="padding:12px 16px;text-align:right">₹${parseInt(rate).toLocaleString('en-IN')}</td>
+          <td style="padding:12px 16px;text-align:right"><strong style="color:#10B981">₹${(parseInt(rate)*28).toLocaleString('en-IN')}</strong></td>
+          <td style="padding:12px 16px;text-align:center">
+            <button class="btn btn-sec btn-sm" onclick="generateFacultyPayslip('${name}')">📄 Payslip</button>
+          </td>
+        `;
+        tbody.prepend(tr);
+      }
+
+      closeModal('facultyModal');
+      toast('Faculty Registered!|' + name + ' added to academic payroll', 'ok');
+    }
+
+    function generateFacultyPayslip(facName) {
+      toast('Generating Payslip PDF|Sending monthly compensation breakdown for ' + facName + ' to printer', 'ok');
+      window.print();
+    }
+
+    // 4. CBT ONLINE EXAM ENGINE
+    let cbtAnswers = { 1: 'B' };
+    const cbtQuestions = [
+      { q: "A wheel of radius R = 0.5 m rolls without slipping on a horizontal surface with a constant linear velocity v = 10 m/s. The acceleration of the highest point of the wheel is:", a: "(A) Zero", b: "(B) 100 m/s² downwards", c: "(C) 200 m/s² towards the center", d: "(D) 400 m/s² upwards", correct: "C", subj: "Physics" },
+      { q: "The equivalent capacitance between terminals A and B of an infinite ladder network of 1 µF capacitors is:", a: "(A) 1.618 µF", b: "(B) 0.618 µF", c: "(C) 2.0 µF", d: "(D) 1.0 µF", correct: "A", subj: "Physics" },
+      { q: "Which of the following compounds exhibits maximum dipole moment due to aromatic stabilization in zwitterionic form?", a: "(A) Cyclopentadienone", b: "(B) Tropone (Cycloheptatrienone)", c: "(C) Benzoquinone", d: "(D) Cyclopropenone", correct: "B", subj: "Chemistry" },
+      { q: "The value of the definite integral ∫ from 0 to π/2 of (sin³x)/(sin³x + cos³x) dx is equal to:", a: "(A) π/2", b: "(B) π/4", c: "(C) π/8", d: "(D) 1", correct: "B", subj: "Mathematics" },
+      { q: "During skeletal muscle contraction, which of the following bands remains unchanged in physical length?", a: "(A) I-band", b: "(B) H-zone", c: "(C) A-band", d: "(D) Sarcomere span", correct: "C", subj: "Biology" }
+    ];
+    let currentCbtIndex = 0;
+
+    function jumpCBTQ(num) {
+      currentCbtIndex = num - 1;
+      renderCurrentCBTQuestion();
+    }
+
+    function renderCurrentCBTQuestion() {
+      const q = cbtQuestions[currentCbtIndex];
+      document.getElementById('cbtQNum').textContent = `Question ${currentCbtIndex + 1} of ${cbtQuestions.length}`;
+      document.getElementById('cbtSubjectBadge').textContent = q.subj;
+      document.getElementById('cbtQuestionText').textContent = q.q;
+
+      // Update options
+      const optGroup = document.getElementById('cbtOptionsGroup');
+      optGroup.innerHTML = `
+        <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:8px;cursor:pointer">
+          <input type="radio" name="cbtOption" value="A" ${cbtAnswers[currentCbtIndex+1] === 'A' ? 'checked' : ''} style="accent-color:var(--brand-500)">
+          <span>${q.a}</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:8px;cursor:pointer">
+          <input type="radio" name="cbtOption" value="B" ${cbtAnswers[currentCbtIndex+1] === 'B' ? 'checked' : ''} style="accent-color:var(--brand-500)">
+          <span>${q.b}</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:8px;cursor:pointer">
+          <input type="radio" name="cbtOption" value="C" ${cbtAnswers[currentCbtIndex+1] === 'C' ? 'checked' : ''} style="accent-color:var(--brand-500)">
+          <span>${q.c}</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:8px;cursor:pointer">
+          <input type="radio" name="cbtOption" value="D" ${cbtAnswers[currentCbtIndex+1] === 'D' ? 'checked' : ''} style="accent-color:var(--brand-500)">
+          <span>${q.d}</span>
+        </label>
+      `;
+
+      // Update palette active state
+      document.querySelectorAll('.cbt-q-btn').forEach((btn, idx) => {
+        btn.classList.remove('active');
+        if (idx === currentCbtIndex) btn.classList.add('active');
+      });
+    }
+
+    function saveAndNextCBT() {
+      const selected = document.querySelector('input[name="cbtOption"]:checked');
+      if (selected) {
+        cbtAnswers[currentCbtIndex + 1] = selected.value;
+        const btn = document.querySelectorAll('.cbt-q-btn')[currentCbtIndex];
+        if (btn) {
+          btn.classList.add('ans');
+          btn.classList.remove('review');
+        }
+      }
+      if (currentCbtIndex < cbtQuestions.length - 1) {
+        currentCbtIndex++;
+        renderCurrentCBTQuestion();
+      } else {
+        toast('Last Question Reached|Click "Finish & Submit Test" when ready', 'info');
+      }
+    }
+
+    function markCBTReview() {
+      const btn = document.querySelectorAll('.cbt-q-btn')[currentCbtIndex];
+      if (btn) btn.classList.add('review');
+      saveAndNextCBT();
+    }
+
+    function clearCBTOption() {
+      delete cbtAnswers[currentCbtIndex + 1];
+      const checked = document.querySelector('input[name="cbtOption"]:checked');
+      if (checked) checked.checked = false;
+      const btn = document.querySelectorAll('.cbt-q-btn')[currentCbtIndex];
+      if (btn) {
+        btn.classList.remove('ans');
+        btn.classList.remove('review');
+      }
+    }
+
+    function submitCBTExam() {
+      let score = 0;
+      let correct = 0;
+      let wrong = 0;
+
+      cbtQuestions.forEach((q, idx) => {
+        const userAns = cbtAnswers[idx + 1];
+        if (userAns) {
+          if (userAns === q.correct) {
+            score += 4;
+            correct++;
+          } else {
+            score -= 1;
+            wrong++;
+          }
+        }
+      });
+
+      alert(`🎉 CBT Exam Submitted!\n\n• Score: ${score} / 20\n• Correct: ${correct}\n• Incorrect: ${wrong} (-${wrong} Negative Marks)\n• Percentile Predicted: 97.4%\n\nReport card stored in student cumulative records.`);
+      navigateTo('exams');
+    }
+
     // App Initialization
     window.addEventListener('DOMContentLoaded', () => {
       // Load persistent database from localStorage
@@ -7178,7 +8283,7 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) { r.update(); }
         });
-        navigator.serviceWorker.register('./sw.js?v=7').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=8').catch(() => {});
       }
       updateCommercialCalc();
       initAuthSession();
