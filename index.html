@@ -3960,12 +3960,16 @@
 
           <div class="card">
             <div class="card-header" style="flex-wrap:wrap;gap:12px">
-              <div class="filter-pills" style="margin-bottom:0">
-                <button class="filter-pill active" onclick="filterBatch('all', this)">All Batches (1,248)</button>
-                <button class="filter-pill" onclick="filterBatch('JEE Elite', this)">Class 12 JEE Elite</button>
-                <button class="filter-pill" onclick="filterBatch('NEET Super', this)">Class 11 NEET Super 30</button>
-                <button class="filter-pill" onclick="filterBatch('CBSE 12', this)">CBSE 12 Board</button>
-                <button class="filter-pill" onclick="filterBatch('Foundation', this)">Foundation 10</button>
+              <div class="filter-pills" style="margin-bottom:0;display:flex;flex-wrap:wrap;gap:6px">
+                <button class="filter-pill active" onclick="filterBatch('all', this)">All Classes (1,248)</button>
+                <button class="filter-pill" onclick="filterBatch('Class 6', this)">Class 6</button>
+                <button class="filter-pill" onclick="filterBatch('Class 7', this)">Class 7</button>
+                <button class="filter-pill" onclick="filterBatch('Class 8', this)">Class 8</button>
+                <button class="filter-pill" onclick="filterBatch('Class 9', this)">Class 9</button>
+                <button class="filter-pill" onclick="filterBatch('Class 10', this)">Class 10</button>
+                <button class="filter-pill" onclick="filterBatch('Class 11', this)">Class 11 (JEE/NEET)</button>
+                <button class="filter-pill" onclick="filterBatch('Class 12', this)">Class 12 (JEE/NEET)</button>
+                <button class="filter-pill" onclick="filterBatch('Dropper', this)">Dropper / Target</button>
               </div>
               <input type="text" class="form-input" style="max-width:240px;padding:6px 12px;font-size:12px" placeholder="Search student name or roll..." onkeyup="searchStudents(this.value)">
             </div>
@@ -5960,10 +5964,29 @@
           <div class="form-group">
             <label class="form-label">Target Batch / Goal</label>
             <select class="form-select" id="inqBatch">
-              <option value="Class 12 JEE Elite">Class 12 JEE Elite</option>
-              <option value="Class 11 NEET Super 30">Class 11 NEET Super 30</option>
-              <option value="CBSE 12 Board">CBSE 12 Board</option>
-              <option value="Foundation 10">Foundation 10</option>
+              <optgroup label="── Pre-Foundation (Classes 6-8) ──">
+                <option value="Class 6 Foundation">Class 6 - Foundation Olympiad</option>
+                <option value="Class 7 Foundation">Class 7 - Foundation Olympiad</option>
+                <option value="Class 8 Pre-Foundation">Class 8 - Pre-Foundation</option>
+              </optgroup>
+              <optgroup label="── Secondary Foundation (Classes 9-10) ──">
+                <option value="Class 9 Foundation">Class 9 - Foundation (CBSE + Olympiad)</option>
+                <option value="Class 10 Board + Foundation">Class 10 - Board + Foundation</option>
+              </optgroup>
+              <optgroup label="── Senior Secondary (Class 11) ──">
+                <option value="Class 11 NEET Super 30">Class 11 - NEET Super 30 (Medical)</option>
+                <option value="Class 11 JEE Pinnacle">Class 11 - JEE Pinnacle (Main+Adv)</option>
+                <option value="Class 11 Commerce / CUET">Class 11 - Commerce / CUET</option>
+              </optgroup>
+              <optgroup label="── Senior Secondary (Class 12) ──">
+                <option value="Class 12 JEE Elite" selected>Class 12 - JEE Elite (Main+Adv)</option>
+                <option value="Class 12 NEET Achievers">Class 12 - NEET Achievers</option>
+                <option value="CBSE 12 Board Booster">Class 12 - CBSE Board Booster</option>
+              </optgroup>
+              <optgroup label="── Target / Dropper / Repeater (12th Pass) ──">
+                <option value="Dropper JEE Target">Dropper / Repeater - JEE Target</option>
+                <option value="Dropper NEET Leader">Dropper / Repeater - NEET Leader</option>
+              </optgroup>
             </select>
           </div>
           <div class="form-group">
@@ -6134,10 +6157,29 @@
           <div class="form-group">
             <label class="form-label">Target Batch / Program *</label>
             <select class="form-select" id="stuBatch">
-              <option value="Class 12 JEE Elite">Class 12 JEE Elite</option>
-              <option value="Class 11 NEET Super 30">Class 11 NEET Super 30</option>
-              <option value="CBSE 12 Board">CBSE 12 Board</option>
-              <option value="Foundation 10">Foundation 10</option>
+              <optgroup label="── Pre-Foundation (Classes 6-8) ──">
+                <option value="Class 6 Foundation">Class 6 - Foundation Olympiad</option>
+                <option value="Class 7 Foundation">Class 7 - Foundation Olympiad</option>
+                <option value="Class 8 Pre-Foundation">Class 8 - Pre-Foundation</option>
+              </optgroup>
+              <optgroup label="── Secondary Foundation (Classes 9-10) ──">
+                <option value="Class 9 Foundation">Class 9 - Foundation (CBSE + Olympiad)</option>
+                <option value="Class 10 Board + Foundation">Class 10 - Board + Foundation</option>
+              </optgroup>
+              <optgroup label="── Senior Secondary (Class 11) ──">
+                <option value="Class 11 NEET Super 30">Class 11 - NEET Super 30 (Medical)</option>
+                <option value="Class 11 JEE Pinnacle">Class 11 - JEE Pinnacle (Main+Adv)</option>
+                <option value="Class 11 Commerce / CUET">Class 11 - Commerce / CUET</option>
+              </optgroup>
+              <optgroup label="── Senior Secondary (Class 12) ──">
+                <option value="Class 12 JEE Elite" selected>Class 12 - JEE Elite (Main+Adv)</option>
+                <option value="Class 12 NEET Achievers">Class 12 - NEET Achievers</option>
+                <option value="CBSE 12 Board Booster">Class 12 - CBSE Board Booster</option>
+              </optgroup>
+              <optgroup label="── Target / Dropper / Repeater (12th Pass) ──">
+                <option value="Dropper JEE Target">Dropper / Repeater - JEE Target</option>
+                <option value="Dropper NEET Leader">Dropper / Repeater - NEET Leader</option>
+              </optgroup>
             </select>
           </div>
           <div class="form-group">
@@ -8991,7 +9033,7 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) { r.update(); }
         });
-        navigator.serviceWorker.register('./sw.js?v=10').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=11').catch(() => {});
       }
       updateCommercialCalc();
       initAuthSession();
