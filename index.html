@@ -6719,6 +6719,120 @@
             </div>
           </div>
 
+          
+          <!-- UNIVERSAL AI AUTONOMOUS DRAG & DROP ZONE -->
+          <div class="card" id="aiDropzoneCard" style="background:linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(16,185,129,0.06) 100%);border:2px dashed rgba(99,102,241,0.45);border-radius:18px;padding:32px 24px;text-align:center;margin-bottom:24px;position:relative;overflow:hidden;transition:all 0.25s ease">
+            <input type="file" id="aiUniversalFileInput" accept=".csv,.xlsx,.xls,.txt,.json" style="display:none" onchange="handleAiFileSelect(event)">
+            
+            <div style="width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,#6366F1,#8B5CF6);color:#fff;display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px;box-shadow:0 0 25px rgba(99,102,241,0.5)">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+
+            <div style="font-size:18px;font-weight:900;color:#fff;letter-spacing:-0.02em;margin-bottom:6px">
+              📂 Drag & Drop Any Record File Here — AI Will Handle Everything!
+            </div>
+            <div style="font-size:13px;color:var(--text-muted);max-width:620px;margin:0 auto 18px auto;line-height:1.5">
+              Bas koi bhi record drop karein (<strong>Exam Marks, Student List, Biometric Attendance, ya Fees Sheet</strong>) — 
+              hamara AI automatically file ko analyze karega, SWOT Report Cards banayega, homework DPPs assign karega aur parents ko personalized WhatsApp dispatch karega!
+            </div>
+
+            <div style="display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-bottom:18px">
+              <button class="btn btn-pri btn-sm" onclick="document.getElementById('aiUniversalFileInput').click()" style="padding:9px 20px;font-size:13px;border-radius:24px;background:linear-gradient(135deg,#6366F1,#8B5CF6)">
+                <span>📁 Browse / Select Record File</span>
+              </button>
+              <span style="font-size:12px;color:var(--text-subtle)">Supports .CSV, .Excel (.xlsx), .TXT, .JSON</span>
+            </div>
+
+            <!-- Instant One-Click Demo Drop Shortcuts -->
+            <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:16px;margin-top:12px">
+              <div style="font-size:11.5px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px">
+                ⚡ Or Test Instant AI Auto-Pilot Ingestion (1-Click Simulation):
+              </div>
+              <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+                <button class="btn btn-sec btn-sm" onclick="simulateAiDrop('exam_marks')" style="border-radius:20px;font-size:11.5px">
+                  🎯 Drop: JEE Mock 4 Result Sheet (142 Students)
+                </button>
+                <button class="btn btn-sec btn-sm" onclick="simulateAiDrop('admissions')" style="border-radius:20px;font-size:11.5px">
+                  📋 Drop: New Admissions Sheet (48 Students)
+                </button>
+                <button class="btn btn-sec btn-sm" onclick="simulateAiDrop('biometric')" style="border-radius:20px;font-size:11.5px">
+                  ⏰ Drop: Gate Biometric Punch Log (1,141 Punches)
+                </button>
+                <button class="btn btn-sec btn-sm" onclick="simulateAiDrop('fee_due')" style="border-radius:20px;font-size:11.5px">
+                  💳 Drop: Pending Fee Ledger (36 Accounts)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI AUTONOMOUS PIPELINE EXECUTION MODAL / OVERLAY -->
+          <div class="modal-backdrop" id="aiPipelineModal" style="display:none">
+            <div class="modal-box" style="max-width:680px;background:#0A0F1D;border:1px solid rgba(99,102,241,0.35);box-shadow:0 25px 60px rgba(0,0,0,0.85)">
+              <div class="modal-header" style="border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:14px">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#6366F1,#8B5CF6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;animation:pulse 1.5s infinite">🤖</div>
+                  <div>
+                    <div class="modal-title" style="font-size:16px;font-weight:800;color:#fff">Zenith AI Autonomous Ingestion Pipeline</div>
+                    <div style="font-size:11.5px;color:var(--text-muted)" id="aiPipeSubtitle">Processing record file on Gemini Neural Engine...</div>
+                  </div>
+                </div>
+                <button class="modal-close" onclick="closeModal('aiPipelineModal')">&times;</button>
+              </div>
+              <div class="modal-body" style="padding:22px">
+                <!-- Progress Bar -->
+                <div style="margin-bottom:20px">
+                  <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:6px">
+                    <span style="color:#fff" id="aiPipeStatusText">Initializing AI Diagnostics...</span>
+                    <span style="color:#818CF8" id="aiPipePercent">0%</span>
+                  </div>
+                  <div style="height:8px;background:rgba(255,255,255,0.08);border-radius:999px;overflow:hidden">
+                    <div id="aiPipeProgressBar" style="width:0%;height:100%;background:linear-gradient(90deg,#6366F1,#10B981);transition:width 0.3s ease;border-radius:999px"></div>
+                  </div>
+                </div>
+
+                <!-- 5 Steps Checklist -->
+                <div id="aiPipeSteps" style="display:flex;flex-direction:column;gap:10px;margin-bottom:22px">
+                  <div class="ai-pipe-step" id="pipeStep1" style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--text-muted)">
+                    <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:10px">1</span>
+                    <span>Scanning & Parsing record rows (Data Integrity Verification)</span>
+                  </div>
+                  <div class="ai-pipe-step" id="pipeStep2" style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--text-muted)">
+                    <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:10px">2</span>
+                    <span>AI Neural Diagnostics: Calculating Percentiles, AIR Ranks & Chapter Errors</span>
+                  </div>
+                  <div class="ai-pipe-step" id="pipeStep3" style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--text-muted)">
+                    <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:10px">3</span>
+                    <span>Synthesizing Visual SWOT Diagnostic Report Cards for each student</span>
+                  </div>
+                  <div class="ai-pipe-step" id="pipeStep4" style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--text-muted)">
+                    <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:10px">4</span>
+                    <span>Compiling Personalized Weak-Area Practice DPPs into Student LMS</span>
+                  </div>
+                  <div class="ai-pipe-step" id="pipeStep5" style="display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--text-muted)">
+                    <span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;font-size:10px">5</span>
+                    <span>Auto-Dispatching Personalized WhatsApp Notes & Scorecards to Parents</span>
+                  </div>
+                </div>
+
+                <!-- Final Action Buttons (Visible upon completion) -->
+                <div id="aiPipeSuccessActions" style="display:none;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.3);border-radius:12px;padding:16px;text-align:center">
+                  <div style="font-size:15px;font-weight:800;color:#34D399;margin-bottom:4px">🎉 All Tasks Completed Autonomously by AI!</div>
+                  <div style="font-size:12px;color:var(--text-muted);margin-bottom:14px" id="aiPipeSuccessMsg">
+                    142 students processed · 142 Report Cards generated · 142 WhatsApps dispatched with 0 manual intervention.
+                  </div>
+                  <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+                    <button class="btn btn-pri btn-sm" onclick="closeModal('aiPipelineModal');navigateTo('report-cards')">
+                      📊 View Generated AI Report Cards →
+                    </button>
+                    <button class="btn btn-whatsapp btn-sm" onclick="closeModal('aiPipelineModal');navigateTo('whatsapp-hub')">
+                      💬 View WhatsApp Dispatch Logs →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- 4 Auto-Pilot Pipeline Metrics -->
           <div class="grid-4">
             <div class="stat-card">
@@ -10350,7 +10464,7 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) { r.update(); }
         });
-        navigator.serviceWorker.register('./sw.js?v=14').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=15').catch(() => {});
       }
       updateCommercialCalc();
       initAuthSession();
