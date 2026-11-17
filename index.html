@@ -4768,11 +4768,16 @@
 
             <div class="stat-card">
               <div class="stat-head">
-                <span class="stat-label">Pending Fees</span>
-                <div class="stat-icon" style="color:#F59E0B">
+                <span class="stat-label">Fee Realization (Q3)</span>
+                <div class="stat-icon" style="color:#10B981">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
                 </div>
               </div>
+              <div class="stat-num" id="dashFeeNum" style="color:#10B981">94.8%</div>
+              <div class="stat-change stat-up" id="dashFeeSub">
+                <span>₹1,00,000 upcoming dues (12 students)</span>
+              </div>
+            </div>
               <div class="stat-num" style="color:#F59E0B">₹4,86,500</div>
               <div class="stat-change" style="color:var(--text-muted)">
                 <span>142 students overdue &gt;15 days</span>
@@ -10523,7 +10528,7 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) { r.update(); }
         });
-        navigator.serviceWorker.register('./sw.js?v=18').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=19').catch(() => {});
       }
       updateCommercialCalc();
       initAuthSession();
