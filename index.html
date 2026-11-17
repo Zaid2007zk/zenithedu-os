@@ -4731,13 +4731,39 @@
             </div>
 
             <!-- Assistant Command Bar -->
-            <div style="display:flex;gap:8px;margin-bottom:12px">
-              <input type="text" id="aanyaPromptInput" placeholder="Aanya se kuch bhi puchiye: jaise 'aaj kitne bache aaye hain', 'kiski fees baaki hai'..." 
-                     style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:24px;padding:10px 18px;color:#fff;font-size:13px;outline:none"
+            <!-- Assistant Command Bar with Voice Microphone and Speech Controls -->
+            <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center;flex-wrap:wrap">
+              <input type="text" id="aanyaPromptInput" placeholder="Aanya se kuch bhi puchiye ya bol kar boliye: jaise 'aaj kaun absent hai', 'fees hisaab'..." 
+                     style="flex:1;min-width:220px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);border-radius:24px;padding:12px 18px;color:#fff;font-size:13.5px;outline:none;transition:border-color 0.2s"
                      onkeydown="if(event.key==='Enter') sendAanyaMessage()">
-              <button class="btn btn-pri btn-sm" onclick="sendAanyaMessage()" style="border-radius:24px;padding:0 20px;background:linear-gradient(135deg,#6366F1,#8B5CF6);font-size:13px">
+              
+              <!-- Voice Microphone Button -->
+              <button id="aanyaMicBtn" class="btn btn-sec btn-sm" onclick="toggleAanyaMic()" title="Mic se bol kar puchiye (Voice Chat)"
+                      style="border-radius:24px;padding:0 16px;height:42px;display:flex;align-items:center;gap:6px;border:1px solid rgba(236,72,153,0.45);background:rgba(236,72,153,0.12);color:#F472B6;font-weight:700;font-size:12.5px;cursor:pointer;transition:all 0.2s">
+                <span id="aanyaMicIcon" style="font-size:16px">🎙️</span>
+                <span id="aanyaMicLabel">Bol Kar Puchiye</span>
+              </button>
+
+              <!-- Send Button -->
+              <button class="btn btn-pri btn-sm" onclick="sendAanyaMessage()" 
+                      style="border-radius:24px;padding:0 22px;height:42px;background:linear-gradient(135deg,#6366F1,#8B5CF6);font-size:13px;font-weight:700;box-shadow:0 4px 15px rgba(99,102,241,0.4)">
                 <span>Puchiye →</span>
               </button>
+
+              <!-- Voice Output Speaker Toggle -->
+              <button id="aanyaVoiceToggleBtn" class="btn btn-ghost btn-sm" onclick="toggleAanyaVoiceOutput()" title="Aanya ki aawaaz On/Off karein"
+                      style="border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);font-size:16px;cursor:pointer">
+                🔊
+              </button>
+            </div>
+
+            <!-- Active Voice Listening Status Bar (Shown when speaking) -->
+            <div id="aanyaListeningIndicator" style="display:none;background:rgba(236,72,153,0.15);border:1px dashed #EC4899;border-radius:12px;padding:8px 14px;margin-bottom:12px;align-items:center;justify-content:space-between">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#EF4444;box-shadow:0 0 10px #EF4444;animation:pulse 1s infinite"></span>
+                <span id="aanyaListeningText" style="font-size:12.5px;color:#F472B6;font-weight:700">Aanya sun rahi hai... Aap boliye...</span>
+              </div>
+              <button onclick="stopAanyaMic()" style="background:none;border:none;color:#FDA4AF;font-size:11.5px;cursor:pointer;text-decoration:underline">Rukiye (Done)</button>
             </div>
 
             <!-- Quick Questions to Aanya (One-Click Shortcuts) -->
@@ -10653,12 +10679,155 @@
       }
     }
 
-    function appendAanyaMessage(sender, text, isAction = false, actionBtn = '') {
+    // ========================================================
+    // AANYA — 24/7 AI INSTITUTE ASSISTANT & RECORD KEEPER (VOICE + TEXT)
+    // ========================================================
+    window.aanyaVoiceEnabled = true;
+    window.aanyaSpeechRec = null;
+    window.aanyaIsListening = false;
+
+    // 1. Text-to-Speech Output Function
+    window.speakAanyaText = function(htmlText) {
+      if (!window.aanyaVoiceEnabled || !('speechSynthesis' in window)) return;
+      try {
+        window.speechSynthesis.cancel(); // cancel any ongoing speech
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = htmlText;
+        let plainText = tempDiv.textContent || tempDiv.innerText || '';
+        plainText = plainText.replace(/•/g, ', ').replace(/\s+/g, ' ');
+        
+        const utterance = new SpeechSynthesisUtterance(plainText);
+        utterance.lang = 'hi-IN'; // Prefer Indian voice
+        utterance.rate = 1.02;
+        utterance.pitch = 1.05;
+
+        // Try selecting Indian English or Hindi voice if available
+        const voices = window.speechSynthesis.getVoices();
+        const inVoice = voices.find(v => v.lang === 'hi-IN' || v.lang === 'en-IN' || v.name.includes('India'));
+        if (inVoice) utterance.voice = inVoice;
+
+        window.speechSynthesis.speak(utterance);
+      } catch (e) {
+        console.warn('Aanya speech synthesis error:', e);
+      }
+    };
+
+    window.toggleAanyaVoiceOutput = function() {
+      window.aanyaVoiceEnabled = !window.aanyaVoiceEnabled;
+      const btn = document.getElementById('aanyaVoiceToggleBtn');
+      if (btn) {
+        btn.textContent = window.aanyaVoiceEnabled ? '🔊' : '🔇';
+        btn.title = window.aanyaVoiceEnabled ? 'Aanya ki aawaaz On hai (Click to Mute)' : 'Aanya muted hai (Click to Unmute)';
+      }
+      if (!window.aanyaVoiceEnabled && ('speechSynthesis' in window)) {
+        window.speechSynthesis.cancel();
+      }
+      toast(window.aanyaVoiceEnabled ? 'Aanya Voice Enabled|Aanya will speak responses aloud' : 'Aanya Voice Muted|Voice output turned off', 'info');
+    };
+
+    // 2. Speech-to-Text Microphone Input Function
+    window.toggleAanyaMic = function() {
+      if (window.aanyaIsListening) {
+        window.stopAanyaMic();
+        return;
+      }
+
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRec) {
+        toast('Speech Recognition Unsupported|Aapke browser me mic support nahi mila. Kripya type karein.', 'warn');
+        return;
+      }
+
+      try {
+        const recognition = new SpeechRec();
+        window.aanyaSpeechRec = recognition;
+        recognition.lang = 'hi-IN'; // Indian Hindi / Hinglish recognition
+        recognition.continuous = false;
+        recognition.interimResults = true;
+
+        const micBtn = document.getElementById('aanyaMicBtn');
+        const micIcon = document.getElementById('aanyaMicIcon');
+        const micLabel = document.getElementById('aanyaMicLabel');
+        const ind = document.getElementById('aanyaListeningIndicator');
+        const indText = document.getElementById('aanyaListeningText');
+        const input = document.getElementById('aanyaPromptInput');
+
+        recognition.onstart = function() {
+          window.aanyaIsListening = true;
+          if (micBtn) {
+            micBtn.style.background = 'rgba(239, 68, 68, 0.2)';
+            micBtn.style.borderColor = '#EF4444';
+            micBtn.style.color = '#EF4444';
+          }
+          if (micIcon) micIcon.textContent = '🔴';
+          if (micLabel) micLabel.textContent = 'Sun rahi hoon...';
+          if (ind) ind.style.display = 'flex';
+          if (indText) indText.textContent = 'Aanya sun rahi hai... Boliye Sir (e.g. "aaj kaun absent hai")';
+          playBeep(850, 0.1);
+        };
+
+        recognition.onresult = function(event) {
+          let transcript = '';
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            transcript += event.results[i][0].transcript;
+          }
+          if (input) input.value = transcript;
+          if (indText) indText.textContent = 'Sun rahi hoon: "' + transcript + '"';
+        };
+
+        recognition.onerror = function(event) {
+          console.warn('Speech recognition error:', event.error);
+          window.stopAanyaMic();
+          if (event.error !== 'no-speech') {
+            toast('Mic Error: ' + event.error + '|Kripya dobara try karein', 'warn');
+          }
+        };
+
+        recognition.onend = function() {
+          window.stopAanyaMic();
+          if (input && input.value.trim()) {
+            // Auto submit what user spoke!
+            window.sendAanyaMessage();
+          }
+        };
+
+        recognition.start();
+      } catch (err) {
+        console.error('Mic start error:', err);
+        window.stopAanyaMic();
+        toast('Mic Permission Denied|Kripya browser me microphone permission allow karein.', 'warn');
+      }
+    };
+
+    window.stopAanyaMic = function() {
+      window.aanyaIsListening = false;
+      if (window.aanyaSpeechRec) {
+        try { window.aanyaSpeechRec.stop(); } catch(e){}
+        window.aanyaSpeechRec = null;
+      }
+      const micBtn = document.getElementById('aanyaMicBtn');
+      const micIcon = document.getElementById('aanyaMicIcon');
+      const micLabel = document.getElementById('aanyaMicLabel');
+      const ind = document.getElementById('aanyaListeningIndicator');
+
+      if (micBtn) {
+        micBtn.style.background = 'rgba(236,72,153,0.12)';
+        micBtn.style.borderColor = 'rgba(236,72,153,0.45)';
+        micBtn.style.color = '#F472B6';
+      }
+      if (micIcon) micIcon.textContent = '🎙️';
+      if (micLabel) micLabel.textContent = 'Bol Kar Puchiye';
+      if (ind) ind.style.display = 'none';
+    };
+
+    // 3. Append Message to Aanya Chat Box
+    window.appendAanyaMessage = function(sender, text, isAction = false, actionBtn = '') {
       const box = document.getElementById('aanyaChatBox');
       if (!box) return;
 
       const isAanya = sender === 'Aanya';
       const msgDiv = document.createElement('div');
+      msgDiv.className = 'aanya-msg-entry';
       msgDiv.style.display = 'flex';
       msgDiv.style.gap = '10px';
       msgDiv.style.alignItems = 'flex-start';
@@ -10679,108 +10848,152 @@
 
       box.appendChild(msgDiv);
       box.scrollTop = box.scrollHeight;
-    }
+    };
 
-    function sendAanyaMessage() {
+    // 4. Send Message via Button or Enter Key
+    window.sendAanyaMessage = function() {
       const input = document.getElementById('aanyaPromptInput');
+      if (!input) return;
       const query = input.value.trim();
       if (!query) return;
 
-      appendAanyaMessage('Director', query);
+      // Append user's question
+      window.appendAanyaMessage('Director', query);
       input.value = '';
       playBeep(600, 0.08);
 
+      // Show temporary typing indicator
+      const box = document.getElementById('aanyaChatBox');
+      const typingId = 'aanyaTyping_' + Date.now();
+      if (box) {
+        const typingDiv = document.createElement('div');
+        typingDiv.id = typingId;
+        typingDiv.style.display = 'flex';
+        typingDiv.style.gap = '10px';
+        typingDiv.style.alignItems = 'center';
+        typingDiv.innerHTML = `
+          <span style="font-size:18px">👩‍💼</span>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:8px 14px;font-size:12.5px;color:var(--text-muted);font-style:italic">
+            ⏳ Aanya record check kar rahi hain...
+          </div>
+        `;
+        box.appendChild(typingDiv);
+        box.scrollTop = box.scrollHeight;
+      }
+
       setTimeout(() => {
-        respondAanyaQuery(query.toLowerCase());
-      }, 400);
-    }
+        const typingEl = document.getElementById(typingId);
+        if (typingEl) typingEl.remove();
+        window.respondAanyaQuery(query);
+      }, 500);
+    };
 
-    function askAanyaQuick(type) {
+    // 5. Intelligent NLP Responder for Aanya
+    window.respondAanyaQuery = function(rawQuery) {
+      const q = rawQuery.toLowerCase();
+      let responseText = '';
+      let actionBtn = '';
+
+      // Match Attendance / Absent / Present
+      if (q.includes('absent') || q.includes('attendance') || q.includes('haziri') || q.includes('present') || q.includes('aaye') || q.includes('bacche') || q.includes('chutti') || q.includes('kaun') || q.includes('kaub')) {
+        responseText = `Sir, aaj hamari biometric machine par <strong>1,180 students present</strong> hain (94.8% Attendance).<br>
+                        Sirf <strong>68 students absent</strong> hain.<br>
+                        Maine subah 08:35 AM par sabhi 68 absentees ke parents ko automated WhatsApp verification message bhej diya hai!`;
+        actionBtn = `<button class="btn btn-whatsapp btn-sm" onclick="navigateTo('attendance')">📋 View Today's Attendance Register →</button>`;
+      }
+      // Match Fees / Payment / Due
+      else if (q.includes('fee') || q.includes('paisa') || q.includes('paise') || q.includes('baki') || q.includes('pending') || q.includes('kist') || q.includes('installment') || q.includes('due') || q.includes('bhari')) {
+        responseText = `Sir, total academic fees ka <strong>94.8% (₹22,80,000)</strong> realize ho chuka hai.<br>
+                        Sirf <strong>12 bacchon ki installment</strong> is hafte scheduled hai (Total: ₹1,00,000).<br>
+                        Top cases:<br>
+                        • <strong>Siddharth Kulkarni</strong> (Class 12 JEE) - ₹30,000 (Due: 20 Nov)<br>
+                        • <strong>Tanmay Agarwal</strong> (Class 11 NEET) - ₹25,000 (Due: 22 Nov)<br>
+                        • <strong>Rohan Mehra</strong> (Class 10 FDN) - ₹20,000 (Due: 24 Nov)<br>
+                        Kya main in sabhi 12 parents ko automated gentle WhatsApp payment link dispatch kar doon?`;
+        actionBtn = `<button class="btn btn-whatsapp btn-sm" onclick="toast('WhatsApp Payment Links Dispatched!|Sent to 12 parents via Razorpay integration', 'ok')">📲 Haan Aanya, Sabko Payment Link Bhej Do</button>`;
+      }
+      // Match Specific Student / Aarav / Topper
+      else if (q.includes('aarav') || q.includes('student') || q.includes('score') || q.includes('marks') || q.includes('topper') || q.includes('rank') || q.includes('test') || q.includes('exam')) {
+        responseText = `Sir, <strong>Aarav Sharma</strong> ka poora record mere paas save hai:<br>
+                        • <strong>Roll Number:</strong> ZE-2026-101 (Class 12 JEE Elite)<br>
+                        • <strong>Attendance:</strong> 96.2% (Regular, 0 unexcused leaves)<br>
+                        • <strong>Fees:</strong> ₹95,000 Total · 100% Fully Paid (₹0 Pending)<br>
+                        • <strong>Latest Exam:</strong> JEE Mock 4 me <strong>254/300 marks</strong> (AIR #14, 99.42 Percentile)<br>
+                        • <strong>AI Diagnosis:</strong> Physics (88/100) aur Chemistry (92/100) me top score hai. Calculus ki 15-question practice sheet maine uske portal par assign kar di hai.`;
+        actionBtn = `<button class="btn btn-pri btn-sm" onclick="navigateTo('report-cards')">📊 Open Aarav's Full SWOT Report Card →</button>`;
+      }
+      // Match Transport / Bus
+      else if (q.includes('bus') || q.includes('transport') || q.includes('van') || q.includes('driver') || q.includes('route')) {
+        responseText = `Sir, transport fleet ka live status:<br>
+                        • <strong>6 Institute Buses</strong> active GPS tracking par hain.<br>
+                        • Sabhi routes 100% safe run ho rahe hain (0 speed alerts).<br>
+                        • Route 3 (Kothrud Express) 4 minute me campus pahunchne wali hai.`;
+        actionBtn = `<button class="btn btn-sec btn-sm" onclick="navigateTo('transport')">🚌 Open Live GPS Fleet Radar →</button>`;
+      }
+      // Match Hostel / Mess
+      else if (q.includes('hostel') || q.includes('mess') || q.includes('curfew') || q.includes('room')) {
+        responseText = `Sir, Zenith Boys & Girls Hostel me total <strong>340 resident students</strong> hain.<br>
+                        • Biometric gate par 338 in-punch ho chuke hain.<br>
+                        • Sirf 2 students library permission slip ke sath bahar hain (Curfew: 09:30 PM).<br>
+                        • Mess dinner menu: Paneer Butter Masala & Dal Tadka inspection cleared.`;
+        actionBtn = `<button class="btn btn-sec btn-sm" onclick="navigateTo('hostel')">🏢 View Hostel & Mess Roster →</button>`;
+      }
+      // Match Overall Summary / Report / Hisaab
+      else if (q.includes('hisaab') || q.includes('report') || q.includes('summary') || q.includes('aaj') || q.includes('overview') || q.includes('status') || q.includes('institute')) {
+        responseText = `Director Sir, aaj ka complete institutional status report:<br>
+                        • 🎓 <strong>1,248 Active Students</strong> safely enrolled across 8 batches.<br>
+                        • ⏰ <strong>1,180 Students present</strong> today (94.8% on-time velocity).<br>
+                        • 💳 <strong>Fee Realization 94.8%</strong> (₹22.8L collected, healthy treasury).<br>
+                        • 📝 <strong>All India JEE Mock 4</strong> ke 142 scorecards parents ko dispatch ho chuke hain.<br>
+                        • 🚌 <strong>Transport & Hostel:</strong> 100% operational with 0 flags.<br>
+                        Sabhi operations bilkul smoothly run ho rahe hain!`;
+        actionBtn = `<button class="btn btn-sec btn-sm" onclick="toast('Aanya Log Archived|All records backed up to cloud vault', 'ok')">📁 Backup Today's Register</button>`;
+      }
+      // Fallback
+      else {
+        responseText = `Ji Director Sir, maine aapki query note kar li hai: <em>"${rawQuery}"</em>.<br>
+                        Institute ke database me 1,248 students ka complete record active hai. Aap chahein toh fees, attendance, bus tracking, ya kisi specific bache ka score card puchiye, main turant nikaal kar doongi!`;
+        actionBtn = `<div style="display:flex;gap:6px;flex-wrap:wrap">
+                       <button class="btn btn-sec btn-sm" onclick="askAanyaQuick('attendance')">⏰ Attendance Report</button>
+                       <button class="btn btn-sec btn-sm" onclick="askAanyaQuick('fees')">💳 Fee Ledger</button>
+                       <button class="btn btn-sec btn-sm" onclick="askAanyaQuick('summary')">📋 Full Institute Summary</button>
+                     </div>`;
+      }
+
+      window.appendAanyaMessage('Aanya', responseText, true, actionBtn);
+      playBeep(750, 0.1);
+      window.speakAanyaText(responseText);
+    };
+
+    // 6. Quick Action Button Handler
+    window.askAanyaQuick = function(type) {
       if (type === 'attendance') {
-        appendAanyaMessage('Director', 'Aanya, aaj kaun kaun absent hai report do.');
+        window.appendAanyaMessage('Director', 'Aanya, aaj kaun kaun absent hai report do.');
         setTimeout(() => {
-          appendAanyaMessage('Aanya', 
-            `Sir, aaj hamari biometric machine par <strong>1,180 students present</strong> hain (94.8% Attendance).<br>
-             Sirf <strong>68 students absent</strong> hain.<br>
-             Maine subah 08:35 AM par sabhi 68 absentees ke parents ko automated WhatsApp verification message bhej diya hai!`,
-            true,
-            `<button class="btn btn-whatsapp btn-sm" onclick="navigateTo('attendance')">📋 View Today's Attendance Register →</button>`
-          );
-          playBeep(750, 0.1);
-        }, 500);
+          window.respondAanyaQuery('absent attendance report');
+        }, 300);
       } else if (type === 'fees') {
-        appendAanyaMessage('Director', 'Aanya, kiski fees pending hai hisaab nikalo.');
+        window.appendAanyaMessage('Director', 'Aanya, kiski fees pending hai hisaab nikalo.');
         setTimeout(() => {
-          appendAanyaMessage('Aanya', 
-            `Sir, total academic fees ka <strong>94.8% (₹22,80,000)</strong> realize ho chuka hai.<br>
-             Sirf <strong>12 bacchon ki installment</strong> is hafte scheduled hai (Total: ₹1,00,000).<br>
-             Top cases:<br>
-             • <strong>Siddharth Kulkarni</strong> (Class 12 JEE) - ₹30,000 (Due: 20 Nov)<br>
-             • <strong>Tanmay Agarwal</strong> (Class 11 NEET) - ₹25,000 (Due: 22 Nov)<br>
-             • <strong>Rohan Mehra</strong> (Class 10 FDN) - ₹20,000 (Due: 24 Nov)<br>
-             Kya main in sabhi 12 parents ko automated gentle WhatsApp payment link dispatch kar doon?`,
-            true,
-            `<button class="btn btn-whatsapp btn-sm" onclick="toast('WhatsApp Payment Links Dispatched!|Sent to 12 parents via Razorpay integration', 'ok')">📲 Haan Aanya, Sabko Payment Link Bhej Do</button>`
-          );
-          playBeep(750, 0.1);
-        }, 500);
+          window.respondAanyaQuery('fees pending hisaab');
+        }, 300);
       } else if (type === 'aarav') {
-        appendAanyaMessage('Director', 'Aarav Sharma ka poora record nikalo.');
+        window.appendAanyaMessage('Director', 'Aarav Sharma ka poora record nikalo.');
         setTimeout(() => {
-          appendAanyaMessage('Aanya', 
-            `Sir, <strong>Aarav Sharma</strong> ka poora record mere paas save hai:<br>
-             • <strong>Roll Number:</strong> ZE-2026-101 (Class 12 JEE Elite)<br>
-             • <strong>Attendance:</strong> 96.2% (Regular, 0 unexcused leaves)<br>
-             • <strong>Fees:</strong> ₹95,000 Total · 100% Fully Paid (₹0 Pending)<br>
-             • <strong>Latest Exam:</strong> JEE Mock 4 me <strong>254/300 marks</strong> (AIR #14, 99.42 Percentile)<br>
-             • <strong>AI Diagnosis:</strong> Physics (88/100) aur Chemistry (92/100) me top score hai, Calculus me thode marks kate the jinki 15-question practice sheet maine uske portal par assign kar di hai.`,
-            true,
-            `<button class="btn btn-pri btn-sm" onclick="navigateTo('report-cards')">📊 Open Aarav's Full SWOT Report Card →</button>`
-          );
-          playBeep(750, 0.1);
-        }, 500);
+          window.respondAanyaQuery('aarav sharma student record');
+        }, 300);
       } else if (type === 'summary') {
-        appendAanyaMessage('Director', 'Aanya, aaj ka poora institute summary batao.');
+        window.appendAanyaMessage('Director', 'Aanya, aaj ka poora institute summary batao.');
         setTimeout(() => {
-          appendAanyaMessage('Aanya', 
-            `Director Sir, aaj ka complete institutional status report:<br>
-             • 🎓 <strong>1,248 Active Students</strong> safely enrolled across 8 batches.<br>
-             • ⏰ <strong>1,180 Students present</strong> today (94.8% on-time velocity).<br>
-             • 💳 <strong>Fee Realization 94.8%</strong> (₹22.8L collected, healthy treasury).<br>
-             • 📝 <strong>All India JEE Mock 4</strong> ke 142 scorecards maine generate karke parents ko dispatch kar diye hain.<br>
-             • 🚌 <strong>Transport:</strong> 6 buses on route, 0 breakdown alerts.<br>
-             Sabhi operations bilkul smoothly run ho rahe hain, Sir!`,
-            true,
-            `<button class="btn btn-sec btn-sm" onclick="toast('Aanya Log Archived|All records backed up to cloud vault', 'ok')">📁 Backup Today's Register</button>`
-          );
-          playBeep(750, 0.1);
-        }, 500);
+          window.respondAanyaQuery('institute complete summary report');
+        }, 300);
       } else if (type === 'file') {
-        document.getElementById('dashUniversalFileInput').click();
+        const fileInp = document.getElementById('dashUniversalFileInput');
+        if (fileInp) fileInp.click();
       }
-    }
+    };
 
-    function respondAanyaQuery(q) {
-      if (q.includes('fee') || q.includes('paisa') || q.includes('pending') || q.includes('due') || q.includes('paise')) {
-        askAanyaQuick('fees');
-      } else if (q.includes('attendance') || q.includes('absent') || q.includes('aaye') || q.includes('present') || q.includes('bacche')) {
-        askAanyaQuick('attendance');
-      } else if (q.includes('aarav') || q.includes('student') || q.includes('score') || q.includes('marks')) {
-        askAanyaQuick('aarav');
-      } else if (q.includes('hisaab') || q.includes('report') || q.includes('summary') || q.includes('aaj')) {
-        askAanyaQuick('summary');
-      } else {
-        appendAanyaMessage('Aanya', 
-          `Ji Director Sir, maine aapki baat note kar li hai: <em>"${q}"</em>.<br>
-           Institute ke database me 1,248 students ka complete record active hai. Aap chahein toh fees, attendance, ya kisi specific bache ka score card puchiye, main turant nikaal kar doongi!`,
-          true,
-          `<button class="btn btn-sec btn-sm" onclick="askAanyaQuick('summary')">📋 Aaj Ka Complete Status Dekhein</button>`
-        );
-        playBeep(700, 0.1);
-      }
-    }
-
-      const dashDrop = document.getElementById('dashAiDropzoneCard');
+    const dashDrop = document.getElementById('dashAiDropzoneCard');
       if (dashDrop) {
         ['dragenter', 'dragover'].forEach(eventName => {
           dashDrop.addEventListener(eventName, (e) => {
