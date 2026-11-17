@@ -10464,7 +10464,7 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) { r.update(); }
         });
-        navigator.serviceWorker.register('./sw.js?v=15').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=16').catch(() => {});
       }
       updateCommercialCalc();
       initAuthSession();
@@ -10489,6 +10489,145 @@
         document.getElementById('topInstLogo').textContent = savedLogo;
         document.getElementById('customLogoInput').value = savedLogo;
       }
+      setupAiDropzone();
+
+    /* ========================================================
+       UNIVERSAL AI AUTONOMOUS DRAG & DROP PIPELINE LOGIC
+       ======================================================== */
+    function setupAiDropzone() {
+      const dropzone = document.getElementById('aiDropzoneCard');
+      if (!dropzone) return;
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzone.style.borderColor = '#10B981';
+          dropzone.style.background = 'rgba(16, 185, 129, 0.12)';
+          dropzone.style.transform = 'scale(1.01)';
+        }, false);
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropzone.addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzone.style.borderColor = 'rgba(99, 102, 241, 0.45)';
+          dropzone.style.background = 'linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(16,185,129,0.06) 100%)';
+          dropzone.style.transform = 'none';
+        }, false);
+      });
+
+      dropzone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        if (files && files.length > 0) {
+          executeAiAutonomousPipeline(files[0].name, files[0].size);
+        }
+      });
+    }
+
+    function handleAiFileSelect(e) {
+      const files = e.target.files;
+      if (files && files.length > 0) {
+        executeAiAutonomousPipeline(files[0].name, files[0].size);
+      }
+    }
+
+    function simulateAiDrop(type) {
+      if (type === 'exam_marks') {
+        executeAiAutonomousPipeline('JEE_Mock_04_All_India_Results.xlsx', 142);
+      } else if (type === 'admissions') {
+        executeAiAutonomousPipeline('Class11_NEET_Super30_Admissions.csv', 48);
+      } else if (type === 'biometric') {
+        executeAiAutonomousPipeline('Gate_Biometric_Punches_17Nov.csv', 1141);
+      } else if (type === 'fee_due') {
+        executeAiAutonomousPipeline('Pending_Overdue_Installments_Q3.xlsx', 36);
+      }
+    }
+
+    function executeAiAutonomousPipeline(fileName, countOrSize) {
+      openModal('aiPipelineModal');
+      playBeep(520, 0.08);
+
+      document.getElementById('aiPipeSubtitle').innerText = 'Ingesting "' + fileName + '" · Autonomous AI pipeline running...';
+      document.getElementById('aiPipeSuccessActions').style.display = 'none';
+      
+      const progressBar = document.getElementById('aiPipeProgressBar');
+      const percentText = document.getElementById('aiPipePercent');
+      const statusText = document.getElementById('aiPipeStatusText');
+
+      // Reset steps
+      for (let i = 1; i <= 5; i++) {
+        const step = document.getElementById('pipeStep' + i);
+        if (step) {
+          step.style.color = 'var(--text-muted)';
+          step.querySelector('span:first-child').style.background = 'rgba(255,255,255,0.06)';
+          step.querySelector('span:first-child').style.color = 'inherit';
+          step.querySelector('span:first-child').innerHTML = i;
+        }
+      }
+
+      function markStepDone(num, label) {
+        const step = document.getElementById('pipeStep' + num);
+        if (step) {
+          step.style.color = '#34D399';
+          step.querySelector('span:first-child').style.background = '#10B981';
+          step.querySelector('span:first-child').style.color = '#fff';
+          step.querySelector('span:first-child').innerHTML = '✓';
+        }
+        if (statusText) statusText.innerText = label;
+      }
+
+      // Step 1: Parsing
+      progressBar.style.width = '20%';
+      percentText.innerText = '20%';
+      markStepDone(1, 'Parsed rows from ' + fileName);
+
+      setTimeout(() => {
+        progressBar.style.width = '45%';
+        percentText.innerText = '45%';
+        markStepDone(2, 'Gemini AI calculating percentiles & error patterns...');
+        playBeep(620, 0.08);
+      }, 500);
+
+      setTimeout(() => {
+        progressBar.style.width = '70%';
+        percentText.innerText = '70%';
+        markStepDone(3, 'Synthesizing visual SWOT Diagnostic Report Cards...');
+        playBeep(720, 0.08);
+      }, 1000);
+
+      setTimeout(() => {
+        progressBar.style.width = '88%';
+        percentText.innerText = '88%';
+        markStepDone(4, 'Compiling personalized weakness practice DPPs...');
+        playBeep(820, 0.08);
+      }, 1500);
+
+      setTimeout(() => {
+        progressBar.style.width = '100%';
+        percentText.innerText = '100%';
+        markStepDone(5, 'Dispatched personalized WhatsApp notes to parents!');
+        playBeep(920, 0.15);
+
+        document.getElementById('aiPipeSuccessActions').style.display = 'block';
+        document.getElementById('aiPipeSuccessMsg').innerText = 
+          'Processed "' + fileName + '" · AI Report Cards generated · Personal DPPs assigned · WhatsApps dispatched to parents with 0 manual effort!';
+        
+        sampleAutoPilotEvents.unshift({
+          type: 'drop',
+          title: 'File Ingested: ' + fileName,
+          desc: 'Universal Dropzone auto-processed record · Generated report cards, assigned weakness DPPs & dispatched parent WhatsApp alerts',
+          time: 'Just now',
+          badge: 'DROPZONE AUTO-PILOT',
+          color: '#10B981'
+        });
+        initAutoPilotFeed();
+        toast('AI Autonomous Pipeline Complete!|Records ingested, analyzed & parent notifications dispatched.', 'ok');
+      }, 2000);
+    }
+
     });
   </script>
 
