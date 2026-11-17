@@ -6681,7 +6681,457 @@
         </div>
 
       </div>
-    </main>
+    
+        <!-- VIEW 20: AI AUTONOMOUS AUTO-PILOT COMMAND CENTER -->
+        <div class="view-pane" id="view-ai-autopilot">
+          <div class="page-header" style="margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+            <div>
+              <div class="page-title" style="display:flex;align-items:center;gap:10px">
+                <span>🤖 AI Autonomous Auto-Pilot Command Center</span>
+                <span class="badge badge-paid" style="font-size:11px">100% Fully Automated</span>
+              </div>
+              <div class="page-desc">Zero manual effort · Automated exam SWOT analysis, personalized parent WhatsApps, DPP assignment & fee recovery</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <button class="btn btn-whatsapp btn-sm" onclick="runAutoPilotCycle()" id="autoPilotCycleBtn">
+                <span>⚡ Run Instant Auto-Pilot Cycle</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Auto-Pilot Control Card -->
+          <div class="card" style="background:linear-gradient(135deg, rgba(16,185,129,0.12) 0%, rgba(99,102,241,0.08) 100%);border:1px solid rgba(16,185,129,0.3);margin-bottom:24px">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px">
+              <div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <span style="width:12px;height:12px;border-radius:50%;background:#10B981;box-shadow:0 0 12px #10B981;display:inline-block"></span>
+                  <span style="font-size:16px;font-weight:800;color:#fff">Autonomous Engine Status: ACTIVE (Auto-Pilot)</span>
+                </div>
+                <div style="font-size:12.5px;color:var(--text-muted);margin-top:4px">
+                  System triggers real-time events automatically without waiting for staff intervention.
+                </div>
+              </div>
+              <div style="display:flex;gap:12px;align-items:center">
+                <span style="font-size:12.5px;color:var(--text-muted)">Mode:</span>
+                <button class="filter-pill active" id="btnModeAuto" onclick="setAutoPilotMode('auto', this)">🟢 Full Auto-Pilot</button>
+                <button class="filter-pill" id="btnModeReview" onclick="setAutoPilotMode('review', this)">🟡 Review & Approve</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Auto-Pilot Pipeline Metrics -->
+          <div class="grid-4">
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">AI SWOT Reports Sent</span></div>
+              <div class="stat-num" id="apStatReports">1,248</div>
+              <div class="stat-sub" style="color:#10B981"><span>✓ 100% parents received</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">Personalized WhatsApps</span></div>
+              <div class="stat-num" id="apStatWa">3,490</div>
+              <div class="stat-sub" style="color:#10B981"><span>✓ 0 manual drafts written</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">Weak-Area DPPs Auto-Assigned</span></div>
+              <div class="stat-num" id="apStatDpp">480</div>
+              <div class="stat-sub" style="color:#818CF8"><span>⚡ Custom to student weakness</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">Automated Fee Recovered</span></div>
+              <div class="stat-num">₹8.42L</div>
+              <div class="stat-sub" style="color:#10B981"><span>✓ Via AI smart payment links</span></div>
+            </div>
+          </div>
+
+          <!-- Live Auto-Pilot Real-Time Processing Feed -->
+          <div class="card">
+            <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
+              <div class="card-title">Live Autonomous Event Stream (Real-Time AI Logs)</div>
+              <span class="badge badge-paid">Connected to Meta Cloud & Gemini API</span>
+            </div>
+            <div id="autoPilotEventFeed" style="display:flex;flex-direction:column;gap:10px;max-height:420px;overflow-y:auto;padding-right:6px">
+              <!-- Event items will be populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 21: AI VISUAL REPORT CARDS & SWOT ANALYSIS -->
+        <div class="view-pane" id="view-report-cards">
+          <div class="page-header" style="margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+            <div>
+              <div class="page-title">📊 AI Student Diagnostic Report Card & SWOT Matrix</div>
+              <div class="page-desc">Automatic diagnostic breakdown, percentile prediction, chapter weakness radar & parent WhatsApp dispatch</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <button class="btn btn-sec btn-sm" onclick="printReportCard()">🖨️ Print / Save PDF</button>
+              <button class="btn btn-whatsapp btn-sm" onclick="sendActiveReportCardWhatsApp()">📲 Send to Parent via WhatsApp</button>
+            </div>
+          </div>
+
+          <!-- Student & Exam Filter Selector -->
+          <div class="card" style="padding:16px 20px !important;margin-bottom:20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+                <label style="font-size:12.5px;font-weight:700;color:var(--text-muted)">Select Student:</label>
+                <select class="form-select" id="rcStudentSelect" onchange="renderReportCard()" style="min-width:220px;padding:6px 12px;font-size:13px">
+                  <option value="Aarav Sharma">Aarav Sharma (Roll: ZE-2026-101)</option>
+                  <option value="Sneha Rao">Sneha Rao (Roll: ZE-2026-102)</option>
+                  <option value="Kunal Verma">Kunal Verma (Roll: ZE-2026-103)</option>
+                  <option value="Priya Patel">Priya Patel (Roll: ZE-2026-104)</option>
+                  <option value="Ananya Deshmukh">Ananya Deshmukh (Roll: ZE-2026-105)</option>
+                </select>
+                <label style="font-size:12.5px;font-weight:700;color:var(--text-muted);margin-left:8px">Exam:</label>
+                <select class="form-select" id="rcExamSelect" onchange="renderReportCard()" style="min-width:240px;padding:6px 12px;font-size:13px">
+                  <option value="JEE Full Mock Test 4">JEE Full Mock Test 4 (300 Marks)</option>
+                  <option value="NEET All India Major 2">NEET All India Major 2 (720 Marks)</option>
+                  <option value="Class 10 Board Booster">Class 10 Board Booster (80 Marks)</option>
+                </select>
+              </div>
+              <span class="badge badge-purple" id="rcAiVerifiedBadge">✓ AI Verified & Signed</span>
+            </div>
+          </div>
+
+          <!-- Printable & Visual Scorecard Container -->
+          <div class="card" id="printableReportCard" style="background:#090E1A;border:1px solid rgba(255,255,255,0.12);padding:28px 32px !important">
+            <!-- Header of Report Card -->
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid rgba(255,255,255,0.1);padding-bottom:18px;margin-bottom:20px;flex-wrap:wrap;gap:14px">
+              <div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#6366F1,#8B5CF6);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px">ZE</div>
+                  <div>
+                    <div style="font-size:18px;font-weight:900;color:#fff;letter-spacing:-0.02em">ZENITHEDU ACADEMY</div>
+                    <div style="font-size:11px;color:var(--text-muted)">National Level Test-Prep & Integrated Academic Diagnostics</div>
+                  </div>
+                </div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:13px;font-weight:800;color:#818CF8" id="rcExamHeading">ALL INDIA JEE MOCK TEST 04</div>
+                <div style="font-size:11px;color:var(--text-muted)">Date: 15 Nov 2026 · Academic Session 2026-27</div>
+              </div>
+            </div>
+
+            <!-- Student Bio Strip -->
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;background:rgba(255,255,255,0.02);padding:14px 18px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);margin-bottom:24px" id="rcBioStrip">
+              <div><span style="font-size:11px;color:var(--text-muted)">Student Name:</span><div style="font-size:14px;font-weight:700;color:#fff" id="rcName">Aarav Sharma</div></div>
+              <div><span style="font-size:11px;color:var(--text-muted)">Roll Number:</span><div style="font-size:14px;font-weight:700;color:#fff" id="rcRoll">ZE-2026-101</div></div>
+              <div><span style="font-size:11px;color:var(--text-muted)">Batch:</span><div style="font-size:14px;font-weight:700;color:#10B981" id="rcBatch">Class 12 JEE Elite</div></div>
+              <div><span style="font-size:11px;color:var(--text-muted)">All India Rank (AIR):</span><div style="font-size:15px;font-weight:800;color:#818CF8" id="rcRank">#14 / 2,450 (Top 0.5%)</div></div>
+            </div>
+
+            <!-- Marks & Percentile Grid -->
+            <div style="margin-bottom:24px">
+              <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:10px">Subject-Wise Performance Breakdown</div>
+              <table style="width:100%;border-collapse:collapse;font-size:13px" id="rcMarksTable">
+                <thead>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.1);color:var(--text-muted);text-align:left">
+                    <th style="padding:10px">Subject</th>
+                    <th style="padding:10px">Total Marks</th>
+                    <th style="padding:10px">Score Obtained</th>
+                    <th style="padding:10px">Accuracy</th>
+                    <th style="padding:10px">Percentile</th>
+                    <th style="padding:10px">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="rcMarksBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- AI SWOT DIAGNOSTIC MATRIX -->
+            <div style="margin-bottom:24px">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+                <span style="font-size:14px;font-weight:800;color:#fff">🧠 Zenith Gemini AI SWOT Diagnostic Matrix</span>
+                <span class="badge badge-purple" style="font-size:10px">Generated on Neural Engine</span>
+              </div>
+              <div class="grid-2">
+                <!-- Strengths -->
+                <div style="background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.25);border-radius:12px;padding:16px">
+                  <div style="font-size:12.5px;font-weight:700;color:#34D399;margin-bottom:6px">🟢 Mastery & Strong Chapters</div>
+                  <ul style="font-size:12px;color:#CBD5E1;padding-left:18px;line-height:1.6" id="rcStrengths">
+                    <li>Modern Physics & Semiconductors (100% accuracy, 0 negative marks)</li>
+                    <li>Coordination Chemistry & Periodic Properties (95% mastery)</li>
+                    <li>Vector & 3D Geometry (Solved in 1.1 min average)</li>
+                  </ul>
+                </div>
+
+                <!-- Weaknesses -->
+                <div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.25);border-radius:12px;padding:16px">
+                  <div style="font-size:12.5px;font-weight:700;color:#F87171;margin-bottom:6px">🔴 Critical Weaknesses (Needs Revision)</div>
+                  <ul style="font-size:12px;color:#CBD5E1;padding-left:18px;line-height:1.6" id="rcWeaknesses">
+                    <li>Calculus: Definite Integration & Area under Curve (3 questions incorrect)</li>
+                    <li>Rotational Dynamics: Moment of Inertia calculations</li>
+                    <li>Organic Reaction Mechanisms: Alcohol & Aldehyde conversions</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Prescription & Parent Message Preview -->
+            <div style="background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.25);border-radius:12px;padding:16px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <span style="font-size:12.5px;font-weight:700;color:#818CF8">💡 AI Prescription & Parent WhatsApp Note (Auto-Generated)</span>
+                <span style="font-size:11px;color:var(--text-muted)">Dispatched to: +91 98220 11223</span>
+              </div>
+              <div style="font-size:12.5px;color:#E2E8F0;line-height:1.5;font-style:italic" id="rcAiPrescription">
+                "Namaste Mr. Sharma, Aarav ne All India Mock 4 me 300 me se 234 marks score kiye (AIR #14, Percentile: 99.42%). Physics aur Chemistry me performance exemplary hai, lekin Calculus me accuracy 58% rahi. AI ne Aarav ke liye 15-question custom practice sheet assign kar di hai. Rozana 45 mins Calculus practice karein."
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW 22: RANK BOOSTER & ONLINE HOMEWORK (DPP) -->
+        <div class="view-pane" id="view-homework">
+          <div class="page-header" style="margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+            <div>
+              <div class="page-title">🎯 AI Rank Booster & Daily Practice Problem (DPP) Engine</div>
+              <div class="page-desc">Auto-generated homework targeting exact student exam errors, automated evaluation & pending parent alerts</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <button class="btn btn-pri btn-sm" onclick="generateAiDppModal()">✨ AI Auto-Generate New DPP</button>
+              <button class="btn btn-whatsapp btn-sm" onclick="broadcastPendingDppWhatsApp()">📲 Alert Pending Submissions via WhatsApp</button>
+            </div>
+          </div>
+
+          <div class="grid-4">
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">Active Homework DPPs</span></div>
+              <div class="stat-num">24</div>
+              <div class="stat-sub" style="color:#10B981">Across all batches</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">Average Submission Rate</span></div>
+              <div class="stat-num">87.4%</div>
+              <div class="stat-sub" style="color:#10B981">↑ 4.2% higher with WhatsApp alerts</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">Pending Homework</span></div>
+              <div class="stat-num" style="color:#F59E0B">42 Students</div>
+              <div class="stat-sub" style="color:var(--text-muted)">Auto-reminded on WhatsApp</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">AI Rank Improvement</span></div>
+              <div class="stat-num" style="color:#818CF8">+18.5%</div>
+              <div class="stat-sub" style="color:#818CF8">In weak chapters within 14 days</div>
+            </div>
+          </div>
+
+          <!-- Active Homework Table -->
+          <div class="card">
+            <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
+              <div class="card-title">Live AI Homework Assignments</div>
+              <span class="badge badge-paid">Self-Evaluating</span>
+            </div>
+            <table style="width:100%">
+              <thead>
+                <tr>
+                  <th>DPP Title</th>
+                  <th>Target Batch</th>
+                  <th>Diagnosis Topic</th>
+                  <th>Questions</th>
+                  <th>Submissions</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>DPP-JEE-24: Calculus Definite Integration</b></td>
+                  <td>Class 12 JEE Elite</td>
+                  <td><span class="badge badge-unpaid">Calculus Weakness</span></td>
+                  <td>15 Qs (AI Curated)</td>
+                  <td><b>48 / 54</b> (88%)</td>
+                  <td><button class="btn btn-sec btn-sm" onclick="toast('Opened DPP|Viewing Calculus solutions', 'info')">Review</button></td>
+                </tr>
+                <tr>
+                  <td><b>DPP-NEET-18: Genetics & Molecular Basis</b></td>
+                  <td>Class 11 NEET Super 30</td>
+                  <td><span class="badge badge-purple">DNA Replication</span></td>
+                  <td>20 Qs (NCERT Line by Line)</td>
+                  <td><b>29 / 30</b> (96%)</td>
+                  <td><button class="btn btn-sec btn-sm" onclick="toast('Opened DPP|Viewing Genetics solutions', 'info')">Review</button></td>
+                </tr>
+                <tr>
+                  <td><b>DPP-FDN-10: Quadratic Equations Master</b></td>
+                  <td>Class 10 Board + Foundation</td>
+                  <td><span class="badge badge-paid">Discriminant & Roots</span></td>
+                  <td>12 Qs (CBSE Exemplar)</td>
+                  <td><b>38 / 40</b> (95%)</td>
+                  <td><button class="btn btn-sec btn-sm" onclick="toast('Opened DPP|Viewing Foundation solutions', 'info')">Review</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- VIEW 23: TRANSPORT & GPS FLEET TRACKER -->
+        <div class="view-pane" id="view-transport">
+          <div class="page-header" style="margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+            <div>
+              <div class="page-title">🚌 Institute Transport & GPS Fleet Management</div>
+              <div class="page-desc">Live vehicle telematics, route navigation, stop-arrival countdown & automated parent WhatsApp notification</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <button class="btn btn-whatsapp btn-sm" onclick="broadcastBusArrivalWhatsApp()">📲 Broadcast "Bus Arriving in 5 Mins" to Parents</button>
+            </div>
+          </div>
+
+          <div class="grid-4">
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">Active Buses / Vans</span></div>
+              <div class="stat-num">6 Vehicles</div>
+              <div class="stat-sub" style="color:#10B981">● All On Schedule</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">Students Transported</span></div>
+              <div class="stat-num">312</div>
+              <div class="stat-sub">Across 4 standard zones</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">GPS Heartbeat</span></div>
+              <div class="stat-num" style="color:#10B981">LIVE (100%)</div>
+              <div class="stat-sub">AIS 140 Compliant</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">Avg Pickup Delay</span></div>
+              <div class="stat-num" style="color:#10B981">0.8 Mins</div>
+              <div class="stat-sub">On-time efficiency 98.4%</div>
+            </div>
+          </div>
+
+          <!-- Active Bus Routes Table -->
+          <div class="card">
+            <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
+              <div class="card-title">Live Routes & Telematics</div>
+              <span class="badge badge-paid">Live GPS Stream</span>
+            </div>
+            <table style="width:100%">
+              <thead>
+                <tr>
+                  <th>Route / Vehicle</th>
+                  <th>Driver Name</th>
+                  <th>Contact</th>
+                  <th>Current Stop</th>
+                  <th>Students Onboard</th>
+                  <th>ETA Campus</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Route 1: Kothrud Express</b> (MH-12-BP-4412)</td>
+                  <td>Ramesh Shinde</td>
+                  <td>+91 98220 55112</td>
+                  <td>Chandani Chowk (Moving)</td>
+                  <td><b>42 / 45</b></td>
+                  <td><span class="badge badge-paid">08:18 AM (On Time)</span></td>
+                  <td><button class="btn btn-sec btn-sm" onclick="toast('Dispatched Arrival Alert|Sent WhatsApp to Route 1 next stop parents', 'ok')">📲 Ping Next Stop</button></td>
+                </tr>
+                <tr>
+                  <td><b>Route 2: Hinjewadi - Wakad</b> (MH-14-GH-8821)</td>
+                  <td>Sachin Patil</td>
+                  <td>+91 98220 77331</td>
+                  <td>Dange Chowk (At Stop)</td>
+                  <td><b>38 / 40</b></td>
+                  <td><span class="badge badge-paid">08:24 AM (On Time)</span></td>
+                  <td><button class="btn btn-sec btn-sm" onclick="toast('Dispatched Arrival Alert|Sent WhatsApp to Route 2 next stop parents', 'ok')">📲 Ping Next Stop</button></td>
+                </tr>
+                <tr>
+                  <td><b>Route 3: Aundh - Baner</b> (MH-12-EQ-1920)</td>
+                  <td>Mahesh More</td>
+                  <td>+91 98220 99442</td>
+                  <td>University Circle</td>
+                  <td><b>35 / 35</b></td>
+                  <td><span class="badge badge-paid">08:15 AM (On Time)</span></td>
+                  <td><button class="btn btn-sec btn-sm" onclick="toast('Dispatched Arrival Alert|Sent WhatsApp to Route 3 next stop parents', 'ok')">📲 Ping Next Stop</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- VIEW 24: HOSTEL & MESS CURFEW MANAGEMENT -->
+        <div class="view-pane" id="view-hostel">
+          <div class="page-header" style="margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+            <div>
+              <div class="page-title">🏢 Hostel Residency & Mess Dining System</div>
+              <div class="page-desc">Room allotments, biometric night curfew gate-pass, parent out-pass approval & AI mess meal planning</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+              <button class="btn btn-pri btn-sm" onclick="openModal('gatePassModal')">+ Issue Night Gate Pass</button>
+            </div>
+          </div>
+
+          <div class="grid-4">
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">Hostel Occupancy</span></div>
+              <div class="stat-num">184 / 200</div>
+              <div class="stat-sub" style="color:#10B981">92% Occupied · 16 Vacant</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">Night Curfew Status</span></div>
+              <div class="stat-num" style="color:#10B981">All Checked In</div>
+              <div class="stat-sub">Curfew: 09:30 PM</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">Active Approved Gate Passes</span></div>
+              <div class="stat-num">8 Students</div>
+              <div class="stat-sub" style="color:var(--text-muted)">Verified with Parent OTP</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-head"><span class="stat-label">AI Mess Meal Forecast (Dinner)</span></div>
+              <div class="stat-num" style="color:#818CF8">176 Meals</div>
+              <div class="stat-sub" style="color:#10B981">Zero food wastage algorithm</div>
+            </div>
+          </div>
+
+          <!-- Room Allocation & Curfew Table -->
+          <div class="card">
+            <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
+              <div class="card-title">Recent Gate Out-Passes & Leaves</div>
+              <span class="badge badge-paid">Biometric Verified</span>
+            </div>
+            <table style="width:100%">
+              <thead>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Room No</th>
+                  <th>Leave Type</th>
+                  <th>Parent WhatsApp Approval</th>
+                  <th>Expected Return</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Siddharth Kulkarni</b></td>
+                  <td>Block A · Room 204</td>
+                  <td>Weekend Home Visit</td>
+                  <td><span class="badge badge-paid">✓ Parent Confirmed (OTP)</span></td>
+                  <td>Sunday 08:00 PM</td>
+                  <td><span class="badge badge-paid">Active Out-Pass</span></td>
+                </tr>
+                <tr>
+                  <td><b>Tanmay Agarwal</b></td>
+                  <td>Block B · Room 112</td>
+                  <td>Medical Emergency</td>
+                  <td><span class="badge badge-paid">✓ Dr. Slip & Parent Verified</span></td>
+                  <td>Tomorrow 10:00 AM</td>
+                  <td><span class="badge badge-paid">Out-Pass Active</span></td>
+                </tr>
+                <tr>
+                  <td><b>Rohan Mehra</b></td>
+                  <td>Block A · Room 302</td>
+                  <td>Local Market (2 Hours)</td>
+                  <td><span class="badge badge-paid">✓ Warden Approved</span></td>
+                  <td>Today 08:30 PM</td>
+                  <td><span class="badge badge-paid">Returned & Punched</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
   </div>
 
   <!-- ==================== MODALS ==================== -->
@@ -9900,7 +10350,7 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) { r.update(); }
         });
-        navigator.serviceWorker.register('./sw.js?v=13').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=14').catch(() => {});
       }
       updateCommercialCalc();
       initAuthSession();
