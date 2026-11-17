@@ -1,4 +1,4 @@
-const CACHE_NAME = 'zenithedu-os-v22';
+const CACHE_NAME = 'zenithedu-os-v23';
 const ASSETS = [
   './',
   './index.html',

@@ -10682,6 +10682,24 @@
     // ========================================================
     // AANYA — 24/7 AI INSTITUTE ASSISTANT & RECORD KEEPER (VOICE + TEXT)
     // ========================================================
+    window.playBeep = function(freq = 600, duration = 0.08) {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (e) {}
+    };
+
     window.aanyaVoiceEnabled = true;
     window.aanyaSpeechRec = null;
     window.aanyaIsListening = false;
