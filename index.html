@@ -10725,7 +10725,8 @@
       toast(window.aanyaVoiceEnabled ? 'Aanya Voice Enabled|Aanya will speak responses aloud' : 'Aanya Voice Muted|Voice output turned off', 'info');
     };
 
-    // 2. Speech-to-Text Microphone Input Function
+    // 2. Speech-to-Text Microphone Input Function with Auto-Recovery & Network Fallback
+    window.aanyaMicRetryCount = 0;
     window.toggleAanyaMic = function() {
       if (window.aanyaIsListening) {
         window.stopAanyaMic();
@@ -10734,16 +10735,19 @@
 
       const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRec) {
-        toast('Speech Recognition Unsupported|Aapke browser me mic support nahi mila. Kripya type karein.', 'warn');
+        window.showAanyaVoicePromptFallback('Browser Mic Unsupported: Kripya type karein ya neeche diye gaye quick prompts chunein.');
         return;
       }
 
       try {
         const recognition = new SpeechRec();
         window.aanyaSpeechRec = recognition;
-        recognition.lang = 'hi-IN'; // Indian Hindi / Hinglish recognition
+        
+        // Use browser language fallback if hi-IN causes network restrictions
+        recognition.lang = (window.aanyaMicRetryCount % 2 === 0) ? (navigator.language || 'en-IN') : 'hi-IN';
         recognition.continuous = false;
         recognition.interimResults = true;
+        recognition.maxAlternatives = 1;
 
         const micBtn = document.getElementById('aanyaMicBtn');
         const micIcon = document.getElementById('aanyaMicIcon');
@@ -10776,17 +10780,23 @@
         };
 
         recognition.onerror = function(event) {
-          console.warn('Speech recognition error:', event.error);
+          console.warn('Speech recognition status:', event.error);
           window.stopAanyaMic();
-          if (event.error !== 'no-speech') {
-            toast('Mic Error: ' + event.error + '|Kripya dobara try karein', 'warn');
+          
+          if (event.error === 'network') {
+            window.aanyaMicRetryCount++;
+            // Don't show scary error toast. Offer instant graceful voice prompts
+            window.showAanyaVoicePromptFallback('Director Sir, aapke browser me Google speech network connectivity temporarily limited hai. Aap neeche se seedha apna sawaal select kar sakte hain ya type kar sakte hain:');
+          } else if (event.error === 'not-allowed' || event.error === 'permission-denied') {
+            toast('Mic Permission Needed|Browser me address bar ke paas Microphone permission allow karein.', 'warn');
+          } else if (event.error !== 'no-speech') {
+            console.log('Mic notice:', event.error);
           }
         };
 
         recognition.onend = function() {
           window.stopAanyaMic();
           if (input && input.value.trim()) {
-            // Auto submit what user spoke!
             window.sendAanyaMessage();
           }
         };
@@ -10795,8 +10805,28 @@
       } catch (err) {
         console.error('Mic start error:', err);
         window.stopAanyaMic();
-        toast('Mic Permission Denied|Kripya browser me microphone permission allow karein.', 'warn');
+        window.showAanyaVoicePromptFallback('Mic unavailable. Kripya niche diye gaye direct prompt button dabayein.');
       }
+    };
+
+    window.showAanyaVoicePromptFallback = function(msg) {
+      window.appendAanyaMessage('Aanya', 
+        `<em>${msg}</em>`, 
+        true, 
+        `<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">
+           <button class="btn btn-sec btn-sm" onclick="quickVoiceSpeak('Aaj kaun kaun absent hai?')">🎙️ "Aaj kaun absent hai?"</button>
+           <button class="btn btn-sec btn-sm" onclick="quickVoiceSpeak('Kiski fees pending hai hisaab nikalo')">🎙️ "Kiski fees pending hai?"</button>
+           <button class="btn btn-sec btn-sm" onclick="quickVoiceSpeak('Aarav Sharma ka poora record nikalo')">🎙️ "Aarav Sharma record"</button>
+           <button class="btn btn-sec btn-sm" onclick="quickVoiceSpeak('Aaj ka poora institute summary batao')">🎙️ "Institute summary"</button>
+         </div>`
+      );
+      playBeep(700, 0.1);
+    };
+
+    window.quickVoiceSpeak = function(promptText) {
+      const input = document.getElementById('aanyaPromptInput');
+      if (input) input.value = promptText;
+      window.sendAanyaMessage();
     };
 
     window.stopAanyaMic = function() {
