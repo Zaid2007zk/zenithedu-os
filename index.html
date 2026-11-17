@@ -4675,6 +4675,91 @@
           </div>
 
           
+          
+          <!-- ========================================================
+               PERSONAL AI INSTITUTE ASSISTANT DESK (AANYA)
+               ======================================================== -->
+          <div class="card" id="aanyaAssistantDesk" style="background:linear-gradient(135deg, rgba(99,102,241,0.14) 0%, rgba(139,92,246,0.1) 50%, rgba(16,185,129,0.08) 100%);border:1px solid rgba(99,102,241,0.4);border-radius:18px;padding:26px 24px;margin-bottom:26px;box-shadow:0 12px 35px rgba(0,0,0,0.45);position:relative">
+            
+            <!-- Assistant Profile Header -->
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:16px;margin-bottom:18px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="position:relative">
+                  <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#EC4899,#8B5CF6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 0 20px rgba(236,72,153,0.5);border:2px solid rgba(255,255,255,0.2)">
+                    👩‍💼
+                  </div>
+                  <span style="position:absolute;bottom:0;right:0;width:14px;height:14px;border-radius:50%;background:#10B981;border:2px solid #090E1A;box-shadow:0 0 10px #10B981"></span>
+                </div>
+                <div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="font-size:18px;font-weight:900;color:#fff;letter-spacing:-0.02em">Aanya — Aapki Personal AI Institute Assistant</span>
+                    <span class="badge badge-paid" style="font-size:10px">24/7 ACTIVE MANAGER</span>
+                  </div>
+                  <div style="font-size:12.5px;color:var(--text-muted);margin-top:2px">
+                    "Director Sir, aapko koi register ya table dekhne ki zaroorat nahi — institute ka 100% record mere paas digitally safe hai."
+                  </div>
+                </div>
+              </div>
+
+              <!-- Assistant Live Memory Counters -->
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:6px 12px;text-align:center">
+                  <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:700">Students Record</div>
+                  <div style="font-size:13px;font-weight:800;color:#fff">1,248 Active</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:6px 12px;text-align:center">
+                  <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:700">Fee Ledger</div>
+                  <div style="font-size:13px;font-weight:800;color:#10B981">94.8% Realized</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:6px 12px;text-align:center">
+                  <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:700">Today Punches</div>
+                  <div style="font-size:13px;font-weight:800;color:#818CF8">1,180 Logged</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Assistant Interactive Notebook / Dialog Box -->
+            <div id="aanyaChatBox" style="background:rgba(8,12,22,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:16px;max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;margin-bottom:14px">
+              <div style="display:flex;gap:10px;align-items:flex-start">
+                <span style="font-size:18px">👩‍💼</span>
+                <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px 14px;font-size:13px;color:#E2E8F0;line-height:1.5">
+                  <strong>Namaste Director Sir! 🙏</strong><br>
+                  Institute ke sabhi 1,248 students, fees collection, daily biometric attendance aur mock tests ka poora record mere paas hai. 
+                  Aapko kisi bhi cheez ka hisaab chahiye, ya koi record search karna ho, bas neeche button dabayein ya mujhse bol kar puchiye!
+                </div>
+              </div>
+            </div>
+
+            <!-- Assistant Command Bar -->
+            <div style="display:flex;gap:8px;margin-bottom:12px">
+              <input type="text" id="aanyaPromptInput" placeholder="Aanya se kuch bhi puchiye: jaise 'aaj kitne bache aaye hain', 'kiski fees baaki hai'..." 
+                     style="flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:24px;padding:10px 18px;color:#fff;font-size:13px;outline:none"
+                     onkeydown="if(event.key==='Enter') sendAanyaMessage()">
+              <button class="btn btn-pri btn-sm" onclick="sendAanyaMessage()" style="border-radius:24px;padding:0 20px;background:linear-gradient(135deg,#6366F1,#8B5CF6);font-size:13px">
+                <span>Puchiye →</span>
+              </button>
+            </div>
+
+            <!-- Quick Questions to Aanya (One-Click Shortcuts) -->
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <button class="btn btn-sec btn-sm" onclick="askAanyaQuick('attendance')" style="border-radius:16px;font-size:11.5px;padding:5px 12px">
+                ⏰ "Aaj kaun kaun absent hai?"
+              </button>
+              <button class="btn btn-sec btn-sm" onclick="askAanyaQuick('fees')" style="border-radius:16px;font-size:11.5px;padding:5px 12px">
+                💳 "Kiski fees pending hai hisaab nikalo"
+              </button>
+              <button class="btn btn-sec btn-sm" onclick="askAanyaQuick('aarav')" style="border-radius:16px;font-size:11.5px;padding:5px 12px">
+                📊 "Aarav Sharma ka poora record nikalo"
+              </button>
+              <button class="btn btn-sec btn-sm" onclick="askAanyaQuick('summary')" style="border-radius:16px;font-size:11.5px;padding:5px 12px">
+                📋 "Aaj ka poora institute report card do"
+              </button>
+              <button class="btn btn-sec btn-sm" onclick="askAanyaQuick('file')" style="border-radius:16px;font-size:11.5px;padding:5px 12px">
+                📂 "Aanya, ye nayi marksheet apne pass save kar lo"
+              </button>
+            </div>
+          </div>
+
           <!-- UNIVERSAL AI AUTONOMOUS DRAG & DROP ZONE (FEATURED ON DASHBOARD) -->
           <div class="card" id="dashAiDropzoneCard" style="background:linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(16,185,129,0.08) 100%);border:2px dashed rgba(99,102,241,0.55);border-radius:16px;padding:26px 20px;text-align:center;margin-bottom:26px;position:relative;box-shadow:0 8px 32px rgba(0,0,0,0.35);transition:all 0.2s ease">
             <input type="file" id="dashUniversalFileInput" accept=".csv,.xlsx,.xls,.txt,.json" style="display:none" onchange="handleAiFileSelect(event)">
@@ -10528,7 +10613,7 @@
         navigator.serviceWorker.getRegistrations().then(regs => {
           for (let r of regs) { r.update(); }
         });
-        navigator.serviceWorker.register('./sw.js?v=19').catch(() => {});
+        navigator.serviceWorker.register('./sw.js?v=20').catch(() => {});
       }
       updateCommercialCalc();
       initAuthSession();
@@ -10554,6 +10639,146 @@
         document.getElementById('customLogoInput').value = savedLogo;
       }
       setupAiDropzone();
+
+      
+    /* ========================================================
+       AANYA: PERSONAL AI INSTITUTE ASSISTANT & RECORD KEEPER
+       ======================================================== */
+    function focusAanyaAssistant() {
+      navigateTo('admin-dashboard');
+      const desk = document.getElementById('aanyaAssistantDesk');
+      if (desk) {
+        desk.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('aanyaPromptInput').focus();
+      }
+    }
+
+    function appendAanyaMessage(sender, text, isAction = false, actionBtn = '') {
+      const box = document.getElementById('aanyaChatBox');
+      if (!box) return;
+
+      const isAanya = sender === 'Aanya';
+      const msgDiv = document.createElement('div');
+      msgDiv.style.display = 'flex';
+      msgDiv.style.gap = '10px';
+      msgDiv.style.alignItems = 'flex-start';
+      if (!isAanya) msgDiv.style.flexDirection = 'row-reverse';
+
+      const avatar = isAanya ? '👩‍💼' : '👑';
+      const bg = isAanya ? 'rgba(255,255,255,0.04)' : 'rgba(99,102,241,0.2)';
+      const border = isAanya ? 'rgba(255,255,255,0.08)' : 'rgba(99,102,241,0.4)';
+
+      msgDiv.innerHTML = `
+        <span style="font-size:18px">${avatar}</span>
+        <div style="background:${bg};border:1px solid ${border};border-radius:12px;padding:10px 14px;font-size:13px;color:#E2E8F0;line-height:1.5;max-width:85%">
+          <strong>${isAanya ? 'Aanya (Assistant)' : 'Director Sir'}</strong><br>
+          ${text}
+          ${actionBtn ? `<div style="margin-top:10px">${actionBtn}</div>` : ''}
+        </div>
+      `;
+
+      box.appendChild(msgDiv);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function sendAanyaMessage() {
+      const input = document.getElementById('aanyaPromptInput');
+      const query = input.value.trim();
+      if (!query) return;
+
+      appendAanyaMessage('Director', query);
+      input.value = '';
+      playBeep(600, 0.08);
+
+      setTimeout(() => {
+        respondAanyaQuery(query.toLowerCase());
+      }, 400);
+    }
+
+    function askAanyaQuick(type) {
+      if (type === 'attendance') {
+        appendAanyaMessage('Director', 'Aanya, aaj kaun kaun absent hai report do.');
+        setTimeout(() => {
+          appendAanyaMessage('Aanya', 
+            `Sir, aaj hamari biometric machine par <strong>1,180 students present</strong> hain (94.8% Attendance).<br>
+             Sirf <strong>68 students absent</strong> hain.<br>
+             Maine subah 08:35 AM par sabhi 68 absentees ke parents ko automated WhatsApp verification message bhej diya hai!`,
+            true,
+            `<button class="btn btn-whatsapp btn-sm" onclick="navigateTo('attendance')">📋 View Today's Attendance Register →</button>`
+          );
+          playBeep(750, 0.1);
+        }, 500);
+      } else if (type === 'fees') {
+        appendAanyaMessage('Director', 'Aanya, kiski fees pending hai hisaab nikalo.');
+        setTimeout(() => {
+          appendAanyaMessage('Aanya', 
+            `Sir, total academic fees ka <strong>94.8% (₹22,80,000)</strong> realize ho chuka hai.<br>
+             Sirf <strong>12 bacchon ki installment</strong> is hafte scheduled hai (Total: ₹1,00,000).<br>
+             Top cases:<br>
+             • <strong>Siddharth Kulkarni</strong> (Class 12 JEE) - ₹30,000 (Due: 20 Nov)<br>
+             • <strong>Tanmay Agarwal</strong> (Class 11 NEET) - ₹25,000 (Due: 22 Nov)<br>
+             • <strong>Rohan Mehra</strong> (Class 10 FDN) - ₹20,000 (Due: 24 Nov)<br>
+             Kya main in sabhi 12 parents ko automated gentle WhatsApp payment link dispatch kar doon?`,
+            true,
+            `<button class="btn btn-whatsapp btn-sm" onclick="toast('WhatsApp Payment Links Dispatched!|Sent to 12 parents via Razorpay integration', 'ok')">📲 Haan Aanya, Sabko Payment Link Bhej Do</button>`
+          );
+          playBeep(750, 0.1);
+        }, 500);
+      } else if (type === 'aarav') {
+        appendAanyaMessage('Director', 'Aarav Sharma ka poora record nikalo.');
+        setTimeout(() => {
+          appendAanyaMessage('Aanya', 
+            `Sir, <strong>Aarav Sharma</strong> ka poora record mere paas save hai:<br>
+             • <strong>Roll Number:</strong> ZE-2026-101 (Class 12 JEE Elite)<br>
+             • <strong>Attendance:</strong> 96.2% (Regular, 0 unexcused leaves)<br>
+             • <strong>Fees:</strong> ₹95,000 Total · 100% Fully Paid (₹0 Pending)<br>
+             • <strong>Latest Exam:</strong> JEE Mock 4 me <strong>254/300 marks</strong> (AIR #14, 99.42 Percentile)<br>
+             • <strong>AI Diagnosis:</strong> Physics (88/100) aur Chemistry (92/100) me top score hai, Calculus me thode marks kate the jinki 15-question practice sheet maine uske portal par assign kar di hai.`,
+            true,
+            `<button class="btn btn-pri btn-sm" onclick="navigateTo('report-cards')">📊 Open Aarav's Full SWOT Report Card →</button>`
+          );
+          playBeep(750, 0.1);
+        }, 500);
+      } else if (type === 'summary') {
+        appendAanyaMessage('Director', 'Aanya, aaj ka poora institute summary batao.');
+        setTimeout(() => {
+          appendAanyaMessage('Aanya', 
+            `Director Sir, aaj ka complete institutional status report:<br>
+             • 🎓 <strong>1,248 Active Students</strong> safely enrolled across 8 batches.<br>
+             • ⏰ <strong>1,180 Students present</strong> today (94.8% on-time velocity).<br>
+             • 💳 <strong>Fee Realization 94.8%</strong> (₹22.8L collected, healthy treasury).<br>
+             • 📝 <strong>All India JEE Mock 4</strong> ke 142 scorecards maine generate karke parents ko dispatch kar diye hain.<br>
+             • 🚌 <strong>Transport:</strong> 6 buses on route, 0 breakdown alerts.<br>
+             Sabhi operations bilkul smoothly run ho rahe hain, Sir!`,
+            true,
+            `<button class="btn btn-sec btn-sm" onclick="toast('Aanya Log Archived|All records backed up to cloud vault', 'ok')">📁 Backup Today's Register</button>`
+          );
+          playBeep(750, 0.1);
+        }, 500);
+      } else if (type === 'file') {
+        document.getElementById('dashUniversalFileInput').click();
+      }
+    }
+
+    function respondAanyaQuery(q) {
+      if (q.includes('fee') || q.includes('paisa') || q.includes('pending') || q.includes('due') || q.includes('paise')) {
+        askAanyaQuick('fees');
+      } else if (q.includes('attendance') || q.includes('absent') || q.includes('aaye') || q.includes('present') || q.includes('bacche')) {
+        askAanyaQuick('attendance');
+      } else if (q.includes('aarav') || q.includes('student') || q.includes('score') || q.includes('marks')) {
+        askAanyaQuick('aarav');
+      } else if (q.includes('hisaab') || q.includes('report') || q.includes('summary') || q.includes('aaj')) {
+        askAanyaQuick('summary');
+      } else {
+        appendAanyaMessage('Aanya', 
+          `Ji Director Sir, maine aapki baat note kar li hai: <em>"${q}"</em>.<br>
+           Institute ke database me 1,248 students ka complete record active hai. Aap chahein toh fees, attendance, ya kisi specific bache ka score card puchiye, main turant nikaal kar doongi!`,
+          true,
+          `<button class="btn btn-sec btn-sm" onclick="askAanyaQuick('summary')">📋 Aaj Ka Complete Status Dekhein</button>`
+        );
+        playBeep(700, 0.1);
+      }
+    }
 
       const dashDrop = document.getElementById('dashAiDropzoneCard');
       if (dashDrop) {
@@ -10730,6 +10955,12 @@
           badge: 'DROPZONE AUTO-PILOT',
           color: '#10B981'
         });
+        
+        appendAanyaMessage('Aanya', 
+          `Sir, maine <strong>"${fileName}"</strong> ka poora record apne register me file kar liya hai!<br>
+           Sabhi rows verify ho gayi hain, SWOT Report Cards generate ho chuke hain aur parents ko WhatsApp report bhej di hai.`
+        );
+
         initAutoPilotFeed();
         toast('AI Autonomous Pipeline Complete!|Records ingested, analyzed & parent notifications dispatched.', 'ok');
       }, 2000);
