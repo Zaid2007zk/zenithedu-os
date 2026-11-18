@@ -4588,10 +4588,6 @@
 
         <div class="topbar-actions">
           <!-- Quick Role & Switcher Pill -->
-          <!-- Trading / Learning Experience Level Badge -->
-          <div id="topUserRoleBadge" onclick="openLevelModal()" title="Academic Target Level (Click to change)" style="cursor:pointer;display:inline-flex;align-items:center">
-            <span class="badge badge-paid" style="font-size:11px;padding:5px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:4px">🟢 <span>Foundation (Class 6-10)</span></span>
-          </div>
 
           <div style="position:relative">
             <button class="role-badge" id="roleBtn" onclick="toggleRoleDropdown()" style="padding:6px 12px;gap:8px;font-size:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px">
@@ -7044,36 +7040,16 @@
     // ========================================================
     window.currentAuthMode = 'signup';
 
-    window.syncUserLevelBadge = function() {
-      const level = localStorage.getItem('zenithedu_academic_level') || localStorage.getItem('zenithedu_trader_level') || 'beginner';
-      let badgeHtml = '';
-      if (level === 'beginner') {
-        badgeHtml = '<span class="badge badge-paid" onclick="openLevelModal()" style="cursor:pointer;font-size:11px;padding:5px 10px;display:inline-flex;align-items:center;gap:4px" title="Academic Target Level (Click to change)">🟢 <span>Foundation (Class 6-10)</span></span>';
-      } else if (level === 'intermediate') {
-        badgeHtml = '<span class="badge badge-pending" onclick="openLevelModal()" style="cursor:pointer;font-size:11px;padding:5px 10px;display:inline-flex;align-items:center;gap:4px" title="Academic Target Level (Click to change)">🟡 <span>Target Batch (11-12)</span></span>';
-      } else {
-        badgeHtml = '<span class="badge badge-scholar" onclick="openLevelModal()" style="cursor:pointer;font-size:11px;padding:5px 10px;background:#6366F1;color:#fff;display:inline-flex;align-items:center;gap:4px" title="Academic Target Level (Click to change)">🔴 <span>Rank Booster (Top AIR)</span></span>';
-      }
-
-      const roleBadge = document.getElementById('topUserRoleBadge');
-      if (roleBadge) {
-        roleBadge.innerHTML = badgeHtml;
-      }
-    };
+    window.syncUserLevelBadge = function() {};
 
     window.checkInitialAccessGate = function() {
       const user = localStorage.getItem('zenithedu_auth_user');
-      const level = localStorage.getItem('zenithedu_trader_level');
       const dismissed = sessionStorage.getItem('zenithedu_gate_dismissed');
       const gateModal = document.getElementById('zenithAccessGateModal');
       
       if (!user && !dismissed && gateModal) {
         gateModal.style.display = 'flex';
-      } else if (user && !level) {
-        window.openLevelModal();
       }
-      
-      window.syncUserLevelBadge();
     };
 
     window.openZenithAuthModal = function(mode) {
@@ -7131,67 +7107,14 @@
       if (authM) authM.style.display = 'none';
 
       if (window.currentAuthMode === 'signup') {
-        setTimeout(() => {
-          window.openLevelModal();
-        }, 300);
+        if (window.toast) toast('Welcome to ZenithEdu OS, ' + name + '!|Account created successfully', 'ok');
       } else {
         if (window.toast) toast('Welcome Back ' + name + '!|Logged into institutional terminal', 'ok');
-        window.syncUserLevelBadge();
       }
     };
 
-    window.openLevelModal = function() {
-      const modal = document.getElementById('zenithLevelModal');
-      if (modal) modal.style.display = 'flex';
-    };
-
-    window.selectUserLevel = function(level) {
-      localStorage.setItem('zenithedu_trader_level', level);
-      
-      // Update badge IMMEDIATELY
-      window.syncUserLevelBadge();
-      
-      const lvlM = document.getElementById('zenithLevelModal');
-      if (lvlM) lvlM.style.display = 'none';
-      if (window.playBeep) window.playBeep(780, 0.12);
-
-      let levelTitle = 'Foundation Batch';
-      let message = '';
-      let actionButtons = '';
-
-      localStorage.setItem('zenithedu_academic_level', level);
-
-      if (level === 'beginner') {
-        levelTitle = 'Foundation Batch (Class 6-10)';
-        message = 'Welcome! Maine aapke liye Foundation Concept Modules, Daily Homework Habits aur Chapter Clarity roadmaps active kar diye hain.';
-        actionButtons = `<button class="btn btn-pri btn-sm" onclick="navigateTo('homework')">📚 Open Daily Homework & DPP →</button>`;
-      } else if (level === 'intermediate') {
-        levelTitle = 'Target Batch (Class 11-12 JEE/NEET)';
-        message = 'Welcome! Aapke liye Chapter-wise Test Series, Speed vs Accuracy Analytics aur Formula Revision packs active hain.';
-        actionButtons = `<button class="btn btn-pri btn-sm" onclick="navigateTo('exams')">📝 Launch Chapter Test Series →</button>`;
-      } else {
-        levelTitle = 'Rank Booster (Top 100 AIR Elite)';
-        message = 'Welcome Rank Booster Aspirant! Aapke liye Advanced Multi-Concept Questions, Negative Marking Eliminator aur All India Rank (AIR) Predictor unlock kar diya gaya hai taaki aap top rank achieve kar sakein!';
-        actionButtons = `<div style="display:flex;gap:8px;flex-wrap:wrap">
-                           <button class="btn btn-pri btn-sm" onclick="navigateTo('report-cards')">⚡ Open AI Rank Booster Radar →</button>
-                           <button class="btn btn-sec btn-sm" onclick="navigateTo('exams')">📊 Full Mock Test Scorecard →</button>
-                         </div>`;
-      }
-
-      try {
-        if (window.toast) toast('Level Activated: ' + levelTitle + '|Customized tools & skill growth unlocked!', 'ok');
-      } catch(e) {}
-
-      // Update Aanya greeting immediately
-      setTimeout(() => {
-        if (window.appendAanyaMessage) {
-          window.appendAanyaMessage('Aanya', `<strong>Namaste ${levelTitle}! 🙏</strong><br>${message}`, true, actionButtons);
-          if (window.speakAanyaText) {
-            window.speakAanyaText(`Namaste ${levelTitle}! ${message}`);
-          }
-        }
-      }, 300);
-    };
+    window.openLevelModal = function() {};
+    window.selectUserLevel = function() {};
 
     // State Store
     const state = {
@@ -10332,87 +10255,6 @@
           <a href="javascript:void(0)" id="authSwitchLink" onclick="switchAuthMode()" style="font-size:12px;color:#818CF8;font-weight:600">Login here</a>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- USER PROFICIENCY LEVEL POPUP -->
-  <div id="zenithLevelModal" class="modal-backdrop" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(5,9,18,0.92);backdrop-filter:blur(14px);z-index:9999999;align-items:center;justify-content:center">
-    <div style="background:linear-gradient(135deg,#0B1120 0%,#161E38 100%);border:1px solid rgba(99,102,241,0.5);border-radius:24px;width:94%;max-width:620px;padding:32px 28px;box-shadow:0 25px 60px rgba(0,0,0,0.85);position:relative">
-      
-      <div style="text-align:center;margin-bottom:24px">
-        <span style="font-size:28px">🎯</span>
-        <h2 style="font-size:22px;font-weight:900;color:#fff;margin-top:8px;letter-spacing:-0.02em">
-          Aapka Academic / Coaching Target Level Kya Hai?
-        </h2>
-        <p style="font-size:13px;color:var(--text-muted);margin-top:4px">
-          Apna academic target level chunein — Hamari AI Assistant Aanya aur Dashboard aapke goals ke hisaab se customized ho jayenge!
-        </p>
-      </div>
-
-      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
-        
-        <!-- Beginner -->
-        <div onclick="selectUserLevel('beginner')" class="level-choice-card" id="levelCard-beginner"
-             style="background:rgba(16,185,129,0.06);border:1.5px solid rgba(16,185,129,0.3);border-radius:16px;padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:16px;transition:all 0.2s">
-          <div style="width:48px;height:48px;border-radius:14px;background:rgba(16,185,129,0.2);display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid rgba(16,185,129,0.4)">
-            🌱
-          </div>
-          <div style="flex:1">
-            <div style="display:flex;align-items:center;gap:8px">
-              <strong style="font-size:15px;color:#fff">Beginner (Foundation Batch)</strong>
-              <span class="badge badge-paid" style="font-size:10px">Class 6–10</span>
-            </div>
-            <div style="font-size:12.5px;color:var(--text-muted);margin-top:3px">
-              Naya admission / Foundation student — Science, Maths concept clarity, daily study schedule, homework habits aur school exam preparation.
-            </div>
-          </div>
-          <span style="font-size:18px;color:#10B981">➔</span>
-        </div>
-
-        <!-- Intermediate -->
-        <div onclick="selectUserLevel('intermediate')" class="level-choice-card" id="levelCard-intermediate"
-             style="background:rgba(245,158,11,0.06);border:1.5px solid rgba(245,158,11,0.3);border-radius:16px;padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:16px;transition:all 0.2s">
-          <div style="width:48px;height:48px;border-radius:14px;background:rgba(245,158,11,0.2);display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid rgba(245,158,11,0.4)">
-            📈
-          </div>
-          <div style="flex:1">
-            <div style="display:flex;align-items:center;gap:8px">
-              <strong style="font-size:15px;color:#fff">Intermediate (Target Batch)</strong>
-              <span class="badge badge-pending" style="font-size:10px">Class 11–12 JEE / NEET</span>
-            </div>
-            <div style="font-size:12.5px;color:var(--text-muted);margin-top:3px">
-              Syllabus basics aate hain — Chapter-wise test series, formula revision, speed & accuracy improvement aur weak area doubt resolution grow karna hai.
-            </div>
-          </div>
-          <span style="font-size:18px;color:#F59E0B">➔</span>
-        </div>
-
-        <!-- Advanced -->
-        <div onclick="selectUserLevel('advanced')" class="level-choice-card" id="levelCard-advanced"
-             style="background:rgba(99,102,241,0.08);border:1.5px solid rgba(99,102,241,0.4);border-radius:16px;padding:16px 20px;cursor:pointer;display:flex;align-items:center;gap:16px;transition:all 0.2s">
-          <div style="width:48px;height:48px;border-radius:14px;background:rgba(99,102,241,0.25);display:flex;align-items:center;justify-content:center;font-size:24px;border:1px solid rgba(99,102,241,0.5)">
-            ⚡
-          </div>
-          <div style="flex:1">
-            <div style="display:flex;align-items:center;gap:8px">
-              <strong style="font-size:15px;color:#fff">Advanced (Rank Booster · Top 100 AIR)</strong>
-              <span class="badge badge-scholar" style="font-size:10px;background:#6366F1;color:#fff">Elite Aspirant</span>
-            </div>
-            <div style="font-size:12.5px;color:var(--text-muted);margin-top:3px">
-              Sab kuch padha hua hai, scoring high — Want AI Rank Booster, difficult multi-concept questions, negative marking elimination & All India Rank (AIR) edge!
-            </div>
-          </div>
-          <span style="font-size:18px;color:#818CF8">➔</span>
-        </div>
-
-      </div>
-
-      <div style="text-align:center">
-        <span style="font-size:11.5px;color:var(--text-muted)">
-          💡 Aap apna level baad me kabhi bhi topbar profile se change kar sakte hain.
-        </span>
-      </div>
-
     </div>
   </div>
 
