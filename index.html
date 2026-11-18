@@ -4588,6 +4588,11 @@
 
         <div class="topbar-actions">
           <!-- Quick Role & Switcher Pill -->
+          <!-- Trading / Learning Experience Level Badge -->
+          <div id="topUserRoleBadge" onclick="openLevelModal()" title="Trading & Skill Level (Click to change)" style="cursor:pointer;display:inline-flex;align-items:center">
+            <span class="badge badge-paid" style="font-size:11px;padding:5px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:4px">🟢 <span>Beginner</span></span>
+          </div>
+
           <div style="position:relative">
             <button class="role-badge" id="roleBtn" onclick="toggleRoleDropdown()" style="padding:6px 12px;gap:8px;font-size:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px">
               <span style="width:7px;height:7px;border-radius:50%;background:#10B981;box-shadow:0 0 8px #10B981;display:inline-block"></span>
@@ -7034,6 +7039,144 @@
     
         <!-- VIEW 20: AI AUTONOMOUS AUTO-PILOT COMMAND CENTER -->
         <script>
+    // ========================================================
+    // USER ONBOARDING & TRADING SKILL LEVEL LOGIC (GLOBAL)
+    // ========================================================
+    window.currentAuthMode = 'signup';
+
+    window.syncUserLevelBadge = function() {
+      const level = localStorage.getItem('zenithedu_trader_level') || 'beginner';
+      let badgeHtml = '';
+      if (level === 'beginner') {
+        badgeHtml = '<span class="badge badge-paid" onclick="openLevelModal()" style="cursor:pointer;font-size:11px;padding:5px 10px;display:inline-flex;align-items:center;gap:4px" title="Change Skill Level">🟢 <span>Beginner</span></span>';
+      } else if (level === 'intermediate') {
+        badgeHtml = '<span class="badge badge-pending" onclick="openLevelModal()" style="cursor:pointer;font-size:11px;padding:5px 10px;display:inline-flex;align-items:center;gap:4px" title="Change Skill Level">🟡 <span>Intermediate</span></span>';
+      } else {
+        badgeHtml = '<span class="badge badge-scholar" onclick="openLevelModal()" style="cursor:pointer;font-size:11px;padding:5px 10px;background:#6366F1;color:#fff;display:inline-flex;align-items:center;gap:4px" title="Change Skill Level">🔴 <span>Pro Trader</span></span>';
+      }
+
+      const roleBadge = document.getElementById('topUserRoleBadge');
+      if (roleBadge) {
+        roleBadge.innerHTML = badgeHtml;
+      }
+    };
+
+    window.checkInitialAccessGate = function() {
+      const user = localStorage.getItem('zenithedu_auth_user');
+      const level = localStorage.getItem('zenithedu_trader_level');
+      const dismissed = sessionStorage.getItem('zenithedu_gate_dismissed');
+      const gateModal = document.getElementById('zenithAccessGateModal');
+      
+      if (!user && !dismissed && gateModal) {
+        gateModal.style.display = 'flex';
+      } else if (user && !level) {
+        window.openLevelModal();
+      }
+      
+      window.syncUserLevelBadge();
+    };
+
+    window.openZenithAuthModal = function(mode) {
+      window.currentAuthMode = mode;
+      const modal = document.getElementById('zenithAuthModal');
+      const gateModal = document.getElementById('zenithAccessGateModal');
+      if (gateModal) gateModal.style.display = 'none';
+      
+      const title = document.getElementById('authModalTitle');
+      const nameField = document.getElementById('authNameField');
+      const submitBtn = document.getElementById('authSubmitBtn');
+      const switchPrompt = document.getElementById('authSwitchPrompt');
+      const switchLink = document.getElementById('authSwitchLink');
+
+      if (mode === 'login') {
+        if (title) title.innerText = 'Login to ZenithEdu OS';
+        if (nameField) nameField.style.display = 'none';
+        if (submitBtn) submitBtn.innerText = 'Login to Portal →';
+        if (switchPrompt) switchPrompt.innerText = "Don't have an account? ";
+        if (switchLink) switchLink.innerText = 'Create Account';
+      } else {
+        if (title) title.innerText = 'Create Your Free Account';
+        if (nameField) nameField.style.display = 'block';
+        if (submitBtn) submitBtn.innerText = 'Create Account & Continue →';
+        if (switchPrompt) switchPrompt.innerText = 'Already have an account? ';
+        if (switchLink) switchLink.innerText = 'Login here';
+      }
+
+      if (modal) modal.style.display = 'flex';
+    };
+
+    window.switchAuthMode = function() {
+      window.openZenithAuthModal(window.currentAuthMode === 'signup' ? 'login' : 'signup');
+    };
+
+    window.dismissAccessGate = function() {
+      sessionStorage.setItem('zenithedu_gate_dismissed', 'true');
+      const gateModal = document.getElementById('zenithAccessGateModal');
+      if (gateModal) gateModal.style.display = 'none';
+      if (window.toast) toast('Guest Mode Activated|Exploring live interactive academy preview', 'info');
+      window.syncUserLevelBadge();
+    };
+
+    window.handleAuthSubmit = function() {
+      const email = document.getElementById('authEmailInput').value.trim();
+      const name = document.getElementById('authNameInput').value.trim() || 'Zenith Member';
+      
+      if (!email) {
+        if (window.toast) toast('Input Required|Kripya email ya mobile number dalein.', 'warn');
+        return;
+      }
+
+      localStorage.setItem('zenithedu_auth_user', JSON.stringify({ name: name, email: email, joinedAt: new Date().toISOString() }));
+      const authM = document.getElementById('zenithAuthModal');
+      if (authM) authM.style.display = 'none';
+
+      if (window.currentAuthMode === 'signup') {
+        setTimeout(() => {
+          window.openLevelModal();
+        }, 300);
+      } else {
+        if (window.toast) toast('Welcome Back ' + name + '!|Logged into institutional terminal', 'ok');
+        window.syncUserLevelBadge();
+      }
+    };
+
+    window.openLevelModal = function() {
+      const modal = document.getElementById('zenithLevelModal');
+      if (modal) modal.style.display = 'flex';
+    };
+
+    window.selectUserLevel = function(level) {
+      localStorage.setItem('zenithedu_trader_level', level);
+      const lvlM = document.getElementById('zenithLevelModal');
+      if (lvlM) lvlM.style.display = 'none';
+      if (window.playBeep) window.playBeep(780, 0.12);
+
+      let levelTitle = 'Beginner';
+      let message = '';
+      if (level === 'beginner') {
+        levelTitle = 'Beginner Trader / Student';
+        message = 'Welcome! Maine aapke liye Foundation Basics, Candlestick Guide aur Risk-Protection rules activate kar diye hain.';
+      } else if (level === 'intermediate') {
+        levelTitle = 'Intermediate Trader';
+        message = 'Welcome! Aapke liye Swing Strategies, Options Greeks & Backtesting engine active hai.';
+      } else {
+        levelTitle = 'Advanced Pro Trader';
+        message = 'Welcome Pro Trader! Aapke skills ko aur aage badhane ke liye Algorithmic Flow, High-Probability Setups & Institutional Order Flow radar unlock kar diya gaya hai!';
+      }
+
+      if (window.toast) toast('Level Set: ' + levelTitle + '|Customized tools & analytics activated!', 'ok');
+      window.syncUserLevelBadge();
+
+      setTimeout(() => {
+        if (window.appendAanyaMessage) {
+          window.appendAanyaMessage('Aanya', `<strong>Namaste ${levelTitle}! 🙏</strong><br>${message}<br>Aapko kisi bhi topic ya trading setup par madad chahiye toh mujhse bol kar ya type karke puchiye!`);
+          if (window.speakAanyaText) {
+            window.speakAanyaText(`Namaste ${levelTitle}! ${message}`);
+          }
+        }
+      }, 500);
+    };
+
     // State Store
     const state = {
       role: 'Institute Admin',
@@ -9480,140 +9623,7 @@
     };
 
     
-    // ========================================================
-    // USER ONBOARDING & TRADING SKILL LEVEL LOGIC
-    // ========================================================
-    let currentAuthMode = 'signup';
-
-    window.checkInitialAccessGate = function() {
-      const user = localStorage.getItem('zenithedu_auth_user');
-      const level = localStorage.getItem('zenithedu_trader_level');
-      const dismissed = sessionStorage.getItem('zenithedu_gate_dismissed');
-      const gateModal = document.getElementById('zenithAccessGateModal');
-      
-      if (!user && !dismissed && gateModal) {
-        gateModal.style.display = 'flex';
-      } else if (user && !level) {
-        window.openLevelModal();
-      }
-      
-      window.syncUserLevelBadge();
-    };
-
-    window.openZenithAuthModal = function(mode) {
-      currentAuthMode = mode;
-      const modal = document.getElementById('zenithAuthModal');
-      const gateModal = document.getElementById('zenithAccessGateModal');
-      if (gateModal) gateModal.style.display = 'none';
-      
-      const title = document.getElementById('authModalTitle');
-      const nameField = document.getElementById('authNameField');
-      const submitBtn = document.getElementById('authSubmitBtn');
-      const switchPrompt = document.getElementById('authSwitchPrompt');
-      const switchLink = document.getElementById('authSwitchLink');
-
-      if (mode === 'login') {
-        if (title) title.innerText = 'Login to ZenithEdu OS';
-        if (nameField) nameField.style.display = 'none';
-        if (submitBtn) submitBtn.innerText = 'Login to Portal →';
-        if (switchPrompt) switchPrompt.innerText = "Don't have an account? ";
-        if (switchLink) switchLink.innerText = 'Create Account';
-      } else {
-        if (title) title.innerText = 'Create Your Free Account';
-        if (nameField) nameField.style.display = 'block';
-        if (submitBtn) submitBtn.innerText = 'Create Account & Continue →';
-        if (switchPrompt) switchPrompt.innerText = 'Already have an account? ';
-        if (switchLink) switchLink.innerText = 'Login here';
-      }
-
-      if (modal) modal.style.display = 'flex';
-    };
-
-    window.switchAuthMode = function() {
-      window.openZenithAuthModal(currentAuthMode === 'signup' ? 'login' : 'signup');
-    };
-
-    window.dismissAccessGate = function() {
-      sessionStorage.setItem('zenithedu_gate_dismissed', 'true');
-      const gateModal = document.getElementById('zenithAccessGateModal');
-      if (gateModal) gateModal.style.display = 'none';
-      toast('Guest Mode Activated|Exploring live interactive academy preview', 'info');
-    };
-
-    window.handleAuthSubmit = function() {
-      const email = document.getElementById('authEmailInput').value.trim();
-      const name = document.getElementById('authNameInput').value.trim() || 'Zenith Member';
-      
-      if (!email) {
-        toast('Input Required|Kripya email ya mobile number dalein.', 'warn');
-        return;
-      }
-
-      localStorage.setItem('zenithedu_auth_user', JSON.stringify({ name: name, email: email, joinedAt: new Date().toISOString() }));
-      closeModal('zenithAuthModal');
-
-      if (currentAuthMode === 'signup') {
-        setTimeout(() => {
-          window.openLevelModal();
-        }, 300);
-      } else {
-        toast('Welcome Back ' + name + '!|Logged into institutional terminal', 'ok');
-        window.syncUserLevelBadge();
-      }
-    };
-
-    window.openLevelModal = function() {
-      const modal = document.getElementById('zenithLevelModal');
-      if (modal) modal.style.display = 'flex';
-    };
-
-    window.selectUserLevel = function(level) {
-      localStorage.setItem('zenithedu_trader_level', level);
-      closeModal('zenithLevelModal');
-      window.playBeep(780, 0.12);
-
-      let levelTitle = 'Beginner';
-      let message = '';
-      if (level === 'beginner') {
-        levelTitle = 'Beginner Trader / Student';
-        message = 'Welcome! Maine aapke liye Foundation Basics, Candlestick Guide aur Risk-Protection rules activate kar diye hain.';
-      } else if (level === 'intermediate') {
-        levelTitle = 'Intermediate Trader';
-        message = 'Welcome! Aapke liye Swing Strategies, Options Greeks & Backtesting engine active hai.';
-      } else {
-        levelTitle = 'Advanced Pro Trader';
-        message = 'Welcome Pro Trader! Aapke skills ko aur aage badhane ke liye Algorithmic Flow, High-Probability Setups & Institutional Order Flow radar unlock kar diya gaya hai!';
-      }
-
-      toast('Level Set: ' + levelTitle + '|Customized tools & analytics activated!', 'ok');
-      window.syncUserLevelBadge();
-
-      setTimeout(() => {
-        if (window.appendAanyaMessage) {
-          window.appendAanyaMessage('Aanya', `<strong>Namaste ${levelTitle}! 🙏</strong><br>${message}<br>Aapko kisi bhi topic ya trading setup par madad chahiye toh mujhse bol kar ya type karke puchiye!`);
-          if (window.speakAanyaText) {
-            window.speakAanyaText(`Namaste ${levelTitle}! ${message}`);
-          }
-        }
-      }, 500);
-    };
-
-    window.syncUserLevelBadge = function() {
-      const level = localStorage.getItem('zenithedu_trader_level') || 'beginner';
-      let badgeHtml = '';
-      if (level === 'beginner') {
-        badgeHtml = '<span class="badge badge-paid" onclick="openLevelModal()" style="cursor:pointer;font-size:11px" title="Change Skill Level">🟢 Beginner</span>';
-      } else if (level === 'intermediate') {
-        badgeHtml = '<span class="badge badge-pending" onclick="openLevelModal()" style="cursor:pointer;font-size:11px" title="Change Skill Level">🟡 Intermediate</span>';
-      } else {
-        badgeHtml = '<span class="badge badge-scholar" onclick="openLevelModal()" style="cursor:pointer;font-size:11px;background:#6366F1;color:#fff" title="Change Skill Level">🔴 Pro Trader</span>';
-      }
-
-      const roleBadge = document.getElementById('topUserRoleBadge');
-      if (roleBadge) {
-        roleBadge.innerHTML = badgeHtml;
-      }
-    };
+    
 
 
     window.aanyaVoiceEnabled = true;
