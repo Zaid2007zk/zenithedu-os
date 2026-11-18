@@ -4679,7 +4679,53 @@
           <!-- ========================================================
                PERSONAL AI INSTITUTE ASSISTANT DESK (AANYA)
                ======================================================== -->
-          <div class="card" id="aanyaAssistantDesk" style="background:linear-gradient(135deg, rgba(99,102,241,0.14) 0%, rgba(139,92,246,0.1) 50%, rgba(16,185,129,0.08) 100%);border:1px solid rgba(99,102,241,0.4);border-radius:18px;padding:26px 24px;margin-bottom:26px;box-shadow:0 12px 35px rgba(0,0,0,0.45);position:relative">
+                    <!-- FEATURE 3: AANYA MORNING DIRECTOR BRIEFING -->
+          <div class="card" id="directorBriefingCard" style="background:linear-gradient(135deg,rgba(99,102,241,0.12) 0%,rgba(236,72,153,0.08) 100%);border:1px solid rgba(99,102,241,0.35);border-radius:16px;padding:16px 20px;margin-bottom:20px;box-shadow:0 8px 30px rgba(0,0,0,0.25)">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+              <div style="display:flex;align-items:center;gap:14px">
+                <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#F59E0B,#EF4444);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 0 20px rgba(245,158,11,0.4);flex-shrink:0">
+                  ☀️
+                </div>
+                <div>
+                  <div style="display:flex;align-items:center;gap:8px">
+                    <span style="font-size:16px;font-weight:800;color:#fff;letter-spacing:-0.02em">Director's Morning Briefing</span>
+                    <span class="badge badge-paid" style="font-size:10px">18 Nov 2026 · 08:30 AM Live</span>
+                  </div>
+                  <div style="font-size:12.5px;color:#CBD5E1;margin-top:2px">
+                    Aanya's automated institutional status: Faculty leaves covered, JEE Mock ready & fee collections on track.
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <button class="btn btn-pri btn-sm" onclick="playAanyaBriefingAudio()" id="briefingAudioBtn" style="border-radius:20px;padding:7px 16px;font-size:12.5px;background:linear-gradient(135deg,#6366F1,#EC4899);box-shadow:0 0 15px rgba(236,72,153,0.35)">
+                  <span id="briefingAudioIcon">🎙️</span> <span id="briefingAudioText">Listen to Briefing (Audio)</span>
+                </button>
+                <button class="btn btn-sec btn-sm" onclick="askAanyaQuick('summary')" style="border-radius:20px;padding:7px 14px;font-size:12.5px">
+                  📋 Full Itinerary
+                </button>
+              </div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.08)">
+              <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 14px">
+                <div style="font-size:11px;color:var(--text-muted);font-weight:700;text-transform:uppercase">👨‍🏫 Faculty Operations</div>
+                <div style="font-size:13px;font-weight:700;color:#10B981;margin-top:3px">46 Active · 3 On Leave</div>
+                <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px">Prof. Verma taking Batch 12A substitute</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 14px">
+                <div style="font-size:11px;color:var(--text-muted);font-weight:700;text-transform:uppercase">📝 Test Scheduled Today</div>
+                <div style="font-size:13px;font-weight:700;color:#818CF8;margin-top:3px">JEE Grand Mock 4 @ 2:00 PM</div>
+                <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px">142 CBT terminal seats verified</div>
+              </div>
+              <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:10px 14px">
+                <div style="font-size:11px;color:var(--text-muted);font-weight:700;text-transform:uppercase">💳 Expected Collections</div>
+                <div style="font-size:13px;font-weight:700;color:#F59E0B;margin-top:3px">₹65,000 Scheduled Today</div>
+                <div style="font-size:11.5px;color:var(--text-muted);margin-top:2px">12 automated WhatsApp links active</div>
+              </div>
+            </div>
+          </div>
+
+<div class="card" id="aanyaAssistantDesk" style="background:linear-gradient(135deg, rgba(99,102,241,0.14) 0%, rgba(139,92,246,0.1) 50%, rgba(16,185,129,0.08) 100%);border:1px solid rgba(99,102,241,0.4);border-radius:18px;padding:26px 24px;margin-bottom:26px;box-shadow:0 12px 35px rgba(0,0,0,0.45);position:relative">
             
             <!-- Assistant Profile Header -->
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:16px;margin-bottom:18px">
@@ -6774,7 +6820,127 @@
           </div>
         </div>
 
-        <!-- VIEW 13: INSTITUTE SETTINGS & SYSTEM CONTROLS -->
+                <!-- FEATURE 5: DEDICATED STUDENT & PARENT PORTAL VIEW -->
+        <div class="view-pane" id="view-student-portal">
+          <div style="background:linear-gradient(135deg,#0F172A 0%,#1E1B4B 100%);border:1px solid rgba(99,102,241,0.4);border-radius:18px;padding:24px;margin-bottom:24px;box-shadow:0 10px 40px rgba(0,0,0,0.4)">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+              <div style="display:flex;align-items:center;gap:16px">
+                <div style="width:58px;height:58px;border-radius:18px;background:linear-gradient(135deg,#6366F1,#EC4899);color:#fff;font-size:24px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 0 25px rgba(99,102,241,0.5)">
+                  AS
+                </div>
+                <div>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <h2 style="font-size:22px;font-weight:900;color:#fff;margin:0">Aarav Sharma</h2>
+                    <span class="badge badge-paid">Class 12 JEE Elite</span>
+                    <span class="badge badge-scholar" style="background:#6366F1;color:#fff">AIR #240 Forecast</span>
+                  </div>
+                  <div style="font-size:13px;color:#94A3B8;margin-top:4px">
+                    Roll No: <strong>ZE-2026-101</strong> · Bio-ID: #8841 · Guardian: <strong>Sanjay Sharma (+91 98220 33445)</strong>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;gap:10px">
+                <button class="btn btn-sec btn-sm" onclick="openStudentReportCard('Aarav Sharma', 266, '99.62', '#240-#410')" style="border-radius:20px">
+                  📄 Official Report Card PDF
+                </button>
+                <button class="btn btn-sec btn-sm" onclick="openOfficialFeeReceipt('Aarav Sharma', '25,000', 'ZE-RCPT-2026-8812')" style="border-radius:20px">
+                  🧾 Fee Receipt PDF
+                </button>
+                <button class="btn btn-pri btn-sm" onclick="switchRole('Institute Admin')" style="border-radius:20px;background:linear-gradient(135deg,#6366F1,#8B5CF6)">
+                  👑 Return to Admin Console
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Student Live Metrics -->
+          <div class="grid-4" style="margin-bottom:20px">
+            <div class="stat-card" style="border:1px solid rgba(16,185,129,0.3)">
+              <div class="stat-label">Today's Biometric Attendance</div>
+              <div class="stat-num" style="color:#10B981">🟢 Present</div>
+              <div class="stat-change stat-up"><span>Punched 08:14 AM at Gate #1</span></div>
+            </div>
+            <div class="stat-card" style="border:1px solid rgba(99,102,241,0.3)">
+              <div class="stat-label">Overall Attendance (Session)</div>
+              <div class="stat-num" style="color:#6366F1">96.2%</div>
+              <div class="stat-change stat-up"><span>112/116 Days Logged</span></div>
+            </div>
+            <div class="stat-card" style="border:1px solid rgba(16,185,129,0.3)">
+              <div class="stat-label">Latest Grand Mock Score</div>
+              <div class="stat-num" style="color:#10B981">266 / 300</div>
+              <div class="stat-change stat-up"><span>Batch Rank #1 · 99.62 %ile</span></div>
+            </div>
+            <div class="stat-card" style="border:1px solid rgba(16,185,129,0.3)">
+              <div class="stat-label">Fee Installment Status</div>
+              <div class="stat-num" style="color:#10B981">100% Settled</div>
+              <div class="stat-change stat-up"><span>₹95,000 Annual Paid</span></div>
+            </div>
+          </div>
+
+          <!-- Student Daily Timeline & DPP Schedule -->
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Today's Lecture Schedule (Class 12 JEE Elite)</div>
+                <span class="badge badge-paid">Room 204</span>
+              </div>
+              <div class="card-body">
+                <div style="display:flex;flex-direction:column;gap:12px">
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)">
+                    <div>
+                      <strong style="color:#fff">09:00 AM – 10:30 AM</strong>
+                      <div style="font-size:12px;color:var(--text-muted)">Physics: EMI & AC Circuit Theory (Prof. Verma)</div>
+                    </div>
+                    <span class="badge badge-paid">Completed 🟢</span>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06)">
+                    <div>
+                      <strong style="color:#fff">11:00 AM – 12:30 PM</strong>
+                      <div style="font-size:12px;color:var(--text-muted)">Chemistry: Organic Reaction Mechanisms (Dr. Shalini)</div>
+                    </div>
+                    <span class="badge badge-paid">Completed 🟢</span>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:10px;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3)">
+                    <div>
+                      <strong style="color:#fff">02:00 PM – 05:00 PM</strong>
+                      <div style="font-size:12px;color:#A5B4FC">All-India Grand Mock Test 4 (CBT Hall #2)</div>
+                    </div>
+                    <span class="badge badge-scholar" style="background:#6366F1;color:#fff">Upcoming ⚡</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Pending Daily Homework & DPP Submissions</div>
+                <span class="badge badge-pending">1 Due Tonight</span>
+              </div>
+              <div class="card-body">
+                <div style="display:flex;flex-direction:column;gap:12px">
+                  <div style="padding:12px;border-radius:10px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.3)">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                      <strong style="color:#fff">Physics DPP #42: EMI & AC</strong>
+                      <span class="badge badge-pending">Due 8:00 PM</span>
+                    </div>
+                    <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px">15 MCQs based on morning lecture. Submit solution sheet or enter answers online.</p>
+                    <button class="btn btn-pri btn-sm" onclick="toast('DPP Submission Opened|Upload your scanned solution sheet', 'ok')">Submit Homework Sheet →</button>
+                  </div>
+
+                  <div style="padding:12px;border-radius:10px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.3)">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                      <strong style="color:#fff">Chemistry DPP #38: Chemical Equilibrium</strong>
+                      <span class="badge badge-paid">Submitted 🟢 (Score: 12/12)</span>
+                    </div>
+                    <p style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Evaluated by Dr. Shalini Sharma. 100% Accuracy achieved!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<!-- VIEW 13: INSTITUTE SETTINGS & SYSTEM CONTROLS -->
         <div class="view-pane" id="view-settings">
           <!-- Navigation Breadcrumb -->
           <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;padding:12px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px">
@@ -7729,16 +7895,21 @@
     }
 
     function showReceiptModal(recId, student, batch, amount, mode) {
-      document.getElementById('recNumber').textContent = recId;
-      document.getElementById('recStudent').textContent = student;
-      document.getElementById('recBatch').textContent = batch;
-      document.getElementById('recMode').textContent = mode;
-      document.getElementById('recTotal').textContent = '₹' + amount.toLocaleString('en-IN') + '.00';
-      const tuition = Math.round(amount * 0.85);
-      const gst = amount - tuition - 1000;
-      document.getElementById('recTuition').textContent = '₹' + tuition.toLocaleString('en-IN') + '.00';
-      document.getElementById('recGst').textContent = '₹' + gst.toLocaleString('en-IN') + '.00';
-      openModal('receiptModal');
+      if (typeof openOfficialFeeReceipt === 'function') {
+        const amtStr = (typeof amount === 'number') ? amount.toLocaleString('en-IN') : amount;
+        openOfficialFeeReceipt(student, amtStr, recId);
+        return;
+      }
+      try {
+        if (document.getElementById('recNumber')) document.getElementById('recNumber').textContent = recId;
+        if (document.getElementById('recStudent')) document.getElementById('recStudent').textContent = student;
+        if (document.getElementById('recBatch')) document.getElementById('recBatch').textContent = batch;
+        if (document.getElementById('recMode')) document.getElementById('recMode').textContent = mode;
+        if (document.getElementById('recTotal')) document.getElementById('recTotal').textContent = '₹' + amount.toLocaleString('en-IN');
+        if (typeof openModal === 'function') openModal('receiptModal');
+      } catch(e) {
+        console.error(e);
+      }
     }
 
     function submitNewStudent() {
