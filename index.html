@@ -5238,6 +5238,100 @@
             </div>
           </div>
 
+          
+          <!-- FEATURE 2: AI RANK PREDICTOR & JEE / NEET AIR FORECAST -->
+          <div class="card" style="margin-bottom:24px;background:linear-gradient(135deg,rgba(99,102,241,0.08) 0%,rgba(16,185,129,0.05) 100%);border:1.5px solid rgba(99,102,241,0.4);border-radius:16px;padding:20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:20px">🎯</span>
+                  <h3 style="font-size:17px;font-weight:800;color:#fff;margin:0">Zenith AI All-India Rank (AIR) & Percentile Forecaster</h3>
+                  <span class="badge badge-scholar" style="font-size:10px;background:#6366F1;color:#fff">NTA 2026 Model</span>
+                </div>
+                <div style="font-size:12.5px;color:var(--text-muted);margin-top:4px">
+                  AI neural estimation based on mock test speed, negative marking errors & historic cutoffs.
+                </div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button class="btn btn-sec btn-sm" onclick="filterAirBatch('jee')" id="btnAirJee" style="border-radius:20px;font-weight:700">Class 12 JEE Elite</button>
+                <button class="btn btn-sec btn-sm" onclick="filterAirBatch('neet')" id="btnAirNeet" style="border-radius:20px">Class 12 NEET Target</button>
+                <button class="btn btn-pri btn-sm" onclick="generateAiBoosterBatch()" style="border-radius:20px;background:linear-gradient(135deg,#6366F1,#8B5CF6)">
+                  ⚡ Generate Remedial Booster Sets
+                </button>
+              </div>
+            </div>
+
+            <div class="table-container" style="border-radius:12px;overflow:hidden">
+              <table class="data-table" id="airForecastTable">
+                <thead>
+                  <tr style="background:rgba(255,255,255,0.03)">
+                    <th>Student Name</th>
+                    <th>Batch</th>
+                    <th>Latest Score</th>
+                    <th>Predicted Percentile</th>
+                    <th>Forecasted All India Rank (AIR)</th>
+                    <th>Weak Area Diagnostic</th>
+                    <th>Official Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Aarav Sharma</strong><br><span style="font-size:11px;color:var(--text-muted)">ZE-2026-101</span></td>
+                    <td><span class="badge badge-paid">Class 12 JEE Elite</span></td>
+                    <td><strong>266 / 300</strong> (88.7%)</td>
+                    <td><span style="color:#10B981;font-weight:800;font-size:14px">99.62 %ile</span></td>
+                    <td><span style="color:#6366F1;font-weight:800;font-size:14px">AIR #240 – #410</span></td>
+                    <td><span style="font-size:12px;color:#F59E0B">Rotational Dynamics multi-correct</span></td>
+                    <td>
+                      <button class="btn btn-sec btn-sm" onclick="openStudentReportCard('Aarav Sharma', 266, '99.62', '#240-#410')" style="padding:4px 10px;font-size:11px">
+                        📄 Report Card PDF
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Ishita Gupta</strong><br><span style="font-size:11px;color:var(--text-muted)">ZE-2026-104</span></td>
+                    <td><span class="badge badge-paid">Class 12 JEE Elite</span></td>
+                    <td><strong>254 / 300</strong> (84.6%)</td>
+                    <td><span style="color:#10B981;font-weight:800;font-size:14px">99.14 %ile</span></td>
+                    <td><span style="color:#6366F1;font-weight:800;font-size:14px">AIR #750 – #1,100</span></td>
+                    <td><span style="font-size:12px;color:#F59E0B">Organic Reaction Mechanisms</span></td>
+                    <td>
+                      <button class="btn btn-sec btn-sm" onclick="openStudentReportCard('Ishita Gupta', 254, '99.14', '#750-#1100')" style="padding:4px 10px;font-size:11px">
+                        📄 Report Card PDF
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Rohan Mehra</strong><br><span style="font-size:11px;color:var(--text-muted)">ZE-2026-118</span></td>
+                    <td><span class="badge badge-paid">Class 12 JEE Elite</span></td>
+                    <td><strong>241 / 300</strong> (80.3%)</td>
+                    <td><span style="color:#10B981;font-weight:800;font-size:14px">98.40 %ile</span></td>
+                    <td><span style="color:#6366F1;font-weight:800;font-size:14px">AIR #1,800 – #2,400</span></td>
+                    <td><span style="font-size:12px;color:#EF4444">High Negative Marks in Maths</span></td>
+                    <td>
+                      <button class="btn btn-sec btn-sm" onclick="openStudentReportCard('Rohan Mehra', 241, '98.40', '#1800-#2400')" style="padding:4px 10px;font-size:11px">
+                        📄 Report Card PDF
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><strong>Meera Iyer</strong><br><span style="font-size:11px;color:var(--text-muted)">ZE-2026-122</span></td>
+                    <td><span class="badge badge-paid">Class 12 JEE Elite</span></td>
+                    <td><strong>235 / 300</strong> (78.3%)</td>
+                    <td><span style="color:#10B981;font-weight:800;font-size:14px">97.90 %ile</span></td>
+                    <td><span style="color:#6366F1;font-weight:800;font-size:14px">AIR #2,900 – #3,600</span></td>
+                    <td><span style="font-size:12px;color:#F59E0B">Speed vs Accuracy imbalance</span></td>
+                    <td>
+                      <button class="btn btn-sec btn-sm" onclick="openStudentReportCard('Meera Iyer', 235, '97.90', '#2900-#3600')" style="padding:4px 10px;font-size:11px">
+                        📄 Report Card PDF
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
           <div class="card" style="margin-bottom:20px">
             <div class="card-header">
               <div class="card-title">All-India Grand Mock Test #04 · All Batches Ranking</div>
@@ -6274,6 +6368,31 @@
             </div>
           </div>
 
+          
+          <!-- FEATURE 6: FACULTY LECTURE PAYROLL & HONORARIUM SUITE -->
+          <div class="grid-4" style="margin-bottom:20px">
+            <div class="stat-card">
+              <div class="stat-label">Total Monthly Payroll</div>
+              <div class="stat-num" style="color:#10B981">₹14,85,000</div>
+              <div class="stat-change stat-up"><span>46 Faculty members</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Lectures Delivered</div>
+              <div class="stat-num" style="color:#6366F1">412 Sessions</div>
+              <div class="stat-change"><span>618 Teaching Hours</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Payroll Disbursed</div>
+              <div class="stat-num" style="color:#10B981">₹12,20,000</div>
+              <div class="stat-change stat-up"><span>82.1% Settled</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Pending Honorarium</div>
+              <div class="stat-num" style="color:#F59E0B">₹2,65,000</div>
+              <div class="stat-change"><span>Due on 30th Nov</span></div>
+            </div>
+          </div>
+
           <div class="card">
             <div class="card-body" style="padding:0">
               <table style="width:100%;border-collapse:collapse;font-size:12.5px" id="facultyTable">
@@ -6347,6 +6466,100 @@
             </div>
             <div style="display:flex;gap:10px">
               <button class="btn btn-pri btn-sm" onclick="openModal('materialModal')">+ Upload Study Material</button>
+            </div>
+          </div>
+
+          
+          <!-- FEATURE 4: DAILY PRACTICE PROBLEMS (DPP) & HOMEWORK TRACKER -->
+          <div class="card" style="margin-bottom:24px;border:1px solid rgba(99,102,241,0.35);border-radius:16px;padding:20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+              <div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:20px">📚</span>
+                  <h3 style="font-size:17px;font-weight:800;color:#fff;margin:0">Daily Practice Problems (DPP) & Homework Tracker</h3>
+                  <span class="badge badge-paid">Session 2026-27</span>
+                </div>
+                <div style="font-size:12.5px;color:var(--text-muted);margin-top:4px">
+                  Track daily batch assignments, submission percentages & trigger automated WhatsApp alerts for missing homework.
+                </div>
+              </div>
+              <button class="btn btn-pri btn-sm" onclick="openModal('materialModal')" style="border-radius:20px">
+                + Upload Today's DPP Sheet
+              </button>
+            </div>
+
+            <div class="grid-3" style="margin-bottom:16px">
+              <!-- DPP 1 -->
+              <div class="card" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);padding:14px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <span class="badge badge-purple">Physics · Class 12</span>
+                  <span style="font-size:11px;color:#10B981;font-weight:700">Due Tonight 8 PM</span>
+                </div>
+                <h4 style="color:#fff;font-size:14px;margin-bottom:4px">DPP #42: Electromagnetic Induction</h4>
+                <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px">15 MCQs + 5 Numerical Problems</div>
+                
+                <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:8px 10px;margin-bottom:12px">
+                  <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--text-muted);margin-bottom:4px">
+                    <span>Submissions</span>
+                    <strong style="color:#fff">42 / 48 (87.5%)</strong>
+                  </div>
+                  <div style="width:100%;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden">
+                    <div style="width:87.5%;height:100%;background:#10B981"></div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:6px">
+                  <button class="btn btn-sec btn-sm" style="flex:1" onclick="toast('DPP Downloaded|Physics_DPP_42.pdf saved', 'ok')">📥 PDF</button>
+                  <button class="btn btn-whatsapp btn-sm" onclick="toast('WhatsApp Reminders Sent|Dispatched to 6 pending students & parents', 'ok')">📲 Remind 6</button>
+                </div>
+              </div>
+
+              <!-- DPP 2 -->
+              <div class="card" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);padding:14px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <span class="badge badge-green">Chemistry · Class 12</span>
+                  <span style="font-size:11px;color:#10B981;font-weight:700">Due Tomorrow</span>
+                </div>
+                <h4 style="color:#fff;font-size:14px;margin-bottom:4px">DPP #38: Chemical Equilibrium</h4>
+                <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px">12 Questions on Le Chatelier & Kp/Kc</div>
+                
+                <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:8px 10px;margin-bottom:12px">
+                  <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--text-muted);margin-bottom:4px">
+                    <span>Submissions</span>
+                    <strong style="color:#fff">46 / 48 (95.8%)</strong>
+                  </div>
+                  <div style="width:100%;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden">
+                    <div style="width:95.8%;height:100%;background:#10B981"></div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:6px">
+                  <button class="btn btn-sec btn-sm" style="flex:1" onclick="toast('DPP Downloaded|Chem_DPP_38.pdf saved', 'ok')">📥 PDF</button>
+                  <button class="btn btn-whatsapp btn-sm" onclick="toast('WhatsApp Reminders Sent|Dispatched to 2 pending students', 'ok')">📲 Remind 2</button>
+                </div>
+              </div>
+
+              <!-- DPP 3 -->
+              <div class="card" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);padding:14px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <span class="badge badge-blue">Maths · Class 12</span>
+                  <span style="font-size:11px;color:#F59E0B;font-weight:700">Urgent: 9 Pending</span>
+                </div>
+                <h4 style="color:#fff;font-size:14px;margin-bottom:4px">DPP #44: Definite Integrals</h4>
+                <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px">15 High-Yield Advanced Integrals</div>
+                
+                <div style="background:rgba(255,255,255,0.04);border-radius:8px;padding:8px 10px;margin-bottom:12px">
+                  <div style="display:flex;justify-content:space-between;font-size:11.5px;color:var(--text-muted);margin-bottom:4px">
+                    <span>Submissions</span>
+                    <strong style="color:#fff">39 / 48 (81.2%)</strong>
+                  </div>
+                  <div style="width:100%;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden">
+                    <div style="width:81.2%;height:100%;background:#F59E0B"></div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:6px">
+                  <button class="btn btn-sec btn-sm" style="flex:1" onclick="toast('DPP Downloaded|Maths_DPP_44.pdf saved', 'ok')">📥 PDF</button>
+                  <button class="btn btn-whatsapp btn-sm" onclick="toast('WhatsApp Reminders Sent|Dispatched to 9 pending students', 'ok')">📲 Remind 9</button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -7305,6 +7518,8 @@
         'transport': 'attendance',
         'hostel': 'students',
         'homework': 'exams',
+        'student-portal': 'student-portal',
+        'dpp': 'lms',
         'ai-autopilot': 'admin-dashboard'
       };
       
@@ -10118,7 +10333,71 @@
     }
 
     });
-  </script>
+  
+    // ==============================================================================
+    // TOP 6 ACADEMIC FEATURES JAVASCRIPT ENGINE
+    // ==============================================================================
+    window.openStudentReportCard = function(name, score, percentile, air) {
+      document.getElementById('rcStudentName').textContent = name || 'Aarav Sharma';
+      document.getElementById('rcTotalScore').textContent = score || '266';
+      document.getElementById('rcPercentile').textContent = (percentile || '99.62') + ' %ile';
+      document.getElementById('rcAir').textContent = 'AIR ' + (air || '#240 – #410');
+      document.getElementById('studentReportCardModal').style.display = 'flex';
+      playBeep(750, 0.1);
+    };
+
+    window.openOfficialFeeReceipt = function(name, amount, rcptNo) {
+      document.getElementById('rcptStudentName').textContent = name || 'Aarav Sharma';
+      document.getElementById('rcptAmount').textContent = '₹' + (amount || '25,000.00');
+      document.getElementById('rcptDocNo').textContent = rcptNo || 'ZE-RCPT-2026-8812';
+      document.getElementById('officialFeeReceiptModal').style.display = 'flex';
+      playBeep(750, 0.1);
+    };
+
+    window.playAanyaBriefingAudio = function() {
+      const text = "Namaste Director Sir! Aaj Central Pune Campus me total forty-six teachers active hain. Prof Verma Batch 12A me substitute class le rahe hain. Aaj dopahar do baje JEE Grand Mock 4 scheduled hai, aur aaj sixty-five thousand rupees ki fee collections expect ho rahi hain. Sabhi systems live hain!";
+      const btn = document.getElementById('briefingAudioBtn');
+      const icon = document.getElementById('briefingAudioIcon');
+      const label = document.getElementById('briefingAudioText');
+
+      if (window.speakAanyaText) {
+        window.speakAanyaText(text);
+        if (icon) icon.textContent = '🔊';
+        if (label) label.textContent = 'Aanya Speaking...';
+        setTimeout(() => {
+          if (icon) icon.textContent = '🎙️';
+          if (label) label.textContent = 'Listen to Briefing (Audio)';
+        }, 12000);
+      } else {
+        toast('Director Briefing Audio|' + text, 'info');
+      }
+    };
+
+    window.filterAirBatch = function(type) {
+      const btnJee = document.getElementById('btnAirJee');
+      const btnNeet = document.getElementById('btnAirNeet');
+      if (type === 'jee') {
+        if (btnJee) { btnJee.classList.add('btn-pri'); btnJee.classList.remove('btn-sec'); }
+        if (btnNeet) { btnNeet.classList.remove('btn-pri'); btnNeet.classList.add('btn-sec'); }
+        toast('AIR Filter: JEE Elite|Displaying Class 12 JEE Advanced percentile models', 'ok');
+      } else {
+        if (btnNeet) { btnNeet.classList.add('btn-pri'); btnNeet.classList.remove('btn-sec'); }
+        if (btnJee) { btnJee.classList.remove('btn-pri'); btnJee.classList.add('btn-sec'); }
+        toast('AIR Filter: NEET Target|Displaying Class 12 NEET 720-marks forecast', 'ok');
+      }
+    };
+
+    window.generateAiBoosterBatch = function() {
+      toast('Remedial Booster Generated|Custom 45-question speed tests dispatched to Top AIR candidates', 'ok');
+      playBeep(880, 0.15);
+    };
+
+    window.generateFacultyPayslip = function(facultyName) {
+      toast('Salary Slip Generated|' + (facultyName || 'Faculty') + ' official payslip ready for download', 'ok');
+      playBeep(700, 0.1);
+    };
+
+    </script>
 
   <!-- App-like Mobile Bottom Navigation Bar -->
   <nav class="mobile-bottom-nav" id="mobileBottomNav">
@@ -10270,6 +10549,216 @@
         <div style="text-align:center;margin-top:4px">
           <span id="authSwitchPrompt" style="font-size:12px;color:var(--text-muted)">Already registered? </span>
           <a href="javascript:void(0)" id="authSwitchLink" onclick="switchAuthMode()" style="font-size:12px;color:#818CF8;font-weight:600">Login here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FEATURE 1: OFFICIAL PRINTABLE STUDENT REPORT CARD MODAL -->
+  <div id="studentReportCardModal" class="modal-backdrop" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(5,9,18,0.92);backdrop-filter:blur(10px);z-index:999999;align-items:center;justify-content:center;overflow-y:auto;padding:20px">
+    <div style="background:#fff;color:#1E293B;border-radius:16px;width:100%;max-width:760px;box-shadow:0 25px 60px rgba(0,0,0,0.85);position:relative;overflow:hidden" class="printable-area">
+      
+      <!-- Top Action Bar (hidden on print) -->
+      <div class="no-print" style="background:#0F172A;padding:12px 20px;display:flex;justify-content:space-between;align-items:center">
+        <span style="color:#fff;font-weight:700;font-size:13px">📄 Official Student Cumulative Progress Card</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-pri btn-sm" onclick="window.print()" style="background:#6366F1;color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">
+            🖨️ Print / Save as PDF
+          </button>
+          <button class="btn btn-whatsapp btn-sm" onclick="toast('Shared on WhatsApp|Progress Card dispatched to Guardian WhatsApp', 'ok')" style="border-radius:8px;padding:6px 14px;font-size:12px">
+            📲 Share on WhatsApp
+          </button>
+          <button onclick="closeModal('studentReportCardModal')" style="background:none;border:none;color:#94A3B8;font-size:20px;cursor:pointer;line-height:1">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Printable Document Sheet -->
+      <div style="padding:32px 36px">
+        <!-- Institution Header -->
+        <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #E2E8F0;padding-bottom:18px;margin-bottom:20px">
+          <div style="display:flex;align-items:center;gap:14px">
+            <div style="width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,#6366F1,#EC4899);color:#fff;font-size:24px;font-weight:900;display:flex;align-items:center;justify-content:center">
+              🎓
+            </div>
+            <div>
+              <h2 style="font-size:22px;font-weight:900;color:#0F172A;margin:0;letter-spacing:-0.02em">ZenithEdu Academy</h2>
+              <div style="font-size:12px;color:#64748B;margin-top:2px">Premier Institute for JEE (Main & Advanced), NEET-UG & Olympiads</div>
+              <div style="font-size:11px;color:#94A3B8">Central Pune Campus · Affiliated & ISO 9001:2025 Certified Institute</div>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <span style="display:inline-block;padding:4px 10px;background:#F1F5F9;border:1px solid #CBD5E1;border-radius:6px;font-size:11px;font-weight:800;color:#0F172A">
+              SESSION 2026–27
+            </span>
+            <div style="font-size:11px;color:#64748B;margin-top:4px">Card No: <strong id="rcDocNum">ZE-RC-2026-101</strong></div>
+          </div>
+        </div>
+
+        <!-- Student Meta Details Grid -->
+        <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:14px 18px;margin-bottom:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12.5px">
+          <div>Student Name: <strong id="rcStudentName" style="color:#0F172A">Aarav Sharma</strong></div>
+          <div>Roll Number: <strong id="rcRollNo" style="color:#0F172A">ZE-2026-101</strong></div>
+          <div>Target Batch: <strong id="rcBatch" style="color:#0F172A">Class 12 JEE Elite</strong></div>
+          <div>Biometric Attendance: <strong id="rcAtt" style="color:#10B981">96.2% (Regular)</strong></div>
+          <div>Guardian Name: <strong id="rcParent" style="color:#0F172A">Sanjay Sharma</strong></div>
+          <div>Predicted All India Rank: <strong id="rcAir" style="color:#6366F1">AIR #240 – #410</strong></div>
+        </div>
+
+        <!-- Scorecard Table -->
+        <div style="margin-bottom:20px">
+          <table style="width:100%;border-collapse:collapse;font-size:12.5px;text-align:left">
+            <thead>
+              <tr style="background:#F1F5F9;border-bottom:2px solid #CBD5E1">
+                <th style="padding:10px 12px;color:#0F172A">Subject</th>
+                <th style="padding:10px 12px;text-align:center;color:#0F172A">Max Marks</th>
+                <th style="padding:10px 12px;text-align:center;color:#0F172A">Marks Obtained</th>
+                <th style="padding:10px 12px;text-align:center;color:#0F172A">Percentile</th>
+                <th style="padding:10px 12px;color:#0F172A">Performance Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid #E2E8F0">
+                <td style="padding:10px 12px;font-weight:700">Physics</td>
+                <td style="padding:10px 12px;text-align:center">100</td>
+                <td style="padding:10px 12px;text-align:center;font-weight:800;color:#0F172A">88</td>
+                <td style="padding:10px 12px;text-align:center;color:#10B981;font-weight:700">98.8 %ile</td>
+                <td style="padding:10px 12px"><span style="color:#10B981;font-weight:700">Exemplary</span></td>
+              </tr>
+              <tr style="border-bottom:1px solid #E2E8F0">
+                <td style="padding:10px 12px;font-weight:700">Chemistry</td>
+                <td style="padding:10px 12px;text-align:center">100</td>
+                <td style="padding:10px 12px;text-align:center;font-weight:800;color:#0F172A">92</td>
+                <td style="padding:10px 12px;text-align:center;color:#10B981;font-weight:700">99.4 %ile</td>
+                <td style="padding:10px 12px"><span style="color:#10B981;font-weight:700">Outstanding</span></td>
+              </tr>
+              <tr style="border-bottom:1px solid #E2E8F0">
+                <td style="padding:10px 12px;font-weight:700">Mathematics</td>
+                <td style="padding:10px 12px;text-align:center">100</td>
+                <td style="padding:10px 12px;text-align:center;font-weight:800;color:#0F172A">86</td>
+                <td style="padding:10px 12px;text-align:center;color:#10B981;font-weight:700">98.2 %ile</td>
+                <td style="padding:10px 12px"><span style="color:#10B981;font-weight:700">Exemplary</span></td>
+              </tr>
+              <tr style="background:#F8FAFC;font-weight:800">
+                <td style="padding:12px;color:#0F172A">GRAND TOTAL</td>
+                <td style="padding:12px;text-align:center">300</td>
+                <td style="padding:12px;text-align:center;color:#6366F1;font-size:15px" id="rcTotalScore">266</td>
+                <td style="padding:12px;text-align:center;color:#10B981;font-size:15px" id="rcPercentile">99.62 %ile</td>
+                <td style="padding:12px"><span style="background:#10B981;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px">BATCH RANK #1</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Academic Remarks & Signatures -->
+        <div style="background:#F1F5F9;border-radius:8px;padding:12px 16px;margin-bottom:24px;font-size:12px;color:#334155;line-height:1.5">
+          <strong>Faculty Council Feedback:</strong> Exceptional conceptual depth in Mechanics and Physical Chemistry. Recommended to solve 15 advanced multi-concept integration sheets to eliminate minor negative marking. High probability of Top 500 AIR in JEE Advanced 2027.
+        </div>
+
+        <!-- Signatures Row -->
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:30px;padding-top:16px;border-top:1px dashed #CBD5E1">
+          <div style="text-align:center">
+            <div style="font-size:11px;color:#64748B">Date of Generation</div>
+            <strong style="font-size:12px;color:#0F172A">18 November 2026</strong>
+          </div>
+          <div style="text-align:center">
+            <div style="width:120px;border-bottom:1px solid #94A3B8;margin-bottom:6px"></div>
+            <div style="font-size:11.5px;font-weight:700;color:#0F172A">Class Mentor Signature</div>
+          </div>
+          <div style="text-align:center">
+            <div style="display:inline-block;padding:4px 10px;border:1.5px solid #10B981;border-radius:6px;color:#10B981;font-size:11px;font-weight:900;text-transform:uppercase;margin-bottom:6px">
+              ✓ ZENITH VERIFIED
+            </div>
+            <div style="font-size:11.5px;font-weight:800;color:#0F172A">Director & Academic Head</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURE 1: OFFICIAL PRINTABLE TAX FEE RECEIPT MODAL -->
+  <div id="officialFeeReceiptModal" class="modal-backdrop" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(5,9,18,0.92);backdrop-filter:blur(10px);z-index:999999;align-items:center;justify-content:center;overflow-y:auto;padding:20px">
+    <div style="background:#fff;color:#1E293B;border-radius:16px;width:100%;max-width:680px;box-shadow:0 25px 60px rgba(0,0,0,0.85);position:relative;overflow:hidden" class="printable-area">
+      
+      <!-- Top Action Bar -->
+      <div class="no-print" style="background:#0F172A;padding:12px 20px;display:flex;justify-content:space-between;align-items:center">
+        <span style="color:#fff;font-weight:700;font-size:13px">🧾 Official Institute Tax Fee Receipt</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-pri btn-sm" onclick="window.print()" style="background:#10B981;color:#fff;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:700">
+            🖨️ Print Receipt PDF
+          </button>
+          <button class="btn btn-whatsapp btn-sm" onclick="toast('Receipt Sent on WhatsApp|Dispatched to parent mobile with PDF download link', 'ok')" style="border-radius:8px;padding:6px 14px;font-size:12px">
+            📲 WhatsApp to Parent
+          </button>
+          <button onclick="closeModal('officialFeeReceiptModal')" style="background:none;border:none;color:#94A3B8;font-size:20px;cursor:pointer;line-height:1">
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <div style="padding:30px 34px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #E2E8F0;padding-bottom:16px;margin-bottom:18px">
+          <div>
+            <h3 style="font-size:20px;font-weight:900;color:#0F172A;margin:0">ZenithEdu Academy</h3>
+            <div style="font-size:11.5px;color:#64748B;margin-top:2px">Official Tuition & Academic Service Fee Receipt</div>
+            <div style="font-size:10.5px;color:#94A3B8">GSTIN: 27AABCS1429E1Z8 · Central Pune Campus</div>
+          </div>
+          <div style="text-align:right">
+            <div style="background:#F0FDF4;border:1px solid #BBF7D0;padding:4px 10px;border-radius:6px;color:#15803D;font-weight:800;font-size:11px">
+              PAYMENT RECEIVED
+            </div>
+            <div style="font-size:11px;color:#64748B;margin-top:4px">Receipt: <strong id="rcptDocNo">ZE-RCPT-2026-8812</strong></div>
+            <div style="font-size:11px;color:#64748B">Date: <strong>18-Nov-2026</strong></div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12.5px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:12px 16px;margin-bottom:18px">
+          <div>Student Name: <strong id="rcptStudentName" style="color:#0F172A">Aarav Sharma</strong></div>
+          <div>Batch: <strong id="rcptBatch" style="color:#0F172A">Class 12 JEE Elite</strong></div>
+          <div>Enrollment ID: <strong id="rcptEnrollId" style="color:#0F172A">ZE-2026-101</strong></div>
+          <div>Payment Mode: <strong style="color:#0F172A">Online UPI (Auto Reconciled)</strong></div>
+        </div>
+
+        <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:18px">
+          <thead>
+            <tr style="background:#F1F5F9;border-bottom:1px solid #CBD5E1">
+              <th style="padding:8px 10px;text-align:left;color:#0F172A">Description</th>
+              <th style="padding:8px 10px;text-align:center;color:#0F172A">Term</th>
+              <th style="padding:8px 10px;text-align:right;color:#0F172A">Amount (INR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid #E2E8F0">
+              <td style="padding:10px">Advanced JEE Coaching Tuition & Study Material</td>
+              <td style="padding:10px;text-align:center">Installment 2</td>
+              <td style="padding:10px;text-align:right;font-weight:700">₹21,186.44</td>
+            </tr>
+            <tr style="border-bottom:1px solid #E2E8F0">
+              <td style="padding:10px">GST (18% Integrated Goods & Services Tax)</td>
+              <td style="padding:10px;text-align:center">Tax</td>
+              <td style="padding:10px;text-align:right;font-weight:700">₹3,813.56</td>
+            </tr>
+            <tr style="background:#F8FAFC;font-weight:800;font-size:13.5px">
+              <td style="padding:12px;color:#0F172A">TOTAL PAID AMOUNT</td>
+              <td style="padding:12px;text-align:center"></td>
+              <td style="padding:12px;text-align:right;color:#15803D" id="rcptAmount">₹25,000.00</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px dashed #CBD5E1">
+          <div style="font-size:11px;color:#64748B">
+            Remaining Tuition Balance: <strong style="color:#15803D">₹0.00 (Fully Paid)</strong><br>
+            System Generated Receipt · Needs No Physical Stamp
+          </div>
+          <div style="text-align:center">
+            <div style="color:#15803D;font-size:11px;font-weight:800;border:1px solid #15803D;padding:3px 8px;border-radius:4px;display:inline-block;margin-bottom:4px">
+              PAID & AUDITED
+            </div>
+            <div style="font-size:11px;font-weight:700;color:#0F172A">Accounts Dept. ZenithEdu</div>
+          </div>
         </div>
       </div>
     </div>
