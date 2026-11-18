@@ -7147,34 +7147,48 @@
 
     window.selectUserLevel = function(level) {
       localStorage.setItem('zenithedu_trader_level', level);
+      
+      // Update badge IMMEDIATELY
+      window.syncUserLevelBadge();
+      
       const lvlM = document.getElementById('zenithLevelModal');
       if (lvlM) lvlM.style.display = 'none';
       if (window.playBeep) window.playBeep(780, 0.12);
 
       let levelTitle = 'Beginner';
       let message = '';
+      let actionButtons = '';
+
       if (level === 'beginner') {
         levelTitle = 'Beginner Trader / Student';
-        message = 'Welcome! Maine aapke liye Foundation Basics, Candlestick Guide aur Risk-Protection rules activate kar diye hain.';
+        message = 'Welcome! Maine aapke liye Foundation Basics, Candlestick Chart Guide aur Risk-Protection rules activate kar diye hain.';
+        actionButtons = `<button class="btn btn-pri btn-sm" onclick="navigateTo('ai-test-gen')">📚 Explore Beginner Foundation Guide →</button>`;
       } else if (level === 'intermediate') {
         levelTitle = 'Intermediate Trader';
-        message = 'Welcome! Aapke liye Swing Strategies, Options Greeks & Backtesting engine active hai.';
+        message = 'Welcome! Aapke liye Swing Strategies, Options Greeks & Strategy Backtesting radar active hai.';
+        actionButtons = `<button class="btn btn-pri btn-sm" onclick="navigateTo('homework')">📊 Launch Strategy Backtester →</button>`;
       } else {
         levelTitle = 'Advanced Pro Trader';
-        message = 'Welcome Pro Trader! Aapke skills ko aur aage badhane ke liye Algorithmic Flow, High-Probability Setups & Institutional Order Flow radar unlock kar diya gaya hai!';
+        message = 'Welcome Pro Trader! Aapke trading skills ko aur aage badhane ke liye Algorithmic Edge Predictor, Quantitative Volatility Skew aur Institutional Order Flow radar unlock kar diye gaye hain!';
+        actionButtons = `<div style="display:flex;gap:8px;flex-wrap:wrap">
+                           <button class="btn btn-pri btn-sm" onclick="navigateTo('ai-autopilot')">⚡ Algorithmic Flow Radar →</button>
+                           <button class="btn btn-sec btn-sm" onclick="navigateTo('report-cards')">🧠 Pro Trader Analytics →</button>
+                         </div>`;
       }
 
-      if (window.toast) toast('Level Set: ' + levelTitle + '|Customized tools & analytics activated!', 'ok');
-      window.syncUserLevelBadge();
+      try {
+        if (window.toast) toast('Level Activated: ' + levelTitle + '|Customized tools & skill growth unlocked!', 'ok');
+      } catch(e) {}
 
+      // Update Aanya greeting immediately
       setTimeout(() => {
         if (window.appendAanyaMessage) {
-          window.appendAanyaMessage('Aanya', `<strong>Namaste ${levelTitle}! 🙏</strong><br>${message}<br>Aapko kisi bhi topic ya trading setup par madad chahiye toh mujhse bol kar ya type karke puchiye!`);
+          window.appendAanyaMessage('Aanya', `<strong>Namaste ${levelTitle}! 🙏</strong><br>${message}`, true, actionButtons);
           if (window.speakAanyaText) {
             window.speakAanyaText(`Namaste ${levelTitle}! ${message}`);
           }
         }
-      }, 500);
+      }, 300);
     };
 
     // State Store
@@ -7248,8 +7262,16 @@
 
     // Toast Utility
     function toast(message, type = 'info') {
-      const container = document.getElementById('toastContainer');
+      let container = document.getElementById('toastContainer');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'toastContainer';
+        container.className = 'toast-container';
+        container.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9999999;display:flex;flex-direction:column;gap:10px;pointer-events:none';
+        document.body.appendChild(container);
+      }
       const div = document.createElement('div');
+      div.style.pointerEvents = 'auto';
       div.className = `toast toast-${type === 'ok' ? 'ok' : type === 'error' ? 'err' : 'info'}`;
       
       const parts = message.split('|');
