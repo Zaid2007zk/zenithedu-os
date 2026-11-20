@@ -9286,67 +9286,202 @@
       }, 500);
     }
 
-    function processAIQuery(query) {
-      const q = query.toLowerCase();
+    // ==========================================
+    // UNIFIED INTELLIGENT REAL-DATA NLP ENGINE
+    // ==========================================
+    function resolveInstituteNLPQuery(rawQuery) {
+      const q = (rawQuery || '').toLowerCase().trim();
+      const students = Array.isArray(state.students) && state.students.length > 0 ? state.students : [];
 
-      // 1. Fee Defaulters / Overdue Analysis
-      if (q.includes('fee') || q.includes('defaulter') || q.includes('pending') || q.includes('overdue') || q.includes('paisa')) {
-        const resp = `
-          <div style="font-weight:700;margin-bottom:6px;color:#F59E0B">📊 AI Fee Intelligence Analysis</div>
-          Maine aapke total <strong>1,248 students</strong> ka fee ledger analyze kiya hai:<br><br>
-          • <strong>Total Fee Realization:</strong> ₹22,80,000 (94.8% Realized)<br>
-          • <strong>Upcoming Installments Due:</strong> ₹1,00,000 (12 Students this week)<br>
-          • <strong>Treasury Health:</strong> Healthy & On-Track (Target ₹24,00,000)<br><br>
-          <strong>Top Overdue Students:</strong><br>
-          1. <strong>Aarav Verma</strong> (Class 12 JEE) - ₹12,000 overdue (28 days)<br>
-          2. <strong>Priya Sharma</strong> (Class 11 NEET) - ₹8,500 overdue (19 days)<br>
-          3. <strong>Rohan Patil</strong> (Class 10 Foundation) - ₹6,000 overdue (16 days)<br><br>
-          <div style="display:flex;gap:6px;margin-top:8px">
-            <button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub');closeAICopilot()">💬 Send WhatsApp Reminders</button>
-            <button class="btn btn-sec btn-sm" onclick="navigateTo('fees');closeAICopilot()">💳 Open Fee Ledger</button>
+      // 1. LOWEST / SABSE KAM ATTENDANCE QUERY
+      // Matches: "konse student ki attendance sab se kam hai", "sabse kam attendance kiski hai", "lowest attendance"
+      const isLowestAtt = (q.includes('kam') || q.includes('lowest') || q.includes('least') || q.includes('poor') || q.includes('worst') || q.includes('minimum') || q.includes('sab se kam') || q.includes('sabse kam') || q.includes('low') || q.includes('gir')) &&
+                          (q.includes('attendance') || q.includes('haziri') || q.includes('present') || q.includes('attend') || q.includes('student') || q.includes('bacche') || q.includes('bache'));
+
+      if (isLowestAtt && students.length > 0) {
+        const sorted = [...students].sort((a, b) => parseInt(a.att) - parseInt(b.att));
+        const lowest = sorted[0];
+        const bottom3 = sorted.slice(0, 3);
+        const html = `
+          <div style="font-weight:800;color:#EF4444;margin-bottom:8px;font-size:14px">📉 Lowest Attendance Analysis</div>
+          Institute database analysis ke mutabiq sabse kam attendance <strong>${lowest.name}</strong> ki hai:<br><br>
+          <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:10px;padding:12px;margin-bottom:12px">
+            • <strong>Student Name:</strong> <strong style="color:#fff;font-size:14px">${lowest.name}</strong><br>
+            • <strong>Attendance:</strong> <span class="badge badge-unpaid" style="font-size:12px;font-weight:900">${lowest.att}</span> (Lowest in Institute)<br>
+            • <strong>Roll Number:</strong> ${lowest.roll}<br>
+            • <strong>Target Batch:</strong> ${lowest.batch}<br>
+            • <strong>Parent Contact:</strong> ${lowest.parent}<br>
+            • <strong>Today's Status:</strong> ${lowest.status === 'A' ? '🔴 Absent Today' : lowest.status === 'L' ? '🟡 Medical Leave' : '🟢 Present'}<br>
+            • <strong>Tuition Fee Status:</strong> ${lowest.fee}
+          </div>
+          <strong>Top 3 Lowest Attendance Students:</strong><br>
+          ${bottom3.map((s, idx) => `${idx + 1}. <strong>${s.name}</strong> (${s.batch}) — <span style="color:#F87171;font-weight:700">${s.att}</span> · Roll: ${s.roll}`).join('<br>')}<br><br>
+          <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+            <button class="btn btn-whatsapp btn-sm" onclick="toast('Alert Dispatched|Attendance alert sent to ${lowest.parent}', 'ok')">📲 Parent ko Alert Bhejein</button>
+            <button class="btn btn-sec btn-sm" onclick="navigateTo('students');if(typeof closeAICopilot==='function')closeAICopilot()">📋 SIS Register Me Dekhein</button>
           </div>
         `;
-        appendBotMessage(resp);
-        return;
+        const textForVoice = `Sabse kam attendance ${lowest.name} ki hai, sirf ${lowest.att}. Unka batch ${lowest.batch} hai.`;
+        return { html, textForVoice, actionBtn: `<button class="btn btn-whatsapp btn-sm" onclick="navigateTo('students')">📋 View SIS Profile</button>` };
       }
 
-      // 2. At-Risk / Attendance Prediction
-      if (q.includes('risk') || q.includes('attendance') || q.includes('absent') || q.includes('hazar')) {
-        const resp = `
-          <div style="font-weight:700;margin-bottom:6px;color:#EF4444">⚠️ AI Dropout & At-Risk Predictor</div>
-          Attendance trends ke mutabiq <strong>42 students</strong> ka attendance &lt; 75% hai aur unka dropout risk <strong>HIGH</strong> predict hua hai:<br><br>
-          • <strong>Today's Attendance:</strong> 91.4% (1,141 Present · 60 Unexcused Absent)<br>
-          • <strong>Critical Flag:</strong> Class 11-NEET Batch B has highest absenteeism (14.2%)<br><br>
-          <strong>Recommended AI Action:</strong><br>
-          Aaj ke 60 unexcused absentees ke parents ko instant 10:00 AM WhatsApp alert trigger karein taaki parents se verification ho sake.<br><br>
-          <button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub');closeAICopilot()">📲 Dispatch Absentee Alerts via WhatsApp</button>
+      // 2. HIGHEST / SABSE JYADA ATTENDANCE QUERY
+      // Matches: "sabse jyada attendance kiski hai", "highest attendance", "topper in attendance"
+      const isHighestAtt = (q.includes('jyada') || q.includes('highest') || q.includes('best') || q.includes('top') || q.includes('maximum') || q.includes('sab se jyada') || q.includes('sabse jyada') || q.includes('topper') || q.includes('full')) &&
+                           (q.includes('attendance') || q.includes('haziri') || q.includes('present'));
+
+      if (isHighestAtt && students.length > 0) {
+        const sorted = [...students].sort((a, b) => parseInt(b.att) - parseInt(a.att));
+        const highest = sorted[0];
+        const top3 = sorted.slice(0, 3);
+        const html = `
+          <div style="font-weight:800;color:#10B981;margin-bottom:8px;font-size:14px">🌟 Highest Attendance Record</div>
+          Institute database me sabse regular attendance <strong>${highest.name}</strong> ki hai:<br><br>
+          <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:12px;margin-bottom:12px">
+            • <strong>Student Name:</strong> <strong style="color:#fff;font-size:14px">${highest.name}</strong><br>
+            • <strong>Attendance:</strong> <span class="badge badge-paid" style="font-size:12px;font-weight:900">${highest.att}</span> (Highest in Institute)<br>
+            • <strong>Roll Number:</strong> ${highest.roll}<br>
+            • <strong>Target Batch:</strong> ${highest.batch}<br>
+            • <strong>Parent Contact:</strong> ${highest.parent}
+          </div>
+          <strong>🏆 Top 3 Regular Students:</strong><br>
+          ${top3.map((s, idx) => `${idx + 1}. <strong>${s.name}</strong> (${s.batch}) — <span style="color:#34D399;font-weight:700">${s.att}</span>`).join('<br>')}<br>
+          <div style="display:flex;gap:6px;margin-top:8px">
+            <button class="btn btn-sec btn-sm" onclick="navigateTo('students');if(typeof closeAICopilot==='function')closeAICopilot()">📋 SIS Register Me Dekhein</button>
+          </div>
         `;
-        appendBotMessage(resp);
-        return;
+        const textForVoice = `Sabse highest attendance ${highest.name} ki hai, ${highest.att}.`;
+        return { html, textForVoice, actionBtn: `<button class="btn btn-sec btn-sm" onclick="navigateTo('students')">📋 View SIS Profile</button>` };
       }
 
-      // 3. Test Paper / Quiz Generator
-      if (q.includes('test') || q.includes('exam') || q.includes('question') || q.includes('quiz') || q.includes('paper') || q.includes('physics')) {
-        const resp = `
-          <div style="font-weight:700;margin-bottom:6px;color:#8B5CF6">🧪 AI Question Paper Synthesizer</div>
-          Maine <strong>JEE Advanced Standard (Physics: Rotational Dynamics)</strong> ka 3-Question Practice Test generate kar diya hai:<br><br>
+      // 3. WHO IS ABSENT TODAY QUERY
+      // Matches: "kaun absent hai", "aaj kaun nahi aaya", "absentees today", "who is absent"
+      const isAbsentQuery = (q.includes('kaun') || q.includes('who') || q.includes('kon') || q.includes('list') || q.includes('aaj')) &&
+                            (q.includes('absent') || q.includes('chutti') || q.includes('leave') || q.includes('nahi aaya') || q.includes('nahi aayi'));
+
+      if (isAbsentQuery && students.length > 0) {
+        const absentees = students.filter(s => s.status === 'A');
+        const onLeave = students.filter(s => s.status === 'L');
+        const html = `
+          <div style="font-weight:800;color:#EF4444;margin-bottom:8px;font-size:14px">⏰ Today's Absentee & Leave Register</div>
+          Aaj institute gate biometric sync ke mutabiq:<br><br>
+          ${absentees.length > 0 ? `<strong>🔴 Unexcused Absent (${absentees.length}):</strong><br>${absentees.map(s => `• <strong>${s.name}</strong> (${s.batch}) · Roll: ${s.roll} · Parent: ${s.parent}`).join('<br>')}<br><br>` : '• Koi bhi unexcused absent nahi hai.<br><br>'}
+          ${onLeave.length > 0 ? `<strong>🟡 Approved Medical Leave (${onLeave.length}):</strong><br>${onLeave.map(s => `• <strong>${s.name}</strong> (${s.batch}) · Medical slip on record`).join('<br>')}<br><br>` : ''}
+          <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+            <button class="btn btn-whatsapp btn-sm" onclick="toast('Alerts Queued|Automated WhatsApp verification sent to absentees', 'ok')">📲 Send Absentee WhatsApp</button>
+            <button class="btn btn-sec btn-sm" onclick="navigateTo('attendance');if(typeof closeAICopilot==='function')closeAICopilot()">📋 Attendance Grid</button>
+          </div>
+        `;
+        const textForVoice = absentees.length > 0 ? `Aaj ${absentees.map(s => s.name).join(', ')} absent hain.` : 'Aaj sabhi students present hain.';
+        return { html, textForVoice, actionBtn: `<button class="btn btn-whatsapp btn-sm" onclick="navigateTo('attendance')">📋 View Attendance Register</button>` };
+      }
+
+      // 4. WHOSE FEE IS PENDING / DEFAULTERS QUERY
+      // Matches: "kiski fee pending hai", "fee baki hai", "fee defaulters", "kisko fee deni hai"
+      const isFeeQuery = (q.includes('kiski') || q.includes('kaun') || q.includes('who') || q.includes('defaulter') || q.includes('baki') || q.includes('pending') || q.includes('overdue') || q.includes('nahi di') || q.includes('list')) &&
+                         (q.includes('fee') || q.includes('paisa') || q.includes('fees') || q.includes('kist') || q.includes('installment'));
+
+      if (isFeeQuery && students.length > 0) {
+        const defaulters = students.filter(s => s.fee !== 'Paid');
+        const totalOverdue = defaulters.reduce((sum, s) => sum + (s.tuition || 25000), 0);
+        const html = `
+          <div style="font-weight:800;color:#F59E0B;margin-bottom:8px;font-size:14px">💳 Fee Overdue & Pending Analysis</div>
+          Currently institute me <strong>${defaulters.length} students</strong> ki fee pending/overdue hai (Total Pending: <strong>₹${totalOverdue.toLocaleString('en-IN')}</strong>):<br><br>
+          ${defaulters.map((s, idx) => `
+            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:8px;padding:8px 12px;margin-bottom:8px">
+              ${idx + 1}. <strong>${s.name}</strong> (${s.batch})<br>
+              • Pending Tuition: <strong style="color:#F59E0B">₹${(s.tuition || 25000).toLocaleString('en-IN')}</strong> · Roll: ${s.roll}<br>
+              • Parent: ${s.parent}
+            </div>
+          `).join('')}
+          <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+            <button class="btn btn-whatsapp btn-sm" onclick="toast('Payment Links Dispatched|UPI payment links sent to parents', 'ok')">📲 Broadcast WhatsApp Payment Links</button>
+            <button class="btn btn-sec btn-sm" onclick="navigateTo('fees');if(typeof closeAICopilot==='function')closeAICopilot()">💳 Open Fee Ledger</button>
+          </div>
+        `;
+        const textForVoice = `${defaulters.map(s => s.name).join(' aur ')} ki fees pending hai, total ₹${totalOverdue.toLocaleString('en-IN')}.`;
+        return { html, textForVoice, actionBtn: `<button class="btn btn-whatsapp btn-sm" onclick="navigateTo('fees')">💳 Open Fee Ledger</button>` };
+      }
+
+      // 5. SPECIFIC STUDENT SEARCH BY NAME OR ROLL
+      const studentMatch = students.find(s => {
+        const sName = s.name.toLowerCase();
+        const firstName = sName.split(' ')[0];
+        const rollClean = s.roll.toLowerCase().replace('#', '');
+        return q.includes(sName) || (firstName.length > 3 && q.includes(firstName)) || (rollClean && q.includes(rollClean));
+      });
+
+      if (studentMatch) {
+        const html = `
+          <div style="font-weight:800;color:#818CF8;margin-bottom:8px;font-size:14px">👨‍🎓 Student SIS Profile: ${studentMatch.name}</div>
+          <div style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.3);border-radius:10px;padding:12px;margin-bottom:12px">
+            • <strong>Full Name:</strong> <strong style="color:#fff">${studentMatch.name}</strong><br>
+            • <strong>Roll Number:</strong> ${studentMatch.roll}<br>
+            • <strong>Program / Batch:</strong> ${studentMatch.batch}<br>
+            • <strong>Attendance:</strong> <span class="badge ${parseInt(studentMatch.att) >= 90 ? 'badge-paid' : 'badge-unpaid'}">${studentMatch.att}</span><br>
+            • <strong>Today's Status:</strong> ${studentMatch.status === 'P' ? '🟢 Present' : studentMatch.status === 'A' ? '🔴 Absent' : '🟡 Leave'}<br>
+            • <strong>Tuition Fee Status:</strong> <span class="badge ${studentMatch.fee === 'Paid' ? 'badge-paid' : 'badge-unpaid'}">${studentMatch.fee}</span><br>
+            • <strong>Parent Contact:</strong> ${studentMatch.parent}
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+            <button class="btn btn-pri btn-sm" onclick="openStudentReportCard('${studentMatch.name}', '${studentMatch.batch}', '${studentMatch.roll}', '${studentMatch.att}')">📄 Cumulative Report Card</button>
+            <button class="btn btn-sec btn-sm" onclick="openOfficialFeeReceipt('${studentMatch.name}', '${studentMatch.batch}', '${studentMatch.roll}', ${studentMatch.tuition || 25000})">🧾 Tax Fee Receipt</button>
+          </div>
+        `;
+        const textForVoice = `${studentMatch.name} ka record: attendance ${studentMatch.att}, batch ${studentMatch.batch}, fees ${studentMatch.fee}.`;
+        return { html, textForVoice, actionBtn: `<button class="btn btn-pri btn-sm" onclick="openStudentReportCard('${studentMatch.name}', '${studentMatch.batch}', '${studentMatch.roll}', '${studentMatch.att}')">📄 Open Report Card</button>` };
+      }
+
+      // 6. GENERAL ATTENDANCE / TODAY ATTENDANCE
+      if (q.includes('attendance') || q.includes('haziri') || q.includes('absent')) {
+        const html = `
+          <div style="font-weight:800;color:#10B981;margin-bottom:6px">⏰ Live Attendance Velocity</div>
+          Session 2026–27 real-time biometric metrics:<br><br>
+          • <strong>Today's Velocity:</strong> 94.8% Present (1,180 Students logged)<br>
+          • <strong>Unexcused Absentees:</strong> 60 Students<br>
+          • <strong>Active Faculty on Campus:</strong> 46 Faculty present<br><br>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub');if(typeof closeAICopilot==='function')closeAICopilot()">📲 Send Absentee WhatsApp</button>
+            <button class="btn btn-sec btn-sm" onclick="navigateTo('attendance');if(typeof closeAICopilot==='function')closeAICopilot()">📋 Attendance View</button>
+          </div>
+        `;
+        return { html, textForVoice: "Aaj 94.8% attendance hai, 1180 students present hain.", actionBtn: `<button class="btn btn-sec btn-sm" onclick="navigateTo('attendance')">📋 View Attendance</button>` };
+      }
+
+      // 7. GENERAL FEES / TREASURY
+      if (q.includes('fee') || q.includes('paisa') || q.includes('billing')) {
+        const html = `
+          <div style="font-weight:800;color:#F59E0B;margin-bottom:6px">💳 Fee Collection & Realization</div>
+          Institute treasury overview:<br><br>
+          • <strong>Total Realized:</strong> ₹22,80,000 (94.8% Realized)<br>
+          • <strong>Upcoming Due Dues:</strong> ₹1,00,000 (12 Students this week)<br>
+          • <strong>Annual Target:</strong> ₹24,00,000<br><br>
+          <button class="btn btn-sec btn-sm" onclick="navigateTo('fees');if(typeof closeAICopilot==='function')closeAICopilot()">💳 Open Fee Ledger</button>
+        `;
+        return { html, textForVoice: "Fee realization 94.8% hai, total 22 lakh 80 hazar collect ho chuka hai.", actionBtn: `<button class="btn btn-sec btn-sm" onclick="navigateTo('fees')">💳 Open Fee Ledger</button>` };
+      }
+
+      // 8. TEST / EXAM PAPER
+      if (q.includes('test') || q.includes('exam') || q.includes('quiz') || q.includes('paper') || q.includes('question')) {
+        const html = `
+          <div style="font-weight:800;color:#8B5CF6;margin-bottom:6px">🧪 AI Question Paper Generator</div>
+          Maine <strong>JEE Advanced Standard (Physics: Rotational Dynamics)</strong> ka 2-Question Practice Test generate kar diya hai:<br><br>
           <strong>Q1:</strong> A solid cylinder of mass M and radius R rolls without slipping down an inclined plane of angle &theta;. Its acceleration is:<br>
-          (A) g sin&theta; &nbsp; <strong>(B) (2/3) g sin&theta; [CORRECT]</strong> &nbsp; (C) (1/2) g sin&theta; &nbsp; (D) (3/4) g sin&theta;<br><br>
+          (A) g sin&theta; &nbsp; <strong>(B) (2/3) g sin&theta; [CORRECT]</strong> &nbsp; (C) (1/2) g sin&theta;<br><br>
           <strong>Q2:</strong> A uniform thin rod of length L is suspended vertically from one end. What is the period of small oscillations?<br>
           (A) 2&pi;&radic;(L/g) &nbsp; <strong>(B) 2&pi;&radic;(2L/3g) [CORRECT]</strong> &nbsp; (C) &pi;&radic;(L/2g)<br><br>
-          <div style="display:flex;gap:6px;margin-top:8px">
-            <button class="btn btn-pri btn-sm" onclick="navigateTo('ai-test-gen');closeAICopilot()">📝 Open Full AI Test Studio</button>
-            <button class="btn btn-sec btn-sm" onclick="printExamPaper();closeAICopilot()">🖨️ Export PDF Paper</button>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-pri btn-sm" onclick="navigateTo('ai-test-gen');if(typeof closeAICopilot==='function')closeAICopilot()">📝 Open AI Test Studio</button>
+            <button class="btn btn-sec btn-sm" onclick="printExamPaper();if(typeof closeAICopilot==='function')closeAICopilot()">🖨️ Export PDF</button>
           </div>
         `;
-        appendBotMessage(resp);
-        return;
+        return { html, textForVoice: "Physics test paper ready hai, 2 questions generate ho gaye hain.", actionBtn: `<button class="btn btn-pri btn-sm" onclick="navigateTo('ai-test-gen')">📝 Open Studio</button>` };
       }
 
-      // 4. WhatsApp / PTM Notice
-      if (q.includes('ptm') || q.includes('message') || q.includes('notice') || q.includes('whatsapp') || q.includes('broadcast')) {
-        const resp = `
-          <div style="font-weight:700;margin-bottom:6px;color:#10B981">💬 AI WhatsApp Notice Generator</div>
+      // 9. PTM / NOTICE / WHATSAPP
+      if (q.includes('ptm') || q.includes('message') || q.includes('notice') || q.includes('broadcast')) {
+        const html = `
+          <div style="font-weight:800;color:#10B981;margin-bottom:6px">💬 AI WhatsApp Notice Generator</div>
           Aapke institute ke liye draft tayyar hai:<br><br>
           <div style="background:rgba(0,0,0,0.3);padding:10px;border-radius:6px;border-left:3px solid #10B981;font-family:monospace;font-size:11.5px">
             Dear Parent, Greetings from ZenithEdu Academy! 🎓<br><br>
@@ -9354,24 +9489,28 @@
             Aapke ward ke recent Mock Test Scorecard aur Class Attendance report share ki jayegi. Upasthiti anivarya hai.<br><br>
             - Director, ZenithEdu Academy
           </div><br>
-          <button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub');closeAICopilot()">📲 Send Broadcast to 1,248 Parents</button>
+          <button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub');if(typeof closeAICopilot==='function')closeAICopilot()">📲 Send Broadcast to 1,248 Parents</button>
         `;
-        appendBotMessage(resp);
-        return;
+        return { html, textForVoice: "PTM ka WhatsApp notice draft tayyar hai.", actionBtn: `<button class="btn btn-whatsapp btn-sm" onclick="navigateTo('whatsapp-hub')">📲 Open WhatsApp Hub</button>` };
       }
 
-      // 5. Default General Intelligence Response
-      const resp = `
-        <div style="font-weight:700;margin-bottom:6px;color:#818CF8">🤖 Zenith AI Insight</div>
-        Aapne poocha: <em>"${query}"</em><br><br>
-        Institute Database Summary:<br>
-        • Total Enrolled: <strong>1,248 Students</strong><br>
-        • Active Batches: <strong>6 Batches (Class 9 to 12 JEE/NEET)</strong><br>
-        • Attendance Velocity: <strong>91.4% Present Today</strong><br>
-        • Total Fees Collected: <strong>₹8,42,500 (84.2%)</strong><br><br>
-        Aap upar diye gaye quick prompts click kar sakte hain ya specific query poohein jaise: <em>"fee defaulters"</em>, <em>"at risk students"</em>, ya <em>"generate exam test"</em>.
+      // 10. DEFAULT SMART FALLBACK
+      const html = `
+        <div style="font-weight:800;color:#818CF8;margin-bottom:6px">🤖 Zenith AI Intelligence</div>
+        Aapne poocha: <em>"${rawQuery}"</em><br><br>
+        Aap institute database se kuch bhi pooch sakte hain, jaise:<br>
+        • <em>"konse student ki attendance sab se kam hai"</em><br>
+        • <em>"sabse jyada attendance kiski hai"</em><br>
+        • <em>"aaj kaun absent hai"</em><br>
+        • <em>"kiski fees pending hai"</em><br>
+        • <em>"Aarav Sharma ka record"</em><br>
       `;
-      appendBotMessage(resp);
+      return { html, textForVoice: "Maine aapki query note kar li hai. Aap fees, attendance ya kisi student ka naam pooch sakte hain.", actionBtn: '' };
+    }
+
+    function processAIQuery(query) {
+      const res = resolveInstituteNLPQuery(query);
+      appendBotMessage(res.html);
     }
 
     
@@ -10251,77 +10390,15 @@
       }, 500);
     };
 
-    // 5. Intelligent NLP Responder for Aanya
+    // 5. Intelligent NLP Responder for Aanya (Unified with AI Intelligence Engine)
     window.respondAanyaQuery = function(rawQuery) {
-      const q = rawQuery.toLowerCase();
-      let responseText = '';
-      let actionBtn = '';
-
-      // Match Attendance / Absent / Present
-      if (q.includes('absent') || q.includes('attendance') || q.includes('haziri') || q.includes('present') || q.includes('aaye') || q.includes('bacche') || q.includes('chutti') || q.includes('kaun') || q.includes('kaub')) {
-        responseText = `Sir, aaj hamari biometric machine par <strong>1,180 students present</strong> hain (94.8% Attendance).<br>
-                        Sirf <strong>68 students absent</strong> hain.<br>
-                        Maine subah 08:35 AM par sabhi 68 absentees ke parents ko automated WhatsApp verification message bhej diya hai!`;
-        actionBtn = `<button class="btn btn-whatsapp btn-sm" onclick="navigateTo('attendance')">📋 View Today's Attendance Register →</button>`;
+      const res = resolveInstituteNLPQuery(rawQuery);
+      window.appendAanyaMessage('Aanya', res.html, true, res.actionBtn || '');
+      playBeep(750, 0.1);
+      if (res.textForVoice) {
+        window.speakAanyaText(res.textForVoice);
       }
-      // Match Fees / Payment / Due
-      else if (q.includes('fee') || q.includes('paisa') || q.includes('paise') || q.includes('baki') || q.includes('pending') || q.includes('kist') || q.includes('installment') || q.includes('due') || q.includes('bhari')) {
-        responseText = `Sir, total academic fees ka <strong>94.8% (₹22,80,000)</strong> realize ho chuka hai.<br>
-                        Sirf <strong>12 bacchon ki installment</strong> is hafte scheduled hai (Total: ₹1,00,000).<br>
-                        Top cases:<br>
-                        • <strong>Siddharth Kulkarni</strong> (Class 12 JEE) - ₹30,000 (Due: 20 Nov)<br>
-                        • <strong>Tanmay Agarwal</strong> (Class 11 NEET) - ₹25,000 (Due: 22 Nov)<br>
-                        • <strong>Rohan Mehra</strong> (Class 10 FDN) - ₹20,000 (Due: 24 Nov)<br>
-                        Kya main in sabhi 12 parents ko automated gentle WhatsApp payment link dispatch kar doon?`;
-        actionBtn = `<button class="btn btn-whatsapp btn-sm" onclick="toast('WhatsApp Payment Links Dispatched!|Sent to 12 parents via Razorpay integration', 'ok')">📲 Haan Aanya, Sabko Payment Link Bhej Do</button>`;
-      }
-      // Match Specific Student / Aarav / Topper
-      else if (q.includes('aarav') || q.includes('student') || q.includes('score') || q.includes('marks') || q.includes('topper') || q.includes('rank') || q.includes('test') || q.includes('exam')) {
-        responseText = `Sir, <strong>Aarav Sharma</strong> ka poora record mere paas save hai:<br>
-                        • <strong>Roll Number:</strong> ZE-2026-101 (Class 12 JEE Elite)<br>
-                        • <strong>Attendance:</strong> 96.2% (Regular, 0 unexcused leaves)<br>
-                        • <strong>Fees:</strong> ₹95,000 Total · 100% Fully Paid (₹0 Pending)<br>
-                        • <strong>Latest Exam:</strong> JEE Mock 4 me <strong>254/300 marks</strong> (AIR #14, 99.42 Percentile)<br>
-                        • <strong>AI Diagnosis:</strong> Physics (88/100) aur Chemistry (92/100) me top score hai. Calculus ki 15-question practice sheet maine uske portal par assign kar di hai.`;
-        actionBtn = `<button class="btn btn-pri btn-sm" onclick="navigateTo('exams')">📊 Open Aarav's Full SWOT Report Card →</button>`;
-      }
-      // Match Transport / Bus
-      else if (q.includes('bus') || q.includes('transport') || q.includes('van') || q.includes('driver') || q.includes('route')) {
-        responseText = `Sir, transport fleet ka live status:<br>
-                        • <strong>6 Institute Buses</strong> active GPS tracking par hain.<br>
-                        • Sabhi routes 100% safe run ho rahe hain (0 speed alerts).<br>
-                        • Route 3 (Kothrud Express) 4 minute me campus pahunchne wali hai.`;
-        actionBtn = `<button class="btn btn-sec btn-sm" onclick="navigateTo('transport')">🚌 Open Live GPS Fleet Radar →</button>`;
-      }
-      // Match Hostel / Mess
-      else if (q.includes('hostel') || q.includes('mess') || q.includes('curfew') || q.includes('room')) {
-        responseText = `Sir, Zenith Boys & Girls Hostel me total <strong>340 resident students</strong> hain.<br>
-                        • Biometric gate par 338 in-punch ho chuke hain.<br>
-                        • Sirf 2 students library permission slip ke sath bahar hain (Curfew: 09:30 PM).<br>
-                        • Mess dinner menu: Paneer Butter Masala & Dal Tadka inspection cleared.`;
-        actionBtn = `<button class="btn btn-sec btn-sm" onclick="navigateTo('hostel')">🏢 View Hostel & Mess Roster →</button>`;
-      }
-      // Match Overall Summary / Report / Hisaab
-      else if (q.includes('hisaab') || q.includes('report') || q.includes('summary') || q.includes('aaj') || q.includes('overview') || q.includes('status') || q.includes('institute')) {
-        responseText = `Director Sir, aaj ka complete institutional status report:<br>
-                        • 🎓 <strong>1,248 Active Students</strong> safely enrolled across 8 batches.<br>
-                        • ⏰ <strong>1,180 Students present</strong> today (94.8% on-time velocity).<br>
-                        • 💳 <strong>Fee Realization 94.8%</strong> (₹22.8L collected, healthy treasury).<br>
-                        • 📝 <strong>All India JEE Mock 4</strong> ke 142 scorecards parents ko dispatch ho chuke hain.<br>
-                        • 🚌 <strong>Transport & Hostel:</strong> 100% operational with 0 flags.<br>
-                        Sabhi operations bilkul smoothly run ho rahe hain!`;
-        actionBtn = `<button class="btn btn-sec btn-sm" onclick="toast('Aanya Log Archived|All records backed up to cloud vault', 'ok')">📁 Backup Today's Register</button>`;
-      }
-      // Fallback
-      else {
-        responseText = `Ji Director Sir, maine aapki query note kar li hai: <em>"${rawQuery}"</em>.<br>
-                        Institute ke database me 1,248 students ka complete record active hai. Aap chahein toh fees, attendance, bus tracking, ya kisi specific bache ka score card puchiye, main turant nikaal kar doongi!`;
-        actionBtn = `<div style="display:flex;gap:6px;flex-wrap:wrap">
-                       <button class="btn btn-sec btn-sm" onclick="askAanyaQuick('attendance')">⏰ Attendance Report</button>
-                       <button class="btn btn-sec btn-sm" onclick="askAanyaQuick('fees')">💳 Fee Ledger</button>
-                       <button class="btn btn-sec btn-sm" onclick="askAanyaQuick('summary')">📋 Full Institute Summary</button>
-                     </div>`;
-      }
+    };
 
       window.appendAanyaMessage('Aanya', responseText, true, actionBtn);
       playBeep(750, 0.1);
